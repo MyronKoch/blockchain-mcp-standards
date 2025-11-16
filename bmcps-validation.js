@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * MBSS v3.0 Compliance Validator
+ * Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance Validator
  *
- * Validates blockchain MCP servers against the MBSS v3.0 Unified Standard
+ * Validates blockchain MCP servers against the Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard
  * Checks architecture, tool implementation, naming conventions, and compliance levels.
  *
  * Usage: node mbss-v3-validation.js /path/to/server
@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// MBSS v3.0 Requirements
+// Blockchain MCP Standard v3.0 (BMCPS v3.0) Requirements
 const REQUIRED_TOOLS = [
     'get_chain_info', 'get_balance', 'get_transaction', 'get_block', 'validate_address',
     'get_transaction_history', 'send_transaction', 'create_wallet', 'import_wallet',
@@ -37,7 +37,7 @@ const COMPLIANCE_LEVELS = {
     GOLD: { tools: 100, categories: 16, structure: true, extended: true, production: true }
 };
 
-class MBSSValidator {
+class BMCPSValidator {
     constructor(serverPath) {
         this.serverPath = serverPath;
         this.results = {
@@ -53,7 +53,7 @@ class MBSSValidator {
     }
 
     validate() {
-        console.log('🔍 MBSS v3.0 Compliance Validation');
+        console.log('🔍 Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance Validation');
         console.log('=====================================');
         console.log(`📁 Validating server: ${this.serverPath}\n`);
 
@@ -401,8 +401,8 @@ if (require.main === module) {
         process.exit(1);
     }
 
-    const validator = new MBSSValidator(serverPath);
+    const validator = new BMCPSValidator(serverPath);
     validator.validate();
 }
 
-module.exports = MBSSValidator;
+module.exports = BMCPSValidator;

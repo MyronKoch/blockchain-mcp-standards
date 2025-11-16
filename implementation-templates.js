@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * MBSS v3.0 Implementation Templates
+ * Blockchain MCP Standard v3.0 (BMCPS v3.0) Implementation Templates
  *
  * Ready-to-use implementation examples for common blockchain patterns.
  * Provides working examples for different blockchain types and use cases.
@@ -505,12 +505,12 @@ class ImplementationTemplateGenerator {
     if (fileName.includes('smoke')) {
       return \`/**
  * Smoke Tests - \${this.template.name}
- * MBSS v3.0 Compliance Tests
+ * Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance Tests
  */
 
 import { TOOL_DEFINITIONS } from '../src/tool-definitions';
 
-describe('MBSS v3.0 \${this.template.blockchain.toUpperCase()} Smoke Tests', () => {
+describe('Blockchain MCP Standard v3.0 (BMCPS v3.0) \${this.template.blockchain.toUpperCase()} Smoke Tests', () => {
   test('should have all required tools defined', () => {
     expect(TOOL_DEFINITIONS).toBeDefined();
     expect(TOOL_DEFINITIONS.length).toBeGreaterThanOrEqual(25);
@@ -542,7 +542,7 @@ describe('\${this.template.name} Unit Tests', () => {
 
     const readme = \`# \${this.template.name}
 
-MBSS v3.0 compliant \${this.template.blockchain.toUpperCase()} MCP server with \${this.template.features.join(' and ')} support.
+Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant \${this.template.blockchain.toUpperCase()} MCP server with \${this.template.features.join(' and ')} support.
 
 ## Features
 
@@ -575,9 +575,9 @@ Copy \`.env.example\` to \`.env\` and configure your settings:
 cp .env.example .env
 \`\`\`
 
-## MBSS v3.0 Compliance
+## Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance
 
-This server is \${this.template.complexity === 'advanced' ? 'GOLD' : 'BRONZE'} level compliant with MBSS v3.0 standards.
+This server is \${this.template.complexity === 'advanced' ? 'GOLD' : 'BRONZE'} level compliant with Blockchain MCP Standard v3.0 (BMCPS v3.0) standards.
 
 \`\`\`bash
 npm run mbss:validate
@@ -600,13 +600,13 @@ npm run build    # Build for production
 ## [3.0.0] - \${new Date().toISOString().split('T')[0]}
 
 ### Added
-- Initial MBSS v3.0 compliant implementation
+- Initial Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant implementation
 - \${this.template.features.join(' support, ')} support
 - \${this.template.tools} standardized tools
 - Comprehensive test suite
 
 ### Compliance
-- ✅ MBSS v3.0 \${this.template.complexity === 'advanced' ? 'GOLD' : 'BRONZE'} level
+- ✅ Blockchain MCP Standard v3.0 (BMCPS v3.0) \${this.template.complexity === 'advanced' ? 'GOLD' : 'BRONZE'} level
 - ✅ 25+ mandatory tools implemented
 - ✅ Standardized naming conventions
 - ✅ Comprehensive documentation
@@ -624,7 +624,7 @@ npm run build    # Build for production
     console.log(\`🛠️  Tools: \${this.template.tools}\`);
     console.log(\`📁 Categories: 6+\`);
     console.log(\`📦 Files Created: 25+\`);
-    console.log(\`🏆 MBSS v3.0: \${this.template.complexity === 'advanced' ? '🥇 GOLD' : '🥉 BRONZE'}\`);
+    console.log(\`🏆 Blockchain MCP Standard v3.0 (BMCPS v3.0): \${this.template.complexity === 'advanced' ? '🥇 GOLD' : '🥉 BRONZE'}\`);
     console.log(\`⚡ Ready to use: ✅\`);
   }
 
@@ -647,7 +647,7 @@ npm run build    # Build for production
 
 // CLI Interface
 function printHelp() {
-  console.log('MBSS v3.0 Implementation Templates');
+  console.log('Blockchain MCP Standard v3.0 (BMCPS v3.0) Implementation Templates');
   console.log('==================================');
   console.log('');
   console.log('Usage:');

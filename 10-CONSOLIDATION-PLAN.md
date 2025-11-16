@@ -9,26 +9,26 @@
 ## Identified Duplicates & Overlaps
 
 ### 1. **Main Standards (4 docs) → Keep 1**
-- ❌ `01-MBPS-v2.1-COMPREHENSIVE.md` - Superseded by MBSS v3.0
-- ❌ `10-MSAS.md` - Superseded by MBSS v3.0  
-- ❌ `19-MBPS-UAT-STANDARD.md` - Merge into MBSS v3.0
-- ✅ **KEEP: `MBSS-v3.0-UNIFIED-STANDARD.md`** - The unified standard
+- ❌ `01-MBPS-v2.1-COMPREHENSIVE.md` - Superseded by Blockchain MCP Standard v3.0 (BMCPS v3.0)
+- ❌ `10-MSAS.md` - Superseded by Blockchain MCP Standard v3.0 (BMCPS v3.0)  
+- ❌ `19-MBPS-UAT-STANDARD.md` - Merge into Blockchain MCP Standard v3.0 (BMCPS v3.0)
+- ✅ **KEEP: `Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md`** - The unified standard
 
 ### 2. **Naming Conventions (3 docs) → Merge into 1**
-- ❌ `09-TOOL-NAMING-CONVENTIONS.md` - Already in MBSS v3.0
-- ❌ `16-TOOL-HANDLER-NAMING-CONVENTION.md` - Already in MBSS v3.0
+- ❌ `09-TOOL-NAMING-CONVENTIONS.md` - Already in Blockchain MCP Standard v3.0 (BMCPS v3.0)
+- ❌ `16-TOOL-HANDLER-NAMING-CONVENTION.md` - Already in Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - Both cover the same `{prefix}_{action}_{resource}` pattern
 
 ### 3. **Quick Start Guides (5 docs) → Keep 1**
 - ❌ `03-STEP-BY-STEP-GUIDE.md` - Redundant with quick starts
 - ❌ `04-QUICK-START-NEW-SERVER.md` - Keep as reference
 - ❌ `05-QUICK-START-CONVERSION.md` - Merge into main guide
-- ❌ `06-PROJECT-SETUP-TEMPLATE.md` - Already in MBSS v3.0
+- ❌ `06-PROJECT-SETUP-TEMPLATE.md` - Already in Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - ✅ **Create: `QUICK-START-GUIDE.md`** - Single consolidated guide
 
 ### 4. **Templates (3 docs) → Merge into MBSS**
-- ❌ `07-TOOL-IMPLEMENTATION-TEMPLATES.md` - Move to MBSS v3.0
-- ❌ `08-BLOCKCHAIN-CLIENT-TEMPLATES.md` - Move to MBSS v3.0
+- ❌ `07-TOOL-IMPLEMENTATION-TEMPLATES.md` - Move to Blockchain MCP Standard v3.0 (BMCPS v3.0)
+- ❌ `08-BLOCKCHAIN-CLIENT-TEMPLATES.md` - Move to Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - ❌ `18-REFACTORING-PROMPT-TEMPLATE.md` - Archive (too specific)
 
 ### 5. **Testing & Validation (5 docs) → Keep 1**
@@ -36,7 +36,7 @@
 - ❌ `16-SERVER-STARTUP-VALIDATION.md` - Merge into testing doc
 - ❌ `20-XRP-UAT-ROADMAP.md` - Too specific, archive
 - ❌ `24-PREFLIGHT-CHECKLIST.md` - Merge into testing doc
-- ❌ `21-COMPLETE-BLUEPRINT-CHECKLIST.md` - Already in MBSS v3.0
+- ❌ `21-COMPLETE-BLUEPRINT-CHECKLIST.md` - Already in Blockchain MCP Standard v3.0 (BMCPS v3.0)
 
 ### 6. **Specific Standards (6 docs) → Keep essential ones**
 - ✅ **KEEP: `11-ERROR-HANDLING-PATTERNS.md`** - Important patterns
@@ -56,7 +56,7 @@
 
 ```
 NEW STANDARDS/
-├── MBSS-v3.0-UNIFIED-STANDARD.md          # THE main standard (architecture + tools)
+├── Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md          # THE main standard (architecture + tools)
 ├── QUICK-START-GUIDE.md                   # Consolidated implementation guide
 ├── TESTING-STANDARD.md                    # Testing requirements
 ├── README-TEMPLATE.md                     # Documentation template
@@ -89,9 +89,9 @@ NEW STANDARDS/
 
 ## Key Consolidations
 
-### 1. MBSS v3.0 now includes:
-- All tool requirements (from MBPS v2.1)
-- All architecture patterns (from MSAS v1.0)
+### 1. Blockchain MCP Standard v3.0 (BMCPS v3.0) now includes:
+- All tool requirements (from tool requirements (v2.1))
+- All architecture patterns (from architecture standard (v1.0))
 - All naming conventions (from 2 naming docs)
 - All templates (from 3 template docs)
 - Complete compliance checklist
@@ -113,7 +113,7 @@ NEW STANDARDS/
 ### Step 1: Create consolidated documents
 1. Merge quick-start guides → `QUICK-START-GUIDE.md`
 2. Merge testing docs → `TESTING-STANDARD.md`
-3. Update MBSS v3.0 with any missing templates
+3. Update Blockchain MCP Standard v3.0 (BMCPS v3.0) with any missing templates
 
 ### Step 2: Archive old documents
 ```bash

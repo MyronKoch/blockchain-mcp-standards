@@ -1,4 +1,4 @@
-# MBSS v3.0 Standards - Release Preparation Notes
+# Blockchain MCP Standard v3.0 (BMCPS v3.0) Standards - Release Preparation Notes
 
 ## Current State Assessment
 
@@ -18,7 +18,7 @@
 #### Critical Fixes Needed
 1. **Date References** - Update "September 2025" to current date (documents are from 2024)
    - Location: README.md line 162
-   - Location: 01-MBSS-v3.0-UNIFIED-STANDARD.md line 6 (says "January 2025")
+   - Location: 01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md line 6 (says "January 2025")
 
 2. **Remove .DS_Store file** - macOS system file that shouldn't be committed
    - File: `.DS_Store` in root directory
@@ -65,9 +65,9 @@
    ## [3.0.0] - 2024-11-12
 
    ### Added
-   - Unified MBSS v3.0 standard consolidating MBPS and MSAS
+   - Unified Blockchain MCP Standard v3.0 (BMCPS v3.0) standard consolidating MBPS and MSAS
    - 9 core documentation files (68% reduction from 28 documents)
-   - Multi-chain server amendment (MBSS v3.0.1)
+   - Multi-chain server amendment (Blockchain MCP Standard v3.0 (BMCPS v3.0).1)
    - Factory automation scripts
    - Comprehensive testing framework
 
@@ -101,7 +101,7 @@
 
 ##### Content Accuracy Check
 - [ ] Verify "25 mandatory tools" is correct (README line 14 says 25, need to count actual list)
-- [ ] Check if Multi-Chain Server Amendment (MBSS v3.0.1) is documented
+- [ ] Check if Multi-Chain Server Amendment (Blockchain MCP Standard v3.0 (BMCPS v3.0).1) is documented
 - [ ] Verify all code examples in documents are syntactically correct
 
 ##### Metadata Updates
@@ -145,7 +145,7 @@ sed -i '' 's/September 2025/November 2024/' README.md
 - `mcp-blockchain-server-standard` (explicit)
 
 ### Repository Description
-"MBSS v3.0: The unified standard for building production-ready blockchain MCP servers. Covers architecture, 24 mandatory tools, testing, and implementation patterns."
+"Blockchain MCP Standard v3.0 (BMCPS v3.0): The unified standard for building production-ready blockchain MCP servers. Covers architecture, 24 mandatory tools, testing, and implementation patterns."
 
 ### Topics/Tags
 - mcp
@@ -187,7 +187,7 @@ sed -i '' 's/September 2025/November 2024/' README.md
 
 ### Relationship to Main Ecosystem Repo
 - This standards repo should be **referenced** by the main blockchain MCP ecosystem repo
-- Each server's README can link to "Built according to MBSS v3.0"
+- Each server's README can link to "Built according to Blockchain MCP Standard v3.0 (BMCPS v3.0)"
 - Compliance status document should link to this repo
 
 ### Version Management
@@ -200,7 +200,7 @@ sed -i '' 's/September 2025/November 2024/' README.md
 ## Migration Path for Existing Servers
 
 ### For Your 15 Testnet Servers
-- Already built to MBSS v3.0 (13/15 at 100% compliance)
+- Already built to Blockchain MCP Standard v3.0 (BMCPS v3.0) (13/15 at 100% compliance)
 - Can reference this repo in their READMEs
 - Use this as source of truth for maintaining compliance
 

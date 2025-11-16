@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * MBSS v3.0 Testing Framework
+ * Blockchain MCP Standard v3.0 (BMCPS v3.0) Testing Framework
  *
- * Comprehensive testing suite for MBSS v3.0 compliant blockchain MCP servers.
+ * Comprehensive testing suite for Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant blockchain MCP servers.
  * Includes unit tests, integration tests, security tests, and performance tests.
  *
  * Usage:
@@ -40,7 +40,7 @@ const TEST_LEVELS = {
     }
 };
 
-class MBSSTestFramework {
+class BMCPSTestFramework {
     constructor(options) {
         this.serverPath = options.serverPath;
         this.level = options.level || 'bronze';
@@ -64,7 +64,7 @@ class MBSSTestFramework {
     }
 
     async run() {
-        console.log('🧪 MBSS v3.0 Testing Framework');
+        console.log('🧪 Blockchain MCP Standard v3.0 (BMCPS v3.0) Testing Framework');
         console.log('===============================');
         console.log(\`🎯 Test Level: \${this.config.name} (\${this.config.description})\`);
     console.log(\`📁 Server: \${this.serverPath}\`);
@@ -735,7 +735,7 @@ class MBSSTestFramework {
 
 // CLI Interface
 function printHelp() {
-  console.log('MBSS v3.0 Testing Framework');
+  console.log('Blockchain MCP Standard v3.0 (BMCPS v3.0) Testing Framework');
   console.log('===========================');
   console.log('');
   console.log('Usage:');
@@ -812,7 +812,7 @@ function parseArguments() {
 async function main() {
   try {
     const options = parseArguments();
-    const framework = new MBSSTestFramework(options);
+    const framework = new BMCPSTestFramework(options);
     const results = await framework.run();
 
     // Exit with appropriate code
@@ -828,4 +828,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { MBSSTestFramework, TEST_LEVELS };
+module.exports = { BMCPSTestFramework, TEST_LEVELS };

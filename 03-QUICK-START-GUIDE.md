@@ -1,8 +1,8 @@
 # Quick Start Guide: Build & Convert MCP Servers
 
-## 🚀 From Zero to MBSS v3.0 Compliance in 2 Hours
+## 🚀 From Zero to Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance in 2 Hours
 
-This consolidated guide covers both building new MCP servers and converting existing ones to follow the Modular Blockchain Server Standard (MBSS v3.0).
+This consolidated guide covers both building new MCP servers and converting existing ones to follow the Modular Blockchain Server Standard (Blockchain MCP Standard v3.0 (BMCPS v3.0)).
 
 ---
 
@@ -21,7 +21,7 @@ This consolidated guide covers both building new MCP servers and converting exis
 mkdir {blockchain}-testnet-mcp-server
 cd {blockchain}-testnet-mcp-server
 
-# Initialize with MBSS v3.0 template
+# Initialize with Blockchain MCP Standard v3.0 (BMCPS v3.0) template
 npm init -y
 npm pkg set name="{blockchain}-testnet-mcp-server"
 npm pkg set version="1.0.0"
@@ -109,7 +109,7 @@ export class {Chain}Client {
   constructor() {
     this.apiUrl = process.env.RPC_URL || 'https://testnet-rpc.{blockchain}.com';
     this.provider = new ethers.JsonRpcProvider(this.apiUrl);
-    logger.info('[MBSS v3.0] Client initialized', { url: this.apiUrl });
+    logger.info('[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Client initialized', { url: this.apiUrl });
   }
 
   async isHealthy(): Promise<boolean> {
@@ -229,7 +229,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
   
-  logger.info(`[MBSS v3.0] Executing tool: ${name}`);
+  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Executing tool: ${name}`);
   
   try {
     switch (name) {
@@ -251,8 +251,8 @@ async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   
-  logger.info(`[MBSS v3.0] {Blockchain} MCP server started`);
-  logger.info(`[MBSS v3.0] Tools available: ${tools.length}`);
+  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] {Blockchain} MCP server started`);
+  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Tools available: ${tools.length}`);
 }
 
 main().catch((error) => {
@@ -437,7 +437,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  logger.info(`[MBSS v3.0] Server started with ${Object.keys(TOOL_HANDLERS).length} tools`);
+  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Server started with ${Object.keys(TOOL_HANDLERS).length} tools`);
 }
 
 main().catch(console.error);
@@ -468,7 +468,7 @@ Run this validation checklist:
 #!/bin/bash
 # validate-mbss.sh
 
-echo "MBSS v3.0 Compliance Check"
+echo "Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance Check"
 echo "=========================="
 
 # Check structure
@@ -554,7 +554,7 @@ grep "name:" src/index.ts | wc -l  # Should be 25+
 
 ## Resources
 
-- MBSS v3.0 Standard: `./MBSS-v3.0-UNIFIED-STANDARD.md`
+- Blockchain MCP Standard v3.0 (BMCPS v3.0) Standard: `./Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md`
 - Testing Standard: `./TESTING-STANDARD.md`
 - Error Handling: `./ERROR-HANDLING-PATTERNS.md`
 - Network Configs: `./NETWORK-CONFIGURATIONS.md`

@@ -2,7 +2,7 @@
 
 ## 🎯 Comprehensive Testing & Validation Guide
 
-This consolidated standard covers all testing requirements, validation procedures, and quality assurance for MBSS v3.0 compliant blockchain MCP servers.
+This consolidated standard covers all testing requirements, validation procedures, and quality assurance for Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant blockchain MCP servers.
 
 ---
 
@@ -265,7 +265,7 @@ describe('Tool Integration', () => {
 import * as fs from 'fs';
 import * as path from 'path';
 
-describe('MBSS v3.0 Compliance', () => {
+describe('Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance', () => {
   describe('Directory Structure', () => {
     const requiredDirs = [
       'src/tools/core',
@@ -347,7 +347,7 @@ describe('MBSS v3.0 Compliance', () => {
 #!/bin/bash
 # validate-preflight.sh
 
-echo "🚀 MBSS v3.0 Pre-flight Checklist"
+echo "🚀 Blockchain MCP Standard v3.0 (BMCPS v3.0) Pre-flight Checklist"
 echo "=================================="
 
 # Environment checks
@@ -510,7 +510,7 @@ describe('Performance Tests', () => {
 - **Statements**: 95%
 
 ### Critical Path Coverage (Must be 100%)
-- All MBSS v3.0 core tools (25 tools)
+- All Blockchain MCP Standard v3.0 (BMCPS v3.0) core tools (25 tools)
 - Error handling paths
 - Network failure scenarios
 - Input validation logic
@@ -1028,7 +1028,7 @@ Coverage:    85.3% lines, 82.1% functions
 This comprehensive testing standard ensures:
 - ✅ **Quality**: 80%+ code coverage
 - ✅ **Reliability**: All tools tested
-- ✅ **Compliance**: MBSS v3.0 validated
+- ✅ **Compliance**: Blockchain MCP Standard v3.0 (BMCPS v3.0) validated
 - ✅ **Performance**: Load testing included
 - ✅ **Automation**: CI/CD ready
 - ✅ **Documentation**: Clear test structure

@@ -1,17 +1,17 @@
-# MCP Blockchain Server Standard (MBSS) v3.0
+# Blockchain MCP Standard (BMCPS) v3.0
 ## The Complete Unified Standard for Blockchain MCP Servers
 
 **Version**: 3.0  
 **Date**: January 2025  
 **Author**: Myron Koch - AI Director & Protocol Architect  
 **Status**: ACTIVE UNIFIED STANDARD  
-**Supersedes**: MBPS v2.1 and MSAS v1.0
+**Supersedes**: tool requirements (v2.1) and architecture standard (v1.0)
 
 ---
 
 ## Executive Summary
 
-The MCP Blockchain Server Standard (MBSS) v3.0 unifies architecture and tool requirements into a single comprehensive standard for all blockchain MCP servers. This standard ensures consistency, scalability, and production readiness across the entire blockchain MCP ecosystem.
+The Blockchain MCP Standard (BMCPS) v3.0 unifies architecture and tool requirements into a single comprehensive standard for all blockchain MCP servers. This standard ensures consistency, scalability, and production readiness across the entire blockchain MCP ecosystem.
 
 ## Table of Contents
 1. [Core Principles](#core-principles)
@@ -342,7 +342,7 @@ import { handleGetBalance } from './tools/core/{prefix}-get_balance.js';
 const server = new Server(
   {
     name: '{blockchain}-{network}-mcp-server',
-    version: '3.0.0', // MBSS v3.0 compliant
+    version: '3.0.0', // Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant
   },
   {
     capabilities: { tools: {} },
@@ -386,8 +386,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('[MBSS v3.0] {Blockchain} MCP Server running');
-  console.error(`[MBSS v3.0] Total tools: ${TOOL_DEFINITIONS.length}`);
+  console.error('[Blockchain MCP Standard v3.0 (BMCPS v3.0)] {Blockchain} MCP Server running');
+  console.error(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Total tools: ${TOOL_DEFINITIONS.length}`);
 }
 
 main().catch(console.error);
@@ -429,7 +429,7 @@ export async function handleGetBalance(args: any) {
 
 ## Part 4: Compliance Verification
 
-### MBSS v3.0 Compliance Checklist
+### Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance Checklist
 
 #### Architecture Requirements ✓
 - [ ] Project follows mandatory directory structure
@@ -461,19 +461,19 @@ export async function handleGetBalance(args: any) {
 
 ### Compliance Levels
 
-#### 🥉 MBSS v3.0 Bronze
+#### 🥉 Blockchain MCP Standard v3.0 (BMCPS v3.0) Bronze
 - ✅ 25 core tools implemented
 - ✅ Basic modular structure
 - ✅ TypeScript compilation works
 
-#### 🥈 MBSS v3.0 Silver  
+#### 🥈 Blockchain MCP Standard v3.0 (BMCPS v3.0) Silver  
 - ✅ All Bronze requirements
 - ✅ Full MSAS architecture compliance
 - ✅ Extended tools (40+ total)
 - ✅ Comprehensive testing suite
 - ✅ Documentation complete
 
-#### 🥇 MBSS v3.0 Gold
+#### 🥇 Blockchain MCP Standard v3.0 (BMCPS v3.0) Gold
 - ✅ All Silver requirements
 - ✅ 100+ tools organized
 - ✅ Performance optimized
@@ -523,7 +523,7 @@ switch (toolName) {
 }
 ```
 
-#### To Modular MBSS v3.0 (After)
+#### To Modular Blockchain MCP Standard v3.0 (BMCPS v3.0) (After)
 ```typescript
 // Clean index.ts with imports
 import { handleGetBalance } from './tools/core/eth-get_balance.js';
@@ -591,16 +591,16 @@ switch (toolName) {
 ## Appendix C: Migration Timeline
 
 ### Immediate (Now)
-- All new servers must follow MBSS v3.0
+- All new servers must follow Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - Existing servers should plan migration
 
 ### Q1 2025
-- All testnet servers MBSS v3.0 compliant
+- All testnet servers Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant
 - Migration scripts available
 
 ### Q2 2025
-- All mainnet servers MBSS v3.0 compliant
-- Deprecate MBPS v2.1 and MSAS v1.0
+- All mainnet servers Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant
+- Deprecate tool requirements (v2.1) and architecture standard (v1.0)
 
 ### Q3 2025
 - MBSS v3.1 with advanced features
@@ -610,7 +610,7 @@ switch (toolName) {
 
 ## Version History
 
-- **v3.0** (Jan 2025): Unified MBPS v2.1 + MSAS v1.0
+- **v3.0** (Jan 2025): Unified tool requirements (v2.1) + architecture standard (v1.0)
 - **v2.1** (Dec 2024): MBPS tool requirements
 - **v1.0** (Sep 2024): MSAS architecture standard
 
@@ -620,4 +620,4 @@ switch (toolName) {
 
 **One Standard. Complete Compliance. Production Ready.**
 
-**Maintained at**: `/servers/testnet/NEW STANDARDS/MBSS-v3.0-UNIFIED-STANDARD.md`
+**Maintained at**: `/servers/testnet/NEW STANDARDS/Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md`

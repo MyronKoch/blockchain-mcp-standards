@@ -2,7 +2,7 @@
 
 ## Professional MCP Server Documentation Standard
 
-This document defines the comprehensive README documentation standard for all blockchain MCP servers in the ecosystem. This standard ensures consistent, professional, and user-friendly documentation across all servers while complying with MBSS v3.0 Unified Standard requirements.
+This document defines the comprehensive README documentation standard for all blockchain MCP servers in the ecosystem. This standard ensures consistent, professional, and user-friendly documentation across all servers while complying with Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard requirements.
 
 ---
 
@@ -12,20 +12,20 @@ This document defines the comprehensive README documentation standard for all bl
 ```markdown
 # {Blockchain} {Network} MCP Server
 
-✅ **MBSS v3.0 Compliant** - A comprehensive Model Context Protocol (MCP) server for {blockchain} {network} blockchain integration with AI systems.
+✅ **Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliant** - A comprehensive Model Context Protocol (MCP) server for {blockchain} {network} blockchain integration with AI systems.
 
 ## 🎯 Quick Overview
 
 - **Tool Count**: {actual_tool_count} tools (24 MBSS mandatory + {extended_count} extended tools)
 - **Categories**: 16 standardized categories (core, wallet, network, tokens, help, account, nft, defi, staking, governance, contracts, bridge, analytics, security, events, advanced)
 - **Network**: {primary_network} (locked to single network - testnet or mainnet only)
-- **Architecture**: MBSS v3.0 Unified Standard compliant
+- **Architecture**: Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard compliant
 - **Compliance Level**: {bronze|silver|gold} - {compliance_description}
 - **Test Coverage**: 95%+ enforced with security, chaos & load testing
 - **Help System**: Interactive tool discovery and guidance
 - **Performance**: Production-ready with comprehensive error handling
 
-## 🏆 MBSS v3.0 Compliance
+## 🏆 Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance
 
 | Level | Status | Description |
 |-------|--------|-------------|
@@ -69,7 +69,7 @@ graph TB
     J --> V[Tool Discovery]
     J --> W[Interactive Help]
 
-    subgraph "MBSS v3.0 Categories"
+    subgraph "Blockchain MCP Standard v3.0 (BMCPS v3.0) Categories"
         F
         G
         H
@@ -96,8 +96,8 @@ graph TB
     end
 ```
 
-**MBSS v3.0 Architecture:**
-- **16 Categories**: Modular organization following MBSS v3.0 standard
+**Blockchain MCP Standard v3.0 (BMCPS v3.0) Architecture:**
+- **16 Categories**: Modular organization following Blockchain MCP Standard v3.0 (BMCPS v3.0) standard
 - **25+ Mandatory Tools**: Core blockchain functionality required for all servers
 - **Extended Tools**: Optional advanced features (NFT, DeFi, Cross-chain, etc.)
 - **Help System**: Interactive tool discovery and guidance
@@ -130,7 +130,7 @@ Organize features by functional categories with clear descriptions:
 - **Token Information** - Contract details, supply, and metadata
 - **Token Approvals** - Approve spending for DeFi protocols
 
-### 🏗️ **16 MBSS v3.0 Categories**
+### 🏗️ **16 Blockchain MCP Standard v3.0 (BMCPS v3.0) Categories**
 
 #### 🔗 **Core** (5 mandatory tools)
 - **get_chain_info** - Network statistics and health metrics
@@ -259,7 +259,7 @@ npm install
 # Build the server
 npm run build
 
-# Validate MBSS v3.0 compliance
+# Validate Blockchain MCP Standard v3.0 (BMCPS v3.0) compliance
 npm run mbss:validate
 
 # Run tests
@@ -309,13 +309,13 @@ docker run -p 3000:3000 {blockchain}-mcp-server
 ```
 ```
 
-### **6. MBSS v3.0 Compliance (REQUIRED)**
-All servers must demonstrate compliance with MBSS v3.0 standards:
+### **6. Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance (REQUIRED)**
+All servers must demonstrate compliance with Blockchain MCP Standard v3.0 (BMCPS v3.0) standards:
 
 ```markdown
-## 🏆 MBSS v3.0 Compliance
+## 🏆 Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance
 
-This server is fully compliant with the **MBSS v3.0 Unified Standard** for blockchain MCP servers.
+This server is fully compliant with the **Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard** for blockchain MCP servers.
 
 ### Compliance Verification
 
@@ -340,7 +340,7 @@ npm run build && npm run inspect
 
 ### Compliance Checklist
 - [ ] ✅ 24 mandatory tools implemented (set_network removed for network-locked architecture)
-- [ ] ✅ MBSS v3.0 directory structure
+- [ ] ✅ Blockchain MCP Standard v3.0 (BMCPS v3.0) directory structure
 - [ ] ✅ Standardized tool naming conventions
 - [ ] ✅ Input validation with Zod schemas
 - [ ] ✅ Comprehensive error handling
@@ -349,7 +349,7 @@ npm run build && npm run inspect
 - [ ] ✅ Production-ready configuration
 
 ### Factory System
-This server was generated using the MBSS v3.0 Factory System:
+This server was generated using the Blockchain MCP Standard v3.0 (BMCPS v3.0) Factory System:
 \`\`\`bash
 # Regenerate or update with latest standards
 node mbss-v3-factory.js --blockchain {blockchain} --network {network} --all
@@ -359,7 +359,7 @@ node implementation-templates.js --template {template-name}
 \`\`\`
 
 ### Testing Framework
-Comprehensive testing with MBSS v3.0 Testing Framework:
+Comprehensive testing with Blockchain MCP Standard v3.0 (BMCPS v3.0) Testing Framework:
 \`\`\`bash
 # Bronze level testing
 node mbss-v3-testing-framework.js --server-path . --level bronze
@@ -378,9 +378,9 @@ Document ALL tools with comprehensive information:
 ```markdown
 ## 🛠️ Complete Tool Reference
 
-### MBSS v3.0 Mandatory Tools (24 Required)
+### Blockchain MCP Standard v3.0 (BMCPS v3.0) Mandatory Tools (24 Required)
 
-> **Note**: These are the 24 mandatory tools that every MBSS v3.0-compliant server must implement. `set_network` was removed - servers are now locked to single network (testnet OR mainnet). Additional blockchain-specific tools can be added beyond these.
+> **Note**: These are the 24 mandatory tools that every Blockchain MCP Standard v3.0 (BMCPS v3.0)-compliant server must implement. `set_network` was removed - servers are now locked to single network (testnet OR mainnet). Additional blockchain-specific tools can be added beyond these.
 
 #### Core Blockchain Tools (5)
 1. \`{prefix}_get_chain_info\` - Network information and statistics
@@ -401,7 +401,7 @@ Document ALL tools with comprehensive information:
 #### Network Tools (2)
 11. \`{prefix}_get_network_info\` - Network status and config
 12. \`{prefix}_get_gas_price\` - Current gas/fee pricing
-**Note**: `set_network` removed in MBSS v3.0 - servers locked to single network
+**Note**: `set_network` removed in Blockchain MCP Standard v3.0 (BMCPS v3.0) - servers locked to single network
 
 #### Account Tools (2)
 14. \`{prefix}_get_wallet_info\` - Comprehensive wallet details
@@ -659,7 +659,7 @@ Detailed description of return data structure with examples
 - **Development Tools**: Wallet creation tools are for development/testing only
 - **Network Verification**: Always verify network before transactions
 
-### 🛡️ MBSS v3.0 Security Features
+### 🛡️ Blockchain MCP Standard v3.0 (BMCPS v3.0) Security Features
 - **Input Validation**: All inputs validated with Zod schemas
 - **Error Sanitization**: Error messages don't expose sensitive data
 - **Rate Limiting**: Built-in rate limiting protection
@@ -755,7 +755,7 @@ src/
 ├── client.ts             # Blockchain client abstraction
 ├── types/                # TypeScript type definitions
 ├── tools/                # Organized tool modules
-│   ├── core/             # MBPS v2.1 required tools
+│   ├── core/             # tool requirements (v2.1) required tools
 │   ├── account/          # Account-related tools
 │   ├── tokens/           # Token operations
 │   ├── contracts/        # Smart contract tools
@@ -801,7 +801,7 @@ npm run build
 - **Performance Tests**: Load testing and benchmarking
 
 ### Contributing Guidelines
-1. Follow MBPS v2.1 standards
+1. Follow tool requirements (v2.1) standards
 2. Add comprehensive tests for new tools
 3. Update documentation for any changes
 4. Maintain backward compatibility
@@ -818,7 +818,7 @@ npm run build
 ```markdown
 ## 📚 Appendices
 
-### A. MBSS v3.0 Compliance Checklist
+### A. Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance Checklist
 - [x] All 24 core tools implemented (set_network removed)
 - [x] MBPS naming convention followed
 - [x] Help system implemented
@@ -905,7 +905,7 @@ npm run tools-count
 
 ## 🔄 **Version History**
 
-- **v3.0** - MBSS v3.0 Unified Standard integration with 16 categories and 25+ mandatory tools
+- **v3.0** - Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard integration with 16 categories and 25+ mandatory tools
 - **v2.1** - Enhanced security features and compliance validation
 - **v2.0** - Initial comprehensive standard with Mermaid diagrams
 - **v1.1** - Added security section and troubleshooting
@@ -913,9 +913,9 @@ npm run tools-count
 
 ---
 
-## 🚀 **MBSS v3.0 Implementation Tools**
+## 🚀 **Blockchain MCP Standard v3.0 (BMCPS v3.0) Implementation Tools**
 
-This server leverages the complete MBSS v3.0 toolchain:
+This server leverages the complete Blockchain MCP Standard v3.0 (BMCPS v3.0) toolchain:
 
 ### Factory System
 \`\`\`bash
@@ -953,4 +953,4 @@ node implementation-templates.js --template btc-simple
 
 ---
 
-*This standard ensures all blockchain MCP servers provide consistent, professional, and user-friendly documentation that enables seamless AI integration and developer adoption while maintaining full MBSS v3.0 compliance.*
+*This standard ensures all blockchain MCP servers provide consistent, professional, and user-friendly documentation that enables seamless AI integration and developer adoption while maintaining full Blockchain MCP Standard v3.0 (BMCPS v3.0) compliance.*

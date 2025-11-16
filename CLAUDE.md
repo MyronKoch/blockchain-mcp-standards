@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Repository Is
 
-This is the **MBSS v3.0 (MCP Blockchain Server Standard) Standards Documentation Repository**. It contains the unified architectural and tooling standards for building blockchain MCP servers. This is NOT a server implementation—it's a standards reference and factory tooling system.
+This is the **Blockchain MCP Standard v3.0 (BMCPS v3.0) (MCP Blockchain Server Standard) Standards Documentation Repository**. It contains the unified architectural and tooling standards for building blockchain MCP servers. This is NOT a server implementation—it's a standards reference and factory tooling system.
 
 ## Key Concepts
 
-### MBSS v3.0 Unified Standard
-- **Combines** architecture (MSAS v1.0) + tool requirements (MBPS v2.1) into one standard
+### Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard
+- **Combines** architecture (architecture standard (v1.0)) + tool requirements (tool requirements (v2.1)) into one standard
 - **Defines** 25 mandatory tools every blockchain MCP server must implement
 - **Enforces** modular architecture with category-based tool organization
 - **Specifies** naming convention: `{prefix}_{action}_{resource}` (e.g., `eth_get_balance`)
@@ -48,14 +48,14 @@ Every compliant server must implement these exact tools (with blockchain-specifi
 
 ### Factory System (Node.js Scripts)
 ```bash
-# Generate new MBSS v3.0 compliant server
-node mbss-v3-factory.js --blockchain eth --network testnet
+# Generate new Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant server
+node bmcps-factory.js --blockchain eth --network testnet
 
 # Validate server compliance
-node mbss-v3-validation.js /path/to/server
+node bmcps-validation.js /path/to/server
 
 # Testing framework setup
-node mbss-v3-testing-framework.js /path/to/server
+node bmcps-testing-framework.js /path/to/server
 ```
 
 ### Implementation Templates
@@ -67,7 +67,7 @@ node implementation-templates.js --blockchain eth --tools all
 ## Document Hierarchy (Read in Order)
 
 ### For New Server Development
-1. **01-MBSS-v3.0-UNIFIED-STANDARD.md** - Read first: Complete spec
+1. **01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md** - Read first: Complete spec
 2. **03-QUICK-START-GUIDE.md** - Follow Option A: New server from scratch
 3. **04-NETWORK-CONFIGURATIONS.md** - Configure RPC endpoints
 4. **06-ERROR-HANDLING-PATTERNS.md** - Implement error patterns
@@ -76,7 +76,7 @@ node implementation-templates.js --blockchain eth --tools all
 7. **08-README-TEMPLATE.md** - Document server
 
 ### For Server Migration
-1. **01-MBSS-v3.0-UNIFIED-STANDARD.md** - Understand target architecture
+1. **01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md** - Understand target architecture
 2. **03-QUICK-START-GUIDE.md** - Follow Option B: Migration path
 3. **06-ERROR-HANDLING-PATTERNS.md** - Refactor error handling
 4. **05-TESTING-STANDARD.md** - Add comprehensive tests
@@ -173,7 +173,7 @@ export async function handleGetBalance(args: any, client?: BlockchainClient) {
 ## Reference Implementations
 
 ### Example Servers (in parent directories)
-- **xrp-testnet-mcp-server/** - 40 tools, MBSS v3.0 compliant
+- **xrp-testnet-mcp-server/** - 40 tools, Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant
 - **avalanche-fuji-mcp-server/** - 25+ tools, Silver tier
 - **BLOCKCHAIN-MCP-FACTORY-SERVER/** - Meta-server for generating new servers
 
@@ -181,8 +181,8 @@ export async function handleGetBalance(args: any, client?: BlockchainClient) {
 
 ### Validate a Server
 ```bash
-# Check MBSS v3.0 compliance
-node mbss-v3-validation.js ../xrp-testnet-mcp-server
+# Check Blockchain MCP Standard v3.0 (BMCPS v3.0) compliance
+node bmcps-validation.js ../xrp-testnet-mcp-server
 
 # Expected output: Architecture, tools, naming, testing scores
 ```
@@ -190,7 +190,7 @@ node mbss-v3-validation.js ../xrp-testnet-mcp-server
 ### Generate New Server
 ```bash
 # Create compliant server structure
-node mbss-v3-factory.js --blockchain eth --network testnet
+node bmcps-factory.js --blockchain eth --network testnet
 
 # Generates complete directory structure + 25 tool stubs
 ```
@@ -198,7 +198,7 @@ node mbss-v3-factory.js --blockchain eth --network testnet
 ### Check Tool Naming
 ```bash
 # Verify tool names follow convention
-grep -r "name:" 01-MBSS-v3.0-UNIFIED-STANDARD.md | grep "_"
+grep -r "name:" 01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md | grep "_"
 ```
 
 ## Important Notes
@@ -224,7 +224,7 @@ grep -r "name:" 01-MBSS-v3.0-UNIFIED-STANDARD.md | grep "_"
 
 - **02-UNIVERSAL-TOOL-NAMING-REGISTRY.md** - Complete tool naming reference
 - **10-CONSOLIDATION-PLAN.md** - Historical context for v3.0 unification
-- **RELEASE-NOTES.md** - Changelog for MBSS v3.0
+- **RELEASE-NOTES.md** - Changelog for Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - **llm.txt** - Quick reference for LLM context
 
 ## Working with This Repository
@@ -236,9 +236,9 @@ grep -r "name:" 01-MBSS-v3.0-UNIFIED-STANDARD.md | grep "_"
 4. Update RELEASE-NOTES.md
 
 ### When Updating Factory Scripts
-1. Modify `mbss-v3-factory.js` or related scripts
+1. Modify `bmcps-factory.js` or related scripts
 2. Test generation against all blockchain types
-3. Validate output with `mbss-v3-validation.js`
+3. Validate output with `bmcps-validation.js`
 4. Update Quick Start Guide if CLI changes
 
 ### Archive Policy

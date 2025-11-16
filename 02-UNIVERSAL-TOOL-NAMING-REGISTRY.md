@@ -3,7 +3,7 @@
 
 **Created**: January 24, 2025  
 **Version**: 1.0  
-**Standard**: MBSS v3.0 Compliant  
+**Standard**: Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliant  
 **Scope**: All blockchain MCP servers in ecosystem  
 
 ---
@@ -345,7 +345,7 @@ Where:
 
 ## ✅ Compliance Requirements
 
-### **MBSS v3.0 Mandatory** (25 tools minimum)
+### **Blockchain MCP Standard v3.0 (BMCPS v3.0) Mandatory** (25 tools minimum)
 Every blockchain server MUST implement these exact tool names:
 
 1. `{prefix}_get_chain_info`
@@ -381,7 +381,7 @@ Use this registry for consistency when implementing additional tools beyond the 
 
 ## 🚀 Factory System Integration
 
-This registry enables our MBSS v3.0 factory system to:
+This registry enables our Blockchain MCP Standard v3.0 (BMCPS v3.0) factory system to:
 
 1. **Auto-generate** tool names for new blockchains
 2. **Validate** naming consistency across servers
@@ -403,7 +403,7 @@ export const TOOL_NAMES = {
 ## 🔄 Version History
 
 - **v1.0** (Jan 2025): Initial comprehensive registry with 200+ standardized tool names
-- **v0.1** (Dec 2024): Basic 25-tool naming in MBPS v2.1
+- **v0.1** (Dec 2024): Basic 25-tool naming in tool requirements (v2.1)
 
 ---
 

@@ -8,7 +8,7 @@ We've consolidated 28 documents down to 9 core standards for clarity and maintai
 
 ## Core Standards (Numbered in Usage Order)
 
-### 01. **[MBSS-v3.0-UNIFIED-STANDARD.md](./01-MBSS-v3.0-UNIFIED-STANDARD.md)** ⭐
+### 01. **[01-Blockchain-MCP-Standard-v3.0.md](./01-01-Blockchain-MCP-Standard-v3.0.md)** ⭐
 **READ FIRST - The Main Standard** - Understand the architecture and requirements.
 - Modular architecture patterns
 - 25 mandatory tools specification
@@ -74,7 +74,7 @@ We've consolidated 28 documents down to 9 core standards for clarity and maintai
 ## 📋 Document Usage Workflow
 
 ### Building a New Server (Follow in Order)
-1. **[01-MBSS-v3.0]** → Read standard & requirements
+1. **[01-Blockchain-MCP-Standard-v3.0]** → Read standard & requirements
 2. **[02-QUICK-START]** → Follow Option A for new builds
 3. **[03-NETWORK-CONFIGS]** → Set up blockchain connections
 4. **[04-ERROR-HANDLING]** → Implement error patterns
@@ -84,7 +84,7 @@ We've consolidated 28 documents down to 9 core standards for clarity and maintai
 8. **[08-TROUBLESHOOTING]** → Fix any issues
 
 ### Converting Existing Server (Follow in Order)
-1. **[01-MBSS-v3.0]** → Understand target architecture
+1. **[01-Blockchain-MCP-Standard-v3.0]** → Understand target architecture
 2. **[02-QUICK-START]** → Follow Option B for migration
 3. **[04-ERROR-HANDLING]** → Refactor error handling
 4. **[06-TESTING]** → Add comprehensive tests
@@ -118,7 +118,7 @@ We've consolidated 28 documents down to 9 core standards for clarity and maintai
 ### After (9 documents, ~150KB)
 - ✅ **68% reduction** in document count
 - ✅ **50% reduction** in total size
-- ✅ **Single source of truth** (MBSS v3.0)
+- ✅ **Single source of truth** (Blockchain MCP Standard v3.0 (BMCPS v3.0))
 - ✅ **Clear hierarchy** of standards
 - ✅ **No duplication** between documents
 - ✅ **Easy to maintain** and update
@@ -129,7 +129,7 @@ We've consolidated 28 documents down to 9 core standards for clarity and maintai
 
 Historical documents are preserved in the `archive/` directory:
 
-- `archive/mbps-v2.1/` - Previous MBPS standards
+- `archive/mbps-v2.1/` - Previous tool requirement standards
 - `archive/msas-v1.0/` - Previous architecture standards  
 - `archive/old-guides/` - Superseded guides and templates
 - `archive/specific-implementations/` - Chain-specific docs
@@ -140,7 +140,7 @@ These are kept for reference but should not be used for new development.
 
 ## Version History
 
-- **v3.0** (Current) - Unified MBSS standard with 9 core documents
+- **v3.0** (Current) - Unified Blockchain MCP Standard (BMCPS) with 9 core documents
 - **v2.1** - Separate MBPS (tools) and MSAS (architecture) standards
 - **v2.0** - Initial MBPS comprehensive standard
 - **v1.0** - Original scattered documentation

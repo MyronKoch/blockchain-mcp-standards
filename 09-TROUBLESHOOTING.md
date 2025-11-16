@@ -1,4 +1,4 @@
-# Troubleshooting Guide for MBPS v2.1 Refactoring
+# Troubleshooting Guide for tool requirements (v2.1) Refactoring
 
 ## Common Errors and Solutions
 

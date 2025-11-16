@@ -13,7 +13,7 @@ This document provides ready-to-use configuration files for different blockchain
 {
   "name": "{blockchain}-testnet-mcp-server",
   "version": "1.0.0",
-  "description": "MBPS v2.1 compliant MCP server for {Blockchain} testnet integration",
+  "description": "tool requirements (v2.1) compliant MCP server for {Blockchain} testnet integration",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -80,7 +80,7 @@ This document provides ready-to-use configuration files for different blockchain
 {
   "name": "solana-devnet-mcp-server",
   "version": "1.0.0",
-  "description": "MBPS v2.1 compliant MCP server for Solana devnet integration",
+  "description": "tool requirements (v2.1) compliant MCP server for Solana devnet integration",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -145,7 +145,7 @@ This document provides ready-to-use configuration files for different blockchain
 {
   "name": "bitcoin-testnet-mcp-server",
   "version": "1.0.0",
-  "description": "MBPS v2.1 compliant MCP server for Bitcoin testnet integration",
+  "description": "tool requirements (v2.1) compliant MCP server for Bitcoin testnet integration",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -211,7 +211,7 @@ This document provides ready-to-use configuration files for different blockchain
 {
   "name": "osmosis-testnet-mcp-server",
   "version": "1.0.0",
-  "description": "MBPS v2.1 compliant MCP server for Osmosis testnet integration",
+  "description": "tool requirements (v2.1) compliant MCP server for Osmosis testnet integration",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -278,7 +278,7 @@ This document provides ready-to-use configuration files for different blockchain
 {
   "name": "xrp-testnet-mcp-server",
   "version": "1.0.0",
-  "description": "MBPS v2.1 compliant MCP server for XRP Ledger testnet integration",
+  "description": "tool requirements (v2.1) compliant MCP server for XRP Ledger testnet integration",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
