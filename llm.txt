@@ -1,365 +1,330 @@
-# MCP Blockchain Ecosystem Standards Guide for LLMs
+# Blockchain MCP Standard v3.0 (BMCPS v3.0) - AI/LLM Quick Reference
 
-## Purpose
-This directory contains the complete standards for refactoring and maintaining blockchain MCP servers. Read these documents in sequence to understand the full ecosystem requirements.
+## What This Is
+The **Blockchain MCP Standard v3.0 (BMCPS v3.0)** is the unified architectural and tooling standard for building blockchain MCP (Model Context Protocol) servers. This is a **standards repository**, not an implementation—it provides specifications, validation tools, and factory scripts for creating compliant blockchain MCP servers.
 
-## Reading Order and Document Overview
-
-### 1. START HERE: MBPS-v2.1-COMPREHENSIVE.md
-**What it is**: The master standard defining all blockchain MCP server requirements
-**Why it matters**: Sets the 25 mandatory tools every server MUST implement with exact names
-**Key takeaway**: Every blockchain needs these 25 tools with prefix + exact suffix:
-- {prefix}_get_chain_info
-- {prefix}_get_balance
-- {prefix}_get_transaction
-- {prefix}_get_block
-- {prefix}_validate_address
-- {prefix}_get_transaction_history
-- {prefix}_create_wallet
-- {prefix}_help
-- {prefix}_search_tools
-- {prefix}_list_tools_by_category
-- {prefix}_send_transaction
-- {prefix}_get_network_info
-- {prefix}_set_network
-- {prefix}_get_gas_price
-- {prefix}_get_mempool_info
-- {prefix}_estimate_fees
-- {prefix}_import_wallet
-- {prefix}_get_wallet_info
-- {prefix}_get_account_info
-- {prefix}_generate_address
-- {prefix}_get_token_balance
-- {prefix}_get_token_info
-- {prefix}_transfer_token
-- {prefix}_approve_token
-- {prefix}_get_token_allowance
-
-### 2. REFACTORING-PROMPT-TEMPLATE.md
-**What it is**: Step-by-step instructions for refactoring any blockchain MCP server
-**Why it matters**: Provides the exact checklist to achieve MBPS compliance
-**Key takeaway**: Follow this template exactly when refactoring servers
-
-### 3. TESTING-STANDARDIZATION-INSTRUCTIONS.md
-**What it is**: Jest testing framework requirements for all servers
-**Why it matters**: Ensures all servers can be tested consistently
-**Key takeaway**: Every server needs jest.config.js and tests/ directory with smoke tests
-
-### 4. MCP-HELP-SYSTEM-STANDARD.md
-**What it is**: Interactive help system requirements
-**Why it matters**: Makes servers discoverable and self-documenting
-**Key takeaway**: Implement 3 help tools: help, search_tools, list_tools_by_category
-
-### 5. MSAS.md (MCP Security Architecture Standard)
-**What it is**: Security requirements and best practices
-**Why it matters**: Prevents private key exposure and ensures safe blockchain operations
-**Key takeaway**: Never store private keys, always use user-controlled signing
-
-### 6. MBPS.md
-**What it is**: Original v1.0 standard (superseded by v2.0)
-**Why it matters**: Historical context and basic requirements
-**Key takeaway**: v2.0 extends this with more requirements
-
-## Quick Reference: Chain Prefixes
-
-| Blockchain | Prefix | Example Tool |
-|------------|--------|--------------|
-| Bitcoin | btc_ | btc_get_balance |
-| Ethereum | eth_ | eth_get_balance |
-| Solana | sol_ | sol_get_balance |
-| Polygon | poly_ | poly_get_balance |
-| Arbitrum | arb_ | arb_get_balance |
-| Avalanche | avax_ | avax_get_balance |
-| Base | base_ | base_get_balance |
-| BNB Chain | bnb_ | bnb_get_balance |
-| World Chain | world_ | world_get_balance |
-| NEAR | near_ | near_get_balance |
-| Sui | sui_ | sui_get_balance |
-| TRON | tron_ | tron_get_balance |
-| Cosmos | cosmos_ | cosmos_get_balance |
-| XRP | xrp_ | xrp_get_balance |
-
-## Current Ecosystem Status
-
-### Fully MBPS v2.1 Compliant (Reference Implementations)
-- ✅ Avalanche Fuji Testnet: servers/testnet/avalanche-fuji-mcp-server-refactor/
-- ✅ Bitcoin Testnet (Original): servers/testnet/bitcoin-testnet-mcp-server-refactor/
-- ✅ Bitcoin Testnet v2: servers/testnet/bitcoin-testnet-mcp-server-refactor-2/
-  - 102 tools fully modularized
-  - Complete Jest testing infrastructure
-  - All MBPS v2.1 tools with exact names
-- ✅ BSC (BNB Chain) Testnet: servers/testnet/bsc-testnet-mcp-server-refactor/
-  - 36 tools modularized
-  - Jest testing configured
-  - MBPS v2.1 compliant
-
-### Awaiting Refactor (Priority Order by Tool Count)
-1. Solana Devnet (50 tools) - High complexity
-2. XRP Testnet (39 tools) - Medium complexity  
-3. Avalanche C-Chain (39 tools) - Already has some structure
-4. NEAR Testnet (37 tools) - Medium complexity
-5. BSC Testnet (37 tools) - EVM-based, similar to Ethereum
-6. Ethereum Sepolia (30 tools) - EVM reference
-7. Polygon Amoy (30 tools) - EVM-based
-8. World Chain Testnet (27 tools) - EVM-based
-9. Arbitrum Sepolia (25 tools) - EVM-based L2
-10. Base Sepolia (24 tools) - EVM-based L2
-11. TRON Testnet (20 tools) - Unique architecture
-12. Sui Testnet (20 tools) - Move-based
-13. Cosmos Theta (20 tools) - Cosmos SDK
-
-## Common Refactoring Mistakes to Avoid
-
-1. **Wrong tool names**: Using variations instead of exact MBPS names
-   - ❌ btc_get_wallet_balance, eth_get_account_balance, sol_check_balance
-   - ✅ btc_get_balance, eth_get_balance, sol_get_balance
-   - ❌ btc_get_block_info, eth_block_details, sol_fetch_block
-   - ✅ btc_get_block, eth_get_block, sol_get_block
-
-2. **Missing tool definitions**: Handler exists but tool not registered in tools array
-
-3. **Monolithic structure**: index.ts over 300 lines instead of modular imports
-   - Target: index.ts ~500 lines max with all imports
-   - Each tool in separate file under src/tools/{category}/
-
-4. **No tests**: Missing Jest configuration and smoke tests
-   - ES Modules: Use jest.config.cjs (not .js) when package.json has "type": "module"
-
-5. **No help system**: Missing the 3 required help tools
-
-6. **Template vs Real Implementation**: Ensure tools contain actual logic, not just templates
-   - Each tool should make real API calls or perform real operations
-   - Mock data is acceptable for testnet development, but should be clearly marked
-
-7. **Import Path Issues**: TypeScript with ES modules requires .js extensions
-   - ✅ import { handleGetBalance } from './tools/wallet/btc-get_balance.js';
-   - ❌ import { handleGetBalance } from './tools/wallet/btc-get_balance';
-
-## Verification Checklist
-
-After any refactor, verify:
-1. [ ] All 25 MBPS tools have exact names (check both file names and function names)
-2. [ ] npm run build succeeds without errors
-3. [ ] npm test runs (configuration issues acceptable, but infrastructure must exist)
-4. [ ] Tools work in MCP Inspector: `npx @modelcontextprotocol/inspector node dist/index.js`
-5. [ ] README has MBPS v2.1 compliance badge
-6. [ ] Tool count matches README claims (verify with: `grep -c "case '" src/index.ts`)
-7. [ ] No duplicate tool registrations in index.ts
-8. [ ] All tool files follow naming convention: `{prefix}-{tool_name}.ts`
-
-## For Voice Interface Integration
-
-MBPS compliance is critical for voice interfaces because:
-- Predictable tool names across all blockchains
-- Consistent response formats
-- Standardized error handling
-- Reliable tool discovery via help system
-
-## Refactoring Process (Proven Workflow)
-
-### Phase 1: Analysis
-1. Run `wc -l src/index.ts` to assess monolithic size
-2. Count actual tools: `grep -c "case '" src/index.ts`
-3. Identify existing MBPS tools and needed renames
-4. Check for existing test infrastructure
-
-### Phase 2: Extraction
-1. Create directory structure:
-   ```bash
-   mkdir -p src/tools/{core,wallet,transactions,analytics,defi}
-   mkdir -p tests/{unit,integration}
-   ```
-2. Extract tools from monolithic file:
-   - Use automated scripts for large files (>100 tools)
-   - Manual extraction for smaller servers (<30 tools)
-3. Ensure each tool has real implementation, not templates
-
-### Phase 3: Wiring
-1. Import all tools in index.ts
-2. Register tools in server initialization
-3. Add switch cases for each tool
-4. Verify no duplicates or missing handlers
-
-### Phase 4: MBPS Compliance
-1. Rename tools to exact MBPS names:
-   - File names: `{prefix}-get_balance.ts`
-   - Function names: `handleGetBalance()`
-   - Case statements: `case '{prefix}_get_balance':`
-2. Verify all 25 standardized MBPS v2.1 tools present
-
-### Phase 5: Testing
-1. Install Jest dependencies (see TESTING-STANDARDIZATION-INSTRUCTIONS.md)
-2. Create jest.config.cjs (not .js for ES modules)
-3. Add smoke tests at minimum
-4. Run `npm run build` to verify compilation
-5. Test with MCP Inspector
-
-## Tool Organization Best Practices
-
-### Directory Structure
-```
-src/
-├── index.ts           (max ~500 lines with imports)
-├── client.ts          (blockchain client)
-├── types.ts           (TypeScript interfaces)
-├── utils.ts           (shared utilities)
-├── constants.ts       (API endpoints, configs)
-└── tools/
-    ├── core/          (MBPS mandatory tools)
-    ├── wallet/        (address, balance operations)
-    ├── transactions/  (sending, signing)
-    ├── analytics/     (stats, metrics)
-    └── {chain-specific}/ (e.g., inscriptions for Bitcoin)
-```
-
-### Tool File Template
-```typescript
-import { BitcoinClient } from '../../client.js';
-import { logger } from '../../utils.js';
-
-export async function handleToolName(
-  args: any,
-  client: BitcoinClient
-): Promise<{ content: Array<{ type: string; text: string }> }> {
-  try {
-    // Implementation
-    return {
-      content: [{
-        type: 'text',
-        text: JSON.stringify(result, null, 2)
-      }]
-    };
-  } catch (error: any) {
-    throw new Error(`Failed to execute tool: ${error.message}`);
-  }
-}
-```
-
-## Next Steps for New Refactors
-
-1. Read MBPS-v2.1-COMPREHENSIVE.md first
-2. Use REFACTORING-PROMPT-TEMPLATE.md as checklist
-3. Reference Bitcoin v2 refactor as the gold standard example
-4. Test with TESTING-STANDARDIZATION-INSTRUCTIONS.md
-5. Verify all 25 standardized MBPS v2.1 tools work before marking complete
-
-## Troubleshooting Common Issues
-
-### Build Failures
-**Issue**: `Cannot find module './client.js'`
-**Solution**: Add .js extensions to all local imports in TypeScript files
-
-**Issue**: `module is not defined in ES module scope`
-**Solution**: Rename config files to .cjs extension (jest.config.cjs)
-
-**Issue**: TypeScript compilation errors on tool handlers
-**Solution**: Ensure consistent function signatures and return types
-
-### Testing Issues
-**Issue**: Jest fails with ES module errors
-**Solution**: 
-1. Use jest.config.cjs (not .js)
-2. Configure ts-jest properly in transform section
-3. Mock imports if necessary for unit tests
-
-### Tool Registration Issues
-**Issue**: Tool works but not appearing in MCP Inspector
-**Solution**:
-1. Verify tool is imported in index.ts
-2. Check switch case matches exact tool name
-3. Ensure tool is registered in tools array
-
-### Performance Issues
-**Issue**: Server slow to start with many tools
-**Solution**:
-1. Use dynamic imports for large tool sets
-2. Implement lazy loading for rarely used tools
-3. Consider splitting into multiple specialized servers
-
-## Success Metrics
-
-A properly refactored server should:
-- Build in < 10 seconds
-- Start in < 2 seconds  
-- Pass all smoke tests
-- Have all 25 MBPS v2.1 tools functional
-- Work in MCP Inspector
-- Have modular structure with < 500 lines in index.ts
-
-## Migration Path for Monolithic Servers
-
-### Small Servers (<30 tools)
-- Manual extraction recommended
-- 1-2 hours estimated time
-- Focus on MBPS compliance first
-
-### Medium Servers (30-70 tools)
-- Semi-automated extraction
-- 2-4 hours estimated time
-- Use scripts to generate imports
-
-### Large Servers (>70 tools)
-- Fully automated extraction required
-- 4-8 hours estimated time
-- Consider Python scripts for extraction
-- Test incrementally (10 tools at a time)
-
-## Troubleshooting Common Issues
-
-### MCP Connection Failures
-**Problem**: "Failed to reconnect to {server-name}" after refactoring
-**Cause**: MCP config still points to old server path
-**Solution**: 
-1. Check MCP config: `~/Library/Application Support/Claude/claude_desktop_config.json`
-2. Update path from `{server-name}/dist/index.js` to `{server-name}-refactor/dist/index.js`
-3. Restart Claude Desktop
-
-### Build Failures After Refactoring
-**Problem**: TypeScript compilation errors
-**Common Causes**:
-- Missing .js extensions in imports (ES modules)
-- Incorrect function names after MBPS renames
-- Template implementations instead of real code
-**Solutions**:
-- Add .js to all local imports
-- Update both file names AND function names when renaming
-- Ensure extracted tools have actual implementations
-
-### Test Configuration Issues  
-**Problem**: Jest fails with module errors
-**Cause**: ES modules conflict with CommonJS config
-**Solution**: Rename jest.config.js to jest.config.cjs
-
-### Tool Count Mismatches
-**Problem**: README claims X tools but server has Y
-**Verification**: `grep -c "case '" src/index.ts`
-**Common Issues**:
-- Placeholder tools counted but not implemented
-- Duplicate case statements
-- Missing tool imports
-
-## Refactor Priority Order (Remaining Servers)
-
-Based on tool count and complexity:
-
-### High Priority (Most Tools)
-1. **xrp-testnet** (39 tools) - Complex with NFT generation
-2. **bsc-testnet** (37 tools) - PancakeSwap integration  
-3. **near-testnet** (37 tools) - Unique account model
-
-### Medium Priority (Standard EVM)
-4. **ethereum-sepolia** (30 tools) - Reference EVM implementation
-5. **polygon-amoy** (30 tools) - L2 with similar structure
-6. **worldchain-testnet** (27 tools) - Enhanced data providers
-7. **arbitrum-sepolia** (25 tools) - L2 optimizations
-8. **base-sepolia** (24 tools) - Coinbase L2
-
-### Lower Priority (Unique Architectures)
-9. **cosmos-theta** (20 tools) - CosmJS complexity
-10. **tron-testnet** (20 tools) - TronWeb integration
-11. **sui-testnet** (20 tools) - Move language
-12. **solana-devnet** (50 tools) - Different account model
+## Key Facts
+- **Version**: 3.0 (January 2025)
+- **Supersedes**: MBPS v2.1 (tool requirements) + MSAS v1.0 (architecture standard)
+- **Documents**: 10 core standards (reduced from 28 historical documents)
+- **Mandatory Tools**: 25 tools every compliant server must implement
+- **Supported Blockchains**: 15 official (Bitcoin, Ethereum, Solana, Polygon, Avalanche, Arbitrum, Base, BNB Chain, Cosmos, Osmosis, NEAR, Sui, TRON, XRP, World Chain)
+- **Naming Convention**: `{prefix}_{action}_{resource}` (e.g., `eth_get_balance`, `btc_create_wallet`)
 
 ---
 
-This guide ensures any LLM can understand and apply our blockchain MCP server standards correctly. Last updated after Bitcoin Testnet v2 refactor completion.
+## The 10 Core Documents
+
+### 01-Blockchain-MCP-Standard-v3.0.md ⭐
+**READ FIRST** - The complete unified standard.
+- Modular architecture requirements
+- All 25 mandatory tools with specifications
+- Implementation templates and patterns
+- Compliance verification checklist
+- Combines architecture + tool requirements into one document
+
+### 02-UNIVERSAL-TOOL-NAMING-REGISTRY.md 📖
+**REFERENCE** - Complete tool naming registry.
+- All 25 mandatory tool names
+- 100+ optional/extended tool names
+- Action verb registry (get, send, create, etc.)
+- Resource object registry (balance, transaction, wallet, etc.)
+- Blockchain prefix registry (15 official + 6 proposed)
+
+### 03-QUICK-START-GUIDE.md 🚀
+**IMPLEMENTATION** - Build or convert servers in 2 hours.
+- **Option A**: New server from scratch
+- **Option B**: Convert existing monolithic server to modular
+- Step-by-step instructions with code examples
+- Extraction scripts for migrating large servers
+
+### 04-NETWORK-CONFIGURATIONS.md 🌐
+**CONFIGURATION** - Blockchain network setup.
+- RPC endpoints for testnets and mainnets
+- Chain IDs and network parameters
+- Environment variable templates
+- Connection pool configuration
+
+### 05-TESTING-STANDARD.md 🧪
+**VALIDATION** - Comprehensive testing requirements.
+- Jest configuration for MCP servers
+- Unit, integration, and smoke tests
+- Security testing (input validation, rate limiting)
+- Chaos engineering tests
+- Performance benchmarks
+- UAT (User Acceptance Testing) procedures
+
+### 06-ERROR-HANDLING-PATTERNS.md 🛡️
+**ERROR MANAGEMENT** - Standardized error patterns.
+- McpError usage from @modelcontextprotocol/sdk
+- Error codes (InvalidParams, InternalError, etc.)
+- Input validation with Zod schemas
+- User-friendly error messages
+- Recovery strategies
+
+### 07-HELP-SYSTEM-IMPLEMENTATION.md ❓
+**DISCOVERABILITY** - Interactive help system.
+- 3 required help tools: `help`, `search_tools`, `list_tools_by_category`
+- Tool discovery patterns
+- Category-based organization
+- Search functionality implementation
+
+### 08-README-TEMPLATE.md 📝
+**DOCUMENTATION** - Standard README format.
+- Required sections (Installation, Configuration, Tools, Testing)
+- Tool documentation format
+- Badge templates
+- Example content
+
+### 09-TROUBLESHOOTING.md 🔧
+**DEBUGGING** - Common issues and solutions.
+- TypeScript compilation errors
+- Import path issues (ES modules require .js extensions)
+- MCP connection failures
+- Testing configuration problems
+
+### 10-CONSOLIDATION-PLAN.md 📋
+**HISTORICAL CONTEXT** - Why we consolidated to v3.0.
+- Reduction from 28 documents to 10
+- Migration from separate MBPS/MSAS standards
+- Archive organization
+
+---
+
+## The 25 Mandatory Tools
+
+Every BMCPS v3.0 compliant server must implement these tools with exact names:
+
+### Core Operations (8 tools)
+1. `{prefix}_get_chain_info` - Blockchain network information
+2. `{prefix}_get_balance` - Native token balance for address
+3. `{prefix}_get_transaction` - Transaction details by hash
+4. `{prefix}_get_block` - Block information by number/hash
+5. `{prefix}_validate_address` - Address format validation
+6. `{prefix}_get_transaction_history` - Recent transactions for address
+7. `{prefix}_send_transaction` - Send native tokens
+8. `{prefix}_get_account_info` - Account metadata and status
+
+### Wallet Management (3 tools)
+9. `{prefix}_create_wallet` - Generate new wallet
+10. `{prefix}_import_wallet` - Import from private key/mnemonic
+11. `{prefix}_generate_address` - Generate new addresses
+12. `{prefix}_get_wallet_info` - Comprehensive wallet details
+
+### Network Management (3 tools)
+13. `{prefix}_get_network_info` - Network status and configuration
+14. `{prefix}_get_gas_price` - Current gas/fee pricing
+15. `{prefix}_get_mempool_info` - Mempool statistics
+
+### Fee Management (1 tool)
+16. `{prefix}_estimate_fees` - Fee estimation for transactions
+
+### Token Operations (5 tools)
+17. `{prefix}_get_token_balance` - Token balance queries
+18. `{prefix}_get_token_info` - Token metadata
+19. `{prefix}_transfer_token` - Send tokens
+20. `{prefix}_approve_token` - Approve token spending
+21. `{prefix}_get_token_allowance` - Check spending allowances
+
+### Help System (3 tools)
+22. `{prefix}_help` - Interactive help and guidance
+23. `{prefix}_search_tools` - Search tools by keyword
+24. `{prefix}_list_tools_by_category` - Browse organized tool catalog
+
+Note: `{prefix}` is the blockchain identifier (e.g., eth, btc, sol, xrp, etc.)
+
+---
+
+## Mandatory Directory Structure
+
+```
+{blockchain}-{network}-mcp-server/
+├── src/
+│   ├── index.ts              # Entry point (<300 lines ideal)
+│   ├── tool-definitions.ts   # Tool registry & schemas
+│   ├── client.ts             # Blockchain client wrapper
+│   └── tools/                # Tool implementations
+│       ├── core/             # REQUIRED: blockchain fundamentals
+│       ├── wallet/           # REQUIRED: wallet operations
+│       ├── network/          # REQUIRED: network management
+│       ├── tokens/           # REQUIRED: token operations
+│       ├── help/             # REQUIRED: help system
+│       ├── account/          # Optional: extended account features
+│       ├── nft/              # Optional: NFT operations
+│       ├── defi/             # Optional: DeFi protocols
+│       └── [other]/          # Optional: blockchain-specific features
+├── tests/                    # Jest test suite
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+### File Naming Convention
+`src/tools/{category}/{prefix}-{tool_name_with_underscores}.ts`
+
+Examples:
+- `src/tools/core/eth-get_balance.ts`
+- `src/tools/tokens/btc-transfer_token.ts`
+- `src/tools/nft/sol-mint_nft.ts`
+
+---
+
+## Compliance Levels
+
+### 🥉 Bronze (Minimum Viable)
+- ✅ 25 mandatory tools implemented
+- ✅ Basic modular structure (tools organized in categories)
+- ✅ TypeScript compiles without errors
+
+### 🥈 Silver (Production Ready)
+- ✅ All Bronze requirements
+- ✅ 40+ tools implemented
+- ✅ Full BMCPS v3.0 architecture compliance
+- ✅ Comprehensive test suite (Jest configured)
+- ✅ Complete documentation (README with all tools)
+
+### 🥇 Gold (Enterprise Grade)
+- ✅ All Silver requirements
+- ✅ 100+ tools organized by category
+- ✅ Performance optimized (caching, rate limiting)
+- ✅ Security audited
+- ✅ Production deployed and maintained
+
+---
+
+## Factory Automation
+
+The repository includes Node.js scripts for automation:
+
+### bmcps-factory.js
+Generates new BMCPS v3.0 compliant servers from scratch.
+```bash
+node bmcps-factory.js --blockchain eth --network testnet
+```
+- Creates complete directory structure
+- Generates 25 mandatory tool stubs
+- Sets up TypeScript, Jest, and package.json
+
+### bmcps-validation.js
+Validates server compliance against BMCPS v3.0.
+```bash
+node bmcps-validation.js /path/to/server
+```
+- Checks architecture (directory structure)
+- Validates tool naming conventions
+- Verifies all 25 mandatory tools exist
+- Assigns compliance level (Bronze/Silver/Gold)
+
+### bmcps-testing-framework.js
+Sets up comprehensive testing infrastructure.
+```bash
+node bmcps-testing-framework.js /path/to/server
+```
+- Generates Jest configuration
+- Creates test templates
+- Sets up security and performance tests
+
+### implementation-templates.js
+Generates tool implementation code.
+```bash
+node implementation-templates.js --blockchain eth --tools all
+```
+- Creates tool files with proper structure
+- Includes Zod validation schemas
+- Adds error handling patterns
+
+---
+
+## Quick Start Workflows
+
+### For New Server Development
+1. Read **01-Blockchain-MCP-Standard-v3.0.md**
+2. Check **02-UNIVERSAL-TOOL-NAMING-REGISTRY.md** for tool names
+3. Follow **03-QUICK-START-GUIDE.md** Option A
+4. Configure networks with **04-NETWORK-CONFIGURATIONS.md**
+5. Implement errors per **06-ERROR-HANDLING-PATTERNS.md**
+6. Add help system per **07-HELP-SYSTEM-IMPLEMENTATION.md**
+7. Add tests per **05-TESTING-STANDARD.md**
+8. Document with **08-README-TEMPLATE.md**
+
+### For Converting Existing Server
+1. Understand target in **01-Blockchain-MCP-Standard-v3.0.md**
+2. Check compliance with **02-UNIVERSAL-TOOL-NAMING-REGISTRY.md**
+3. Follow **03-QUICK-START-GUIDE.md** Option B
+4. Refactor errors per **06-ERROR-HANDLING-PATTERNS.md**
+5. Add tests per **05-TESTING-STANDARD.md**
+6. Update docs with **08-README-TEMPLATE.md**
+
+### For Debugging
+- Jump to **09-TROUBLESHOOTING.md**
+
+---
+
+## 15 Official Blockchain Prefixes
+
+| Blockchain | Prefix | Example Tool |
+|------------|--------|--------------|
+| Bitcoin | `btc_` | `btc_get_balance` |
+| Ethereum | `eth_` | `eth_get_balance` |
+| Solana | `sol_` | `sol_get_balance` |
+| Polygon | `poly_` | `poly_get_balance` |
+| Avalanche | `avax_` | `avax_get_balance` |
+| Arbitrum | `arb_` | `arb_get_balance` |
+| Base | `base_` | `base_get_balance` |
+| BNB Chain | `bnb_` | `bnb_get_balance` |
+| Cosmos | `cosmos_` | `cosmos_get_balance` |
+| Osmosis | `osmo_` | `osmo_get_balance` |
+| NEAR | `near_` | `near_get_balance` |
+| Sui | `sui_` | `sui_get_balance` |
+| TRON | `tron_` | `tron_get_balance` |
+| XRP | `xrp_` | `xrp_get_balance` |
+| World Chain | `world_` | `world_get_balance` |
+
+---
+
+## What This Repository IS
+
+✅ Standards documentation for blockchain MCP servers
+✅ Factory automation for generating compliant servers
+✅ Validation scripts for compliance checking
+✅ Reference architecture and patterns
+✅ Tooling for rapid server development
+
+## What This Repository IS NOT
+
+❌ Not a blockchain server implementation
+❌ Not executable MCP server code
+❌ Not meant to handle blockchain transactions directly
+❌ Not a production deployment artifact
+
+---
+
+## Version History
+
+- **v3.0** (January 2025) - Unified standard (MBPS v2.1 + MSAS v1.0 combined)
+- **v2.1** (December 2024) - MBPS tool requirements standard
+- **v1.0** (September 2024) - MSAS architecture standard
+
+---
+
+## For AI Agents Using This Standard
+
+When helping developers build blockchain MCP servers:
+
+1. **Always reference BMCPS v3.0** (not MBPS or MSAS separately)
+2. **Use exact tool names** from 02-UNIVERSAL-TOOL-NAMING-REGISTRY.md
+3. **Follow modular structure** (one tool per file in category directories)
+4. **Include all 25 mandatory tools** with correct `{prefix}_{action}_{resource}` format
+5. **Validate inputs** using Zod schemas
+6. **Use McpError** for error handling
+7. **Keep index.ts clean** (<300 lines with imports)
+8. **Add comprehensive tests** using Jest
+9. **Generate via factory scripts** when possible for consistency
+
+---
+
+**Maintained at**: https://github.com/[your-org]/blockchain-mcp-standards
+**Questions**: See 09-TROUBLESHOOTING.md or open an issue
+**Contributing**: See 10-CONSOLIDATION-PLAN.md for context
+
+*Last updated: January 2025 | BMCPS v3.0*

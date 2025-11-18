@@ -114,7 +114,7 @@ node implementation-templates.js --blockchain eth --tools all
 ### 🥈 Silver (Production Ready)
 - ✅ All Bronze requirements
 - ✅ 40+ tools implemented
-- ✅ Full MBSS architecture compliance
+- ✅ Full BMCPS v3.0 architecture compliance
 - ✅ Comprehensive test suite
 - ✅ Complete documentation
 
@@ -216,7 +216,7 @@ grep -r "name:" 01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md | grep "_"
 
 ## Version History
 
-- **v3.0** (Jan 2025) - Unified MBSS standard (this version)
+- **v3.0** (Jan 2025) - Unified BMCPS standard (this version)
 - **v2.1** (Dec 2024) - MBPS tool requirements
 - **v1.0** (Sep 2024) - MSAS architecture standard
 
@@ -230,7 +230,7 @@ grep -r "name:" 01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md | grep "_"
 ## Working with This Repository
 
 ### When Adding New Standards
-1. Edit the appropriate numbered document (01-09)
+1. Edit the appropriate numbered document (01-10)
 2. Update cross-references in other docs
 3. Test changes against reference implementations
 4. Update RELEASE-NOTES.md

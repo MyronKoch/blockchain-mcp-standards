@@ -28,7 +28,7 @@ logger.error('Something failed');
 ```typescript
 // In src/tools/index.ts
 export const TOOL_HANDLERS = {
-  ...coreHandlers,      // 25 MBPS tools
+  ...coreHandlers,      // 25 BMCPS v3.0 tools
   ...walletHandlers,    // Original wallet tools
   ...tokenHandlers,     // Original token tools
   ...defiHandlers,      // Original DeFi tools
@@ -38,7 +38,7 @@ export const TOOL_HANDLERS = {
 
 ### 3. Aliasing Not Working
 
-**Problem**: "MBPS tools not found even though I aliased them"
+**Problem**: "BMCPS v3.0 tools not found even though I aliased them"
 
 **Solution**: Ensure aliases are checked BEFORE throwing error:
 ```typescript
@@ -158,6 +158,6 @@ export const TOOL_DEFINITIONS = [
    ```
 
 3. Check the core standards:
-   - `00-AGENT-HANDOFF-README.md` - Critical rules
-   - `02-MIGRATION-REQUIREMENTS.md` - ALL tools requirement
-   - `10-MSAS.md` - Aliasing examples
+   - `01-Blockchain-MCP-Standard-v3.0.md` - Complete BMCPS v3.0 specification
+   - `02-UNIVERSAL-TOOL-NAMING-REGISTRY.md` - Tool naming conventions
+   - `03-QUICK-START-GUIDE.md` - Implementation guide

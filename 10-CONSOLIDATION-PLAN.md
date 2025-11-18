@@ -26,7 +26,7 @@
 - ❌ `06-PROJECT-SETUP-TEMPLATE.md` - Already in Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - ✅ **Create: `QUICK-START-GUIDE.md`** - Single consolidated guide
 
-### 4. **Templates (3 docs) → Merge into MBSS**
+### 4. **Templates (3 docs) → Merge into BMCPS**
 - ❌ `07-TOOL-IMPLEMENTATION-TEMPLATES.md` - Move to Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - ❌ `08-BLOCKCHAIN-CLIENT-TEMPLATES.md` - Move to Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - ❌ `18-REFACTORING-PROMPT-TEMPLATE.md` - Archive (too specific)
