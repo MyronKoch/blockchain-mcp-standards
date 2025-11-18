@@ -318,17 +318,13 @@ Where:
 
 ## 🔍 Prefix Registry
 
+### Official BMCPS v3.0 Supported Blockchains
+
 | Blockchain | Prefix | Example Tools |
 |------------|--------|---------------|
 | **Bitcoin** | `btc_` | `btc_get_balance`, `btc_create_inscription` |
 | **Ethereum** | `eth_` | `eth_get_balance`, `eth_resolve_ens` |
 | **Solana** | `sol_` | `sol_get_balance`, `sol_create_spl_token` |
-| **Cardano** | `ada_` | `ada_get_balance`, `ada_stake_tokens` |
-| **Polkadot** | `dot_` | `dot_get_balance`, `dot_get_parachains` |
-| **Chainlink** | `link_` | `link_get_price_feed`, `link_request_vrf` |
-| **Stellar** | `xlm_` | `xlm_get_balance`, `xlm_create_asset` |
-| **Flow** | `flow_` | `flow_get_balance`, `flow_deploy_contract` |
-| **Aptos** | `apt_` | `apt_get_balance`, `apt_deploy_module` |
 | **BNB Chain** | `bnb_` | `bnb_get_balance`, `bnb_swap_tokens` |
 | **Polygon** | `poly_` | `poly_get_balance`, `poly_bridge_tokens` |
 | **Avalanche** | `avax_` | `avax_get_balance`, `avax_create_subnet` |
@@ -340,6 +336,18 @@ Where:
 | **Sui** | `sui_` | `sui_get_balance`, `sui_get_objects` |
 | **TRON** | `tron_` | `tron_get_balance`, `tron_freeze_tokens` |
 | **XRP** | `xrp_` | `xrp_get_balance`, `xrp_create_escrow` |
+| **World Chain** | `world_` | `world_get_balance`, `world_verify_world_id` |
+
+### Proposed Future Support
+
+| Blockchain | Prefix | Status |
+|------------|--------|--------|
+| **Cardano** | `ada_` | Proposed - Not yet implemented |
+| **Polkadot** | `dot_` | Proposed - Not yet implemented |
+| **Chainlink** | `link_` | Proposed - Not yet implemented |
+| **Stellar** | `xlm_` | Proposed - Not yet implemented |
+| **Flow** | `flow_` | Proposed - Not yet implemented |
+| **Aptos** | `apt_` | Proposed - Not yet implemented |
 
 ---
 

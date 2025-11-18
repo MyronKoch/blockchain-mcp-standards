@@ -16,7 +16,7 @@ This document defines the comprehensive README documentation standard for all bl
 
 ## 🎯 Quick Overview
 
-- **Tool Count**: {actual_tool_count} tools (24 MBSS mandatory + {extended_count} extended tools)
+- **Tool Count**: {actual_tool_count} tools (25 BMCPS v3.0 mandatory + {extended_count} extended tools)
 - **Categories**: 16 standardized categories (core, wallet, network, tokens, help, account, nft, defi, staking, governance, contracts, bridge, analytics, security, events, advanced)
 - **Network**: {primary_network} (locked to single network - testnet or mainnet only)
 - **Architecture**: Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard compliant
@@ -702,7 +702,7 @@ Detailed description of return data structure with examples
 **Problem**: "Unknown tool: {tool_name}"
 **Solution**:
 - Verify tool name spelling
-- Check MBPS naming convention
+- Check BMCPS v3.0 naming convention
 - Use `{prefix}_help` for tool discovery
 - Update MCP server configuration
 
@@ -797,11 +797,11 @@ npm run build
 ### Testing
 - **Unit Tests**: Individual tool function testing
 - **Integration Tests**: Full MCP protocol testing
-- **MBPS Compliance**: Automated compliance verification
+- **BMCPS v3.0 Compliance**: Automated compliance verification
 - **Performance Tests**: Load testing and benchmarking
 
 ### Contributing Guidelines
-1. Follow tool requirements (v2.1) standards
+1. Follow BMCPS v3.0 standards
 2. Add comprehensive tests for new tools
 3. Update documentation for any changes
 4. Maintain backward compatibility
@@ -819,8 +819,8 @@ npm run build
 ## 📚 Appendices
 
 ### A. Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance Checklist
-- [x] All 24 core tools implemented (set_network removed)
-- [x] MBPS naming convention followed
+- [x] All 25 core tools implemented
+- [x] BMCPS v3.0 naming convention followed
 - [x] Help system implemented
 - [x] TypeScript compilation
 - [x] Jest testing configured
@@ -852,7 +852,7 @@ npm run build
 ## 🎯 **Implementation Checklist**
 
 ### Required Sections (All Must Be Present)
-- [ ] Header with MBPS compliance badge
+- [ ] Header with BMCPS v3.0 compliance badge
 - [ ] Architecture visualization (Mermaid)
 - [ ] Feature summary by category
 - [ ] Network information with faucets

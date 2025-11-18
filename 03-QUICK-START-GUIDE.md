@@ -51,7 +51,7 @@ npm pkg set scripts.inspect="npx @modelcontextprotocol/inspector node dist/index
 npm pkg set scripts.test="jest"
 ```
 
-### Step 2: Create MBSS Directory Structure (5 min)
+### Step 2: Create BMCPS v3.0 Directory Structure (5 min)
 
 ```bash
 # Create modular structure
@@ -195,7 +195,7 @@ const server = new Server(
   }
 );
 
-// Tool definitions (25 MBSS core tools)
+// Tool definitions (25 BMCPS v3.0 core tools)
 const tools = [
   {
     name: '{prefix}_get_chain_info',
@@ -281,7 +281,7 @@ ls -la src/
 # - Current architecture: [ ] Monolithic  [ ] Partially modular  [ ] Modular
 # - Tool count: ___
 # - File size: ___ lines
-# - Missing MBSS tools: ___
+# - Missing BMCPS v3.0 tools: ___
 ```
 
 ### Step 2: Backup and Prepare
@@ -334,7 +334,7 @@ def extract_tools(input_file, output_dir):
         print(f"✅ Extracted {tool_name} → {file_path}")
 
 def determine_category(tool_name):
-    """Map tool to MBSS category"""
+    """Map tool to BMCPS v3.0 category"""
     if any(x in tool_name for x in ['balance', 'chain_info', 'block', 'transaction', 'gas']):
         return 'core'
     elif any(x in tool_name for x in ['wallet', 'create', 'import', 'validate']):
@@ -351,7 +351,7 @@ def determine_category(tool_name):
         return 'analytics'
 
 def generate_tool_file(tool_name, implementation):
-    """Generate MBSS-compliant tool file"""
+    """Generate BMCPS v3.0 compliant tool file"""
     handler_name = 'handle' + ''.join(word.capitalize() for word in tool_name.split('_')[1:])
     
     return f'''import {{ ErrorCode, McpError }} from '@modelcontextprotocol/sdk/types.js';
@@ -396,7 +396,7 @@ export const TOOL_HANDLERS: Record<string, (args: any, client: any) => Promise<a
 
 // Export tool definitions
 export const TOOL_DEFINITIONS = [
-  // ... all 25 MBSS tool definitions
+  // ... all 25 BMCPS v3.0 tool definitions
 ];
 ```
 
@@ -460,7 +460,7 @@ npm run inspect
 npm test
 ```
 
-### Step 2: Validate MBSS Compliance
+### Step 2: Validate BMCPS v3.0 Compliance
 
 Run this validation checklist:
 
@@ -554,11 +554,11 @@ grep "name:" src/index.ts | wc -l  # Should be 25+
 
 ## Resources
 
-- Blockchain MCP Standard v3.0 (BMCPS v3.0) Standard: `./Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md`
-- Testing Standard: `./TESTING-STANDARD.md`
-- Error Handling: `./ERROR-HANDLING-PATTERNS.md`
-- Network Configs: `./NETWORK-CONFIGURATIONS.md`
-- Troubleshooting: `./TROUBLESHOOTING.md`
+- Blockchain MCP Standard v3.0 (BMCPS v3.0) Standard: `./01-Blockchain-MCP-Standard-v3.0.md`
+- Testing Standard: `./05-TESTING-STANDARD.md`
+- Error Handling: `./06-ERROR-HANDLING-PATTERNS.md`
+- Network Configs: `./04-NETWORK-CONFIGURATIONS.md`
+- Troubleshooting: `./09-TROUBLESHOOTING.md`
 
 ---
 

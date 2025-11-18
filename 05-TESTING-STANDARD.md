@@ -85,7 +85,7 @@ tests/
 ├── integration/            # Integration tests
 │   ├── tools.test.ts      # Tool registration and execution
 │   ├── client.test.ts     # Blockchain client tests
-│   └── mbss-compliance.test.ts  # MBSS standard compliance
+│   └── bmcps-compliance.test.ts  # BMCPS v3.0 standard compliance
 ├── smoke/                  # Smoke tests
 │   └── server-startup.test.ts
 └── fixtures/               # Test data
@@ -181,7 +181,7 @@ describe('Tool Integration', () => {
   });
 
   describe('Tool Registration', () => {
-    it('should have all 25 MBSS core tools', () => {
+    it('should have all 25 BMCPS v3.0 core tools', () => {
       const coreTools = [
         '{prefix}_get_chain_info',
         '{prefix}_get_balance',
@@ -258,10 +258,10 @@ describe('Tool Integration', () => {
 });
 ```
 
-### 4. MBSS Compliance Tests
+### 4. BMCPS v3.0 Compliance Tests
 
 ```typescript
-// tests/integration/mbss-compliance.test.ts
+// tests/integration/bmcps-compliance.test.ts
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -578,8 +578,8 @@ jobs:
       with:
         files: ./coverage/lcov.info
     
-    - name: Validate MBSS compliance
-      run: ./scripts/validate-mbss.sh
+    - name: Validate BMCPS v3.0 compliance
+      run: ./scripts/validate-bmcps.sh
 ```
 
 ---
