@@ -12,11 +12,11 @@ Large MCP servers with many tools need a systematic way for users to discover fu
 
 ### Required Tools (3 tools minimum)
 
-1. **`{prefix}_help`** - Interactive help system with contextual guidance
-2. **`{prefix}_search_tools`** - Search tools by keyword, category, or description  
-3. **`{prefix}_list_tools_by_category`** - Browse tools organized by functional categories
+1. **`\{prefix\}_help`** - Interactive help system with contextual guidance
+2. **`\{prefix\}_search_tools`** - Search tools by keyword, category, or description  
+3. **`\{prefix\}_list_tools_by_category`** - Browse tools organized by functional categories
 
-Where `{prefix}` is the server's standard tool prefix (e.g., `osmo_`, `eth_`, `btc_`, `db_`, `api_`, etc.).
+Where `\{prefix\}` is the server's standard tool prefix (e.g., `osmo_`, `eth_`, `btc_`, `db_`, `api_`, etc.).
 
 ## Implementation Structure
 
@@ -31,14 +31,14 @@ src/tools/help/
 
 ### Tool Registry Schema
 ```typescript
-interface ToolMetadata {
+interface ToolMetadata \{
   name: string;           // Tool name including prefix
   category: string;       // Functional category (e.g., "blockchain", "staking")
   description: string;    // Brief description of functionality
   parameters?: string[];  // Key parameter names
   examples?: string[];    // Usage examples
   tags?: string[];       // Additional searchable keywords
-}
+\}
 ```
 
 ### Category Standards
@@ -63,65 +63,65 @@ interface ToolMetadata {
 
 ### 1. Help Tool Template
 ```typescript
-export async function handleHelp(args: { topic?: string }) {
-  const topics = {
+export async function handleHelp(args: \{ topic?: string \}) \{
+  const topics = \{
     overview: "Server overview and capabilities",
     categories: "Available tool categories", 
     getting_started: "Basic usage examples",
     // Add server-specific topics
-  };
+  \};
 
-  if (!args.topic) {
-    return {
+  if (!args.topic) \{
+    return \{
       available_topics: Object.keys(topics),
-      usage: "Use {prefix}_help with a topic for detailed guidance"
-    };
-  }
+      usage: "Use \{prefix\}_help with a topic for detailed guidance"
+    \};
+  \}
 
   // Return topic-specific help content
-}
+\}
 ```
 
 ### 2. Search Tool Template
 ```typescript
-export async function handleSearchTools(args: { query: string; category?: string }) {
+export async function handleSearchTools(args: \{ query: string; category?: string \}) \{
   const allTools = getToolRegistry();
   
-  const results = allTools.filter(tool => {
+  const results = allTools.filter(tool => \{
     const matchesQuery = tool.name.includes(args.query) || 
                         tool.description.toLowerCase().includes(args.query.toLowerCase());
     const matchesCategory = !args.category || tool.category === args.category;
     return matchesQuery && matchesCategory;
-  });
+  \});
 
-  return {
+  return \{
     query: args.query,
     results_count: results.length,
     tools: results
-  };
-}
+  \};
+\}
 ```
 
 ### 3. List by Category Template
 ```typescript
-export async function handleListByCategory(args: { category?: string }) {
+export async function handleListByCategory(args: \{ category?: string \}) \{
   const allTools = getToolRegistry();
   
-  if (!args.category) {
+  if (!args.category) \{
     const categories = [...new Set(allTools.map(t => t.category))];
-    return {
+    return \{
       available_categories: categories,
       usage: "Specify a category to see tools in that group"
-    };
-  }
+    \};
+  \}
 
   const toolsInCategory = allTools.filter(t => t.category === args.category);
-  return {
+  return \{
     category: args.category,
     tool_count: toolsInCategory.length,
     tools: toolsInCategory
-  };
-}
+  \};
+\}
 ```
 
 ## Integration Guidelines
@@ -132,13 +132,13 @@ Each server should maintain a central registry of all tools with metadata:
 ```typescript
 // src/tools/help/tool-registry.ts
 export const TOOL_REGISTRY: ToolMetadata[] = [
-  {
+  \{
     name: "prefix_get_info",
     category: "core", 
     description: "Get basic server information",
     parameters: ["format"],
     examples: ["prefix_get_info", "prefix_get_info format=json"]
-  },
+  \},
   // ... all other tools
 ];
 ```
@@ -146,46 +146,46 @@ export const TOOL_REGISTRY: ToolMetadata[] = [
 ### 2. Main Server Integration
 ```typescript
 // In main index.ts
-import { handleHelp, handleSearchTools, handleListByCategory } from './tools/help';
+import \{ handleHelp, handleSearchTools, handleListByCategory \} from './tools/help';
 
 // Register help tools
-server.setRequestHandler(ListToolsRequestSchema, async () => ({
+server.setRequestHandler(ListToolsRequestSchema, async () => (\{
   tools: [
     // ... other tools
-    {
+    \{
       name: "prefix_help",
       description: "Get interactive help and guidance",
-      inputSchema: {
+      inputSchema: \{
         type: "object",
-        properties: {
-          topic: { type: "string", description: "Help topic" }
-        }
-      }
-    },
-    {
+        properties: \{
+          topic: \{ type: "string", description: "Help topic" \}
+        \}
+      \}
+    \},
+    \{
       name: "prefix_search_tools", 
       description: "Search tools by keyword or category",
-      inputSchema: {
+      inputSchema: \{
         type: "object",
-        properties: {
-          query: { type: "string", description: "Search query" },
-          category: { type: "string", description: "Filter by category" }
-        },
+        properties: \{
+          query: \{ type: "string", description: "Search query" \},
+          category: \{ type: "string", description: "Filter by category" \}
+        \},
         required: ["query"]
-      }
-    },
-    {
+      \}
+    \},
+    \{
       name: "prefix_list_tools_by_category",
       description: "Browse tools organized by category", 
-      inputSchema: {
+      inputSchema: \{
         type: "object",
-        properties: {
-          category: { type: "string", description: "Category name" }
-        }
-      }
-    }
+        properties: \{
+          category: \{ type: "string", description: "Category name" \}
+        \}
+      \}
+    \}
   ]
-}));
+\}));
 ```
 
 ## Benefits

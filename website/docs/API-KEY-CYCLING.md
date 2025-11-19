@@ -31,7 +31,7 @@ Used to connect to blockchain networks.
 - **Helius** - Solana
 - **GetBlock** - Multi-chain support
 
-**Environment Variable**: `RPC_URL` or `{BLOCKCHAIN}_RPC_URL`
+**Environment Variable**: `RPC_URL` or `\{BLOCKCHAIN\}_RPC_URL`
 
 **Example**:
 ```bash
@@ -52,7 +52,7 @@ Used for transaction history and account lookups.
 - **Blockchair** - Bitcoin
 - **XRPScan** - XRP Ledger
 
-**Environment Variable**: `EXPLORER_API_KEY` or `{BLOCKCHAIN}_EXPLORER_API_KEY`
+**Environment Variable**: `EXPLORER_API_KEY` or `\{BLOCKCHAIN\}_EXPLORER_API_KEY`
 
 **Example**:
 ```bash
@@ -123,7 +123,7 @@ For caching or persistent storage.
 
 2. **Create New App**
    - Click "Create App"
-   - Name: `{blockchain}-mcp-server-v2` (increment version)
+   - Name: `\{blockchain\}-mcp-server-v2` (increment version)
    - Chain: Select your blockchain
    - Network: Mainnet or Testnet
 
@@ -210,7 +210,7 @@ For cloud deployments:
    ```bash
    aws secretsmanager update-secret \
      --secret-id mcp-server/eth-rpc \
-     --secret-string '{"rpc_url":"https://eth-mainnet.g.alchemy.com/v2/NEW_KEY"}'
+     --secret-string '\{"rpc_url":"https://eth-mainnet.g.alchemy.com/v2/NEW_KEY"\}'
    ```
 
 ### Phase 3: Test New Keys (Day 0)
@@ -235,16 +235,16 @@ For cloud deployments:
    # Test RPC connectivity
    curl -X POST https://eth-mainnet.g.alchemy.com/v2/NEW_KEY \
      -H "Content-Type: application/json" \
-     -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+     -d '\{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1\}'
    
-   # Expected: {"jsonrpc":"2.0","id":1,"result":"0x..."}
+   # Expected: \{"jsonrpc":"2.0","id":1,"result":"0x..."\}
    ```
 
 3. **Verify in MCP Inspector**
    - Open MCP Inspector
-   - Test `{prefix}_get_chain_info`
-   - Test `{prefix}_get_balance` with known address
-   - Test `{prefix}_get_transaction_history`
+   - Test `\{prefix\}_get_chain_info`
+   - Test `\{prefix\}_get_balance` with known address
+   - Test `\{prefix\}_get_transaction_history`
 
 4. **Check Logs**
    ```bash
@@ -318,7 +318,7 @@ Update your internal documentation:
 1. Apps → Create App
 2. Select Chain & Network
 3. Copy HTTPS endpoint
-4. Update `{BLOCKCHAIN}_RPC_URL`
+4. Update `\{BLOCKCHAIN\}_RPC_URL`
 5. Archive old app after 7 days
 
 **Rate Limits**: Check your plan's compute units
@@ -391,7 +391,7 @@ After rotating keys, verify:
 ### Production Checks (Day 2)
 - [ ] Production environment updated
 - [ ] Health checks passing
-- [ ] Error rates normal (<0.1%)
+- [ ] Error rates normal (&lt;0.1%)
 - [ ] Latency within SLA
 - [ ] No authentication errors in logs
 
@@ -525,12 +525,12 @@ After rotating keys, verify:
 
 2. **Log API Key Usage**
    ```typescript
-   logger.info('API request', {
+   logger.info('API request', \{
      provider: 'alchemy',
      keyPrefix: apiKey.slice(0, 8) + '...',  // Never log full key
      endpoint: '/v2/...',
      timestamp: Date.now()
-   });
+   \});
    ```
 
 3. **Regular Audits**

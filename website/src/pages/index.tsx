@@ -22,12 +22,12 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/01-Blockchain-MCP-Standard-v3.0">
+            to="/docs/Blockchain-MCP-Standard-v3.0">
             Read the Standard 📖
           </Link>
           <Link
             className="button button--outline button--secondary button--lg"
-            to="/docs/03-QUICK-START-GUIDE"
+            to="/docs/QUICK-START-GUIDE"
             style={{marginLeft: '1rem'}}>
             Quick Start Guide 🚀
           </Link>

@@ -21,17 +21,17 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'doc',
-          id: '01-Blockchain-MCP-Standard-v3.0',
+          id: 'Blockchain-MCP-Standard-v3.0',
           label: '⭐ Main Standard (v3.0)',
         },
         {
           type: 'doc',
-          id: '03-QUICK-START-GUIDE',
+          id: 'QUICK-START-GUIDE',
           label: '🚀 Quick Start Guide',
         },
         {
           type: 'doc',
-          id: '02-UNIVERSAL-TOOL-NAMING-REGISTRY',
+          id: 'UNIVERSAL-TOOL-NAMING-REGISTRY',
           label: '📖 Tool Naming Registry',
         },
       ],
@@ -43,22 +43,22 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'doc',
-          id: '04-NETWORK-CONFIGURATIONS',
+          id: 'NETWORK-CONFIGURATIONS',
           label: '🌐 Network Configurations',
         },
         {
           type: 'doc',
-          id: '06-ERROR-HANDLING-PATTERNS',
+          id: 'ERROR-HANDLING-PATTERNS',
           label: '🛡️ Error Handling',
         },
         {
           type: 'doc',
-          id: '07-HELP-SYSTEM-IMPLEMENTATION',
+          id: 'HELP-SYSTEM-IMPLEMENTATION',
           label: '❓ Help System',
         },
         {
           type: 'doc',
-          id: '05-TESTING-STANDARD',
+          id: 'TESTING-STANDARD',
           label: '🧪 Testing Standard',
         },
       ],
@@ -70,7 +70,7 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'doc',
-          id: '08-README-TEMPLATE',
+          id: 'README-TEMPLATE',
           label: '📝 README Template',
         },
         {
@@ -87,12 +87,12 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'doc',
-          id: '09-TROUBLESHOOTING',
+          id: 'TROUBLESHOOTING',
           label: '🔧 Troubleshooting',
         },
         {
           type: 'doc',
-          id: '10-CONSOLIDATION-PLAN',
+          id: 'CONSOLIDATION-PLAN',
           label: '📋 Consolidation History',
         },
       ],

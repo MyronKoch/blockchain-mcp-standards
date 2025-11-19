@@ -17,7 +17,7 @@
 ### 2. **Naming Conventions (3 docs) → Merge into 1**
 - ❌ `09-TOOL-NAMING-CONVENTIONS.md` - Already in Blockchain MCP Standard v3.0 (BMCPS v3.0)
 - ❌ `16-TOOL-HANDLER-NAMING-CONVENTION.md` - Already in Blockchain MCP Standard v3.0 (BMCPS v3.0)
-- Both cover the same `{prefix}_{action}_{resource}` pattern
+- Both cover the same `\{prefix\}_\{action\}_\{resource\}` pattern
 
 ### 3. **Quick Start Guides (5 docs) → Keep 1**
 - ❌ `03-STEP-BY-STEP-GUIDE.md` - Redundant with quick starts
@@ -117,7 +117,7 @@ NEW STANDARDS/
 
 ### Step 2: Archive old documents
 ```bash
-mkdir -p archive/{mbps-v2.1,msas-v1.0,old-guides,specific}
+mkdir -p archive/\{mbps-v2.1,msas-v1.0,old-guides,specific\}
 mv 01-MBPS-v2.1-COMPREHENSIVE.md archive/mbps-v2.1/
 mv 10-MSAS.md archive/msas-v1.0/
 # ... move all deprecated docs

@@ -10,17 +10,17 @@ This document defines the comprehensive README documentation standard for all bl
 
 ### **1. Header Section (REQUIRED)**
 ```markdown
-# {Blockchain} {Network} MCP Server
+# \{Blockchain\} \{Network\} MCP Server
 
-✅ **Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliant** - A comprehensive Model Context Protocol (MCP) server for {blockchain} {network} blockchain integration with AI systems.
+✅ **Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliant** - A comprehensive Model Context Protocol (MCP) server for \{blockchain\} \{network\} blockchain integration with AI systems.
 
 ## 🎯 Quick Overview
 
-- **Tool Count**: {actual_tool_count} tools (25 BMCPS v3.0 mandatory + {extended_count} extended tools)
+- **Tool Count**: \{actual_tool_count\} tools (25 BMCPS v3.0 mandatory + \{extended_count\} extended tools)
 - **Categories**: 16 standardized categories (core, wallet, network, tokens, help, account, nft, defi, staking, governance, contracts, bridge, analytics, security, events, advanced)
-- **Network**: {primary_network} (locked to single network - testnet or mainnet only)
+- **Network**: \{primary_network\} (locked to single network - testnet or mainnet only)
 - **Architecture**: Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard compliant
-- **Compliance Level**: {bronze|silver|gold} - {compliance_description}
+- **Compliance Level**: \{bronze|silver|gold\} - \{compliance_description\}
 - **Test Coverage**: 95%+ enforced with security, chaos & load testing
 - **Help System**: Interactive tool discovery and guidance
 - **Performance**: Production-ready with comprehensive error handling
@@ -30,8 +30,8 @@ This document defines the comprehensive README documentation standard for all bl
 | Level | Status | Description |
 |-------|--------|-------------|
 | 🥉 **BRONZE** | ✅ | 24 mandatory tools + basic testing |
-| 🥈 **SILVER** | {silver_status} | 40+ tools + extended testing |
-| 🥇 **GOLD** | {gold_status} | 100+ tools + production testing |
+| 🥈 **SILVER** | \{silver_status\} | 40+ tools + extended testing |
+| 🥇 **GOLD** | \{gold_status\} | 100+ tools + production testing |
 
 *Compliance validated with: \`node mbss-v3-validation.js .\`*
 ```
@@ -221,21 +221,21 @@ Organize features by functional categories with clear descriptions:
 ## 🌐 Supported Networks
 
 ### Primary Network
-- **{Network Name}** (Chain ID: {chain_id})
-  - **Purpose**: {primary_purpose}
-  - **Block Time**: {block_time} seconds
-  - **Consensus**: {consensus_mechanism}
-  - **Native Token**: {native_token_symbol} ({native_token_name})
+- **\{Network Name\}** (Chain ID: \{chain_id\})
+  - **Purpose**: \{primary_purpose\}
+  - **Block Time**: \{block_time\} seconds
+  - **Consensus**: \{consensus_mechanism\}
+  - **Native Token**: \{native_token_symbol\} (\{native_token_name\})
 
 ### Testnet Faucets
-- **{Faucet Name}**: {faucet_url}
-- **{Faucet Name}**: {faucet_url}
-- **{Faucet Name}**: {faucet_url}
+- **\{Faucet Name\}**: \{faucet_url\}
+- **\{Faucet Name\}**: \{faucet_url\}
+- **\{Faucet Name\}**: \{faucet_url\}
 
 ### RPC Endpoints
-- **Primary**: {rpc_url}
-- **Backup**: {backup_rpc_url}
-- **WebSocket**: {ws_url}
+- **Primary**: \{rpc_url\}
+- **Backup**: \{backup_rpc_url\}
+- **WebSocket**: \{ws_url\}
 ```
 
 ### **5. Installation & Setup (REQUIRED)**
@@ -250,8 +250,8 @@ Organize features by functional categories with clear descriptions:
 ### Quick Start
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/{blockchain}-mcp-server.git
-cd {blockchain}-mcp-server
+git clone https://github.com/your-repo/\{blockchain\}-mcp-server.git
+cd \{blockchain\}-mcp-server
 
 # Install dependencies
 npm install
@@ -277,35 +277,35 @@ Create a `.env` file in the root directory:
 
 ```env
 # Network Configuration
-NETWORK={network_name}
-RPC_URL={rpc_url}
-CHAIN_ID={chain_id}
+NETWORK=\{network_name\}
+RPC_URL=\{rpc_url\}
+CHAIN_ID=\{chain_id\}
 
 # Optional: Custom RPC endpoint
-CUSTOM_RPC_URL={custom_rpc_url}
+CUSTOM_RPC_URL=\{custom_rpc_url\}
 ```
 
 ### MCP Integration
 Add to your Claude Desktop configuration (`~/Library/Application Support/Claude/claude_desktop_config.json`):
 
 ```json
-{
-  "mcpServers": {
-    "{blockchain}-{network}": {
+\{
+  "mcpServers": \{
+    "\{blockchain\}-\{network\}": \{
       "command": "node",
-      "args": ["/path/to/{blockchain}-mcp-server/dist/index.js"]
-    }
-  }
-}
+      "args": ["/path/to/\{blockchain\}-mcp-server/dist/index.js"]
+    \}
+  \}
+\}
 ```
 
 ### Docker Support (if available)
 ```bash
 # Build Docker image
-docker build -t {blockchain}-mcp-server .
+docker build -t \{blockchain\}-mcp-server .
 
 # Run container
-docker run -p 3000:3000 {blockchain}-mcp-server
+docker run -p 3000:3000 \{blockchain\}-mcp-server
 ```
 ```
 
@@ -335,8 +335,8 @@ npm run build && npm run inspect
 | Level | Status | Description | Tools | Testing |
 |-------|--------|-------------|-------|---------|
 | 🥉 **BRONZE** | ✅ | 24 mandatory tools + basic structure | 24+ | Unit + Integration |
-| 🥈 **SILVER** | {silver_status} | Extended functionality + testing | 40+ | Performance + Security |
-| 🥇 **GOLD** | {gold_status} | Production-ready with full testing | 100+ | Chaos + Load + Security |
+| 🥈 **SILVER** | \{silver_status\} | Extended functionality + testing | 40+ | Performance + Security |
+| 🥇 **GOLD** | \{gold_status\} | Production-ready with full testing | 100+ | Chaos + Load + Security |
 
 ### Compliance Checklist
 - [ ] ✅ 24 mandatory tools implemented (set_network removed for network-locked architecture)
@@ -352,10 +352,10 @@ npm run build && npm run inspect
 This server was generated using the Blockchain MCP Standard v3.0 (BMCPS v3.0) Factory System:
 \`\`\`bash
 # Regenerate or update with latest standards
-node mbss-v3-factory.js --blockchain {blockchain} --network {network} --all
+node mbss-v3-factory.js --blockchain \{blockchain\} --network \{network\} --all
 
 # Generate implementation templates
-node implementation-templates.js --template {template-name}
+node implementation-templates.js --template \{template-name\}
 \`\`\`
 
 ### Testing Framework
@@ -383,59 +383,59 @@ Document ALL tools with comprehensive information:
 > **Note**: These are the 24 mandatory tools that every Blockchain MCP Standard v3.0 (BMCPS v3.0)-compliant server must implement. `set_network` was removed - servers are now locked to single network (testnet OR mainnet). Additional blockchain-specific tools can be added beyond these.
 
 #### Core Blockchain Tools (5)
-1. \`{prefix}_get_chain_info\` - Network information and statistics
-2. \`{prefix}_get_balance\` - Native token balance queries
-3. \`{prefix}_get_transaction\` - Transaction details by hash
-4. \`{prefix}_get_block\` - Block information by number/hash
-5. \`{prefix}_validate_address\` - Address format validation
+1. \`\{prefix\}_get_chain_info\` - Network information and statistics
+2. \`\{prefix\}_get_balance\` - Native token balance queries
+3. \`\{prefix\}_get_transaction\` - Transaction details by hash
+4. \`\{prefix\}_get_block\` - Block information by number/hash
+5. \`\{prefix\}_validate_address\` - Address format validation
 
 #### Transaction Tools (2)
-6. \`{prefix}_get_transaction_history\` - Recent transactions for address
-7. \`{prefix}_send_transaction\` - Send native tokens
+6. \`\{prefix\}_get_transaction_history\` - Recent transactions for address
+7. \`\{prefix\}_send_transaction\` - Send native tokens
 
 #### Wallet Tools (3)
-8. \`{prefix}_create_wallet\` - Generate new wallet
-9. \`{prefix}_import_wallet\` - Import from private key/mnemonic
-10. \`{prefix}_generate_address\` - Generate new address formats
+8. \`\{prefix\}_create_wallet\` - Generate new wallet
+9. \`\{prefix\}_import_wallet\` - Import from private key/mnemonic
+10. \`\{prefix\}_generate_address\` - Generate new address formats
 
 #### Network Tools (2)
-11. \`{prefix}_get_network_info\` - Network status and config
-12. \`{prefix}_get_gas_price\` - Current gas/fee pricing
+11. \`\{prefix\}_get_network_info\` - Network status and config
+12. \`\{prefix\}_get_gas_price\` - Current gas/fee pricing
 **Note**: `set_network` removed in Blockchain MCP Standard v3.0 (BMCPS v3.0) - servers locked to single network
 
 #### Account Tools (2)
-14. \`{prefix}_get_wallet_info\` - Comprehensive wallet details
-15. \`{prefix}_get_account_info\` - Account metadata and status
+14. \`\{prefix\}_get_wallet_info\` - Comprehensive wallet details
+15. \`\{prefix\}_get_account_info\` - Account metadata and status
 
 #### Token Tools (5)
-16. \`{prefix}_get_token_balance\` - Token balance queries
-17. \`{prefix}_get_token_info\` - Token metadata
-18. \`{prefix}_transfer_token\` - Send tokens
-19. \`{prefix}_approve_token\` - Approve token spending
-20. \`{prefix}_get_token_allowance\` - Check spending allowances
+16. \`\{prefix\}_get_token_balance\` - Token balance queries
+17. \`\{prefix\}_get_token_info\` - Token metadata
+18. \`\{prefix\}_transfer_token\` - Send tokens
+19. \`\{prefix\}_approve_token\` - Approve token spending
+20. \`\{prefix\}_get_token_allowance\` - Check spending allowances
 
 #### Help Tools (3)
-21. \`{prefix}_help\` - Interactive help and guidance
-22. \`{prefix}_search_tools\` - Search tools by keyword
-23. \`{prefix}_list_tools_by_category\` - Browse organized catalog
+21. \`\{prefix\}_help\` - Interactive help and guidance
+22. \`\{prefix\}_search_tools\` - Search tools by keyword
+23. \`\{prefix\}_list_tools_by_category\` - Browse organized catalog
 
 ### Extended Tools (Optional but Standardized)
 
 #### Bridge Tools (Cross-Chain)
-24. \`{prefix}_bridge_tokens\` - Bridge tokens to another chain
-25. \`{prefix}_get_bridge_info\` - Bridge status and supported chains
+24. \`\{prefix\}_bridge_tokens\` - Bridge tokens to another chain
+25. \`\{prefix\}_get_bridge_info\` - Bridge status and supported chains
 
 #### Analytics Tools
-26. \`{prefix}_get_analytics\` - Network and account analytics
-27. \`{prefix}_get_performance_metrics\` - Performance statistics
+26. \`\{prefix\}_get_analytics\` - Network and account analytics
+27. \`\{prefix\}_get_performance_metrics\` - Performance statistics
 
 #### Security Tools
-28. \`{prefix}_audit_transaction\` - Transaction security audit
-29. \`{prefix}_validate_security\` - Security validation checks
+28. \`\{prefix\}_audit_transaction\` - Transaction security audit
+29. \`\{prefix\}_validate_security\` - Security validation checks
 
 #### Events Tools
-30. \`{prefix}_get_events\` - Blockchain event logs
-31. \`{prefix}_get_logs\` - Transaction and contract logs
+30. \`\{prefix\}_get_events\` - Blockchain event logs
+31. \`\{prefix\}_get_logs\` - Transaction and contract logs
 
 #### Additional Categories
 - **NFT Tools**: mint_nft, get_nft_info, transfer_nft
@@ -443,7 +443,7 @@ Document ALL tools with comprehensive information:
 - **Staking Tools**: stake_tokens, get_staking_rewards, get_validators
 - **Governance Tools**: get_proposals, vote_proposal, create_proposal
 
-#### 1. `{prefix}_get_chain_info`
+#### 1. `\{prefix\}_get_chain_info`
 Get comprehensive blockchain network information.
 
 **Purpose**: Network health, statistics, and configuration details
@@ -452,7 +452,7 @@ Get comprehensive blockchain network information.
 
 **Returns**:
 ```json
-{
+\{
   "network": "string",
   "chainId": "number",
   "blockHeight": "number",
@@ -460,18 +460,18 @@ Get comprehensive blockchain network information.
   "validators": "number",
   "totalSupply": "string",
   "timestamp": "string"
-}
+\}
 ```
 
 **Example**:
 ```json
-{
-  "tool": "{prefix}_get_chain_info",
-  "arguments": {}
-}
+\{
+  "tool": "\{prefix\}_get_chain_info",
+  "arguments": \{\}
+\}
 ```
 
-#### 2. `{prefix}_get_balance`
+#### 2. `\{prefix\}_get_balance`
 Get native token balance for an address.
 
 **Purpose**: Query account balances with formatted and raw values
@@ -481,27 +481,27 @@ Get native token balance for an address.
 
 **Returns**:
 ```json
-{
+\{
   "address": "string",
-  "balance": "string",        // Formatted (e.g., "1.5 {SYMBOL}")
+  "balance": "string",        // Formatted (e.g., "1.5 \{SYMBOL\}")
   "balanceRaw": "string",     // Raw units (blockchain-specific)
   "symbol": "string",
   "confirmed": "string",
   "unconfirmed": "string"
-}
+\}
 ```
 
 **Example**:
 ```json
-{
-  "tool": "{prefix}_get_balance",
-  "arguments": {
-    "address": "{valid_blockchain_address}"
-  }
-}
+\{
+  "tool": "\{prefix\}_get_balance",
+  "arguments": \{
+    "address": "\{valid_blockchain_address\}"
+  \}
+\}
 ```
 
-#### 3. `{prefix}_get_transaction`
+#### 3. `\{prefix\}_get_transaction`
 Get detailed transaction information by hash.
 
 **Purpose**: Transaction analysis with receipt and event data
@@ -511,7 +511,7 @@ Get detailed transaction information by hash.
 
 **Returns**:
 ```json
-{
+\{
   "hash": "string",
   "status": "success | failed | pending",
   "blockNumber": "number",
@@ -521,22 +521,22 @@ Get detailed transaction information by hash.
   "gasUsed": "string",
   "gasPrice": "string",
   "logs": "array"
-}
+\}
 ```
 
 **Example**:
 ```json
-{
-  "tool": "{prefix}_get_transaction",
-  "arguments": {
+\{
+  "tool": "\{prefix\}_get_transaction",
+  "arguments": \{
     "hash": "0x1234567890abcdef..."
-  }
-}
+  \}
+\}
 ```
 
 ### Extended Tools (Alphabetical Order)
 
-#### `{prefix}_advanced_feature`
+#### `\{prefix\}_advanced_feature`
 Comprehensive description of what this tool does.
 
 **Purpose**: Detailed explanation of tool functionality and use cases
@@ -550,13 +550,13 @@ Detailed description of return data structure with examples
 
 **Example**:
 ```json
-{
-  "tool": "{prefix}_advanced_feature",
-  "arguments": {
+\{
+  "tool": "\{prefix\}_advanced_feature",
+  "arguments": \{
     "param1": "example_value",
     "param2": "optional_value"
-  }
-}
+  \}
+\}
 ```
 
 **Use Cases**:
@@ -577,28 +577,28 @@ Detailed description of return data structure with examples
 
 #### Get Network Information
 ```json
-{
-  "tool": "{prefix}_get_chain_info",
-  "arguments": {}
-}
+\{
+  "tool": "\{prefix\}_get_chain_info",
+  "arguments": \{\}
+\}
 ```
 
 #### Check Balance
 ```json
-{
-  "tool": "{prefix}_get_balance",
-  "arguments": {
+\{
+  "tool": "\{prefix\}_get_balance",
+  "arguments": \{
     "address": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
-  }
-}
+  \}
+\}
 ```
 
 #### Create Wallet (Development Only)
 ```json
-{
-  "tool": "{prefix}_create_wallet",
-  "arguments": {}
-}
+\{
+  "tool": "\{prefix\}_create_wallet",
+  "arguments": \{\}
+\}
 ```
 
 ### Advanced Workflows
@@ -606,46 +606,46 @@ Detailed description of return data structure with examples
 #### Complete Transaction Flow
 1. **Check balance**:
 ```json
-{
-  "tool": "{prefix}_get_balance",
-  "arguments": {
+\{
+  "tool": "\{prefix\}_get_balance",
+  "arguments": \{
     "address": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
-  }
-}
+  \}
+\}
 ```
 
 2. **Prepare transaction**:
 ```json
-{
-  "tool": "{prefix}_send_transaction",
-  "arguments": {
+\{
+  "tool": "\{prefix\}_send_transaction",
+  "arguments": \{
     "to": "0x1234567890123456789012345678901234567890",
     "amount": "0.1",
     "privateKey": "0x..."
-  }
-}
+  \}
+\}
 ```
 
 ### AI Integration Examples
 
 #### Claude Desktop Integration
 ```json
-{
-  "tool": "{prefix}_help",
-  "arguments": {
+\{
+  "tool": "\{prefix\}_help",
+  "arguments": \{
     "topic": "balance_queries"
-  }
-}
+  \}
+\}
 ```
 
 #### Tool Discovery
 ```json
-{
-  "tool": "{prefix}_search_tools",
-  "arguments": {
+\{
+  "tool": "\{prefix\}_search_tools",
+  "arguments": \{
     "query": "balance"
-  }
-}
+  \}
+\}
 ```
 ```
 
@@ -654,7 +654,7 @@ Detailed description of return data structure with examples
 ## 🔒 Security & Best Practices
 
 ### ⚠️ Critical Security Notes
-- **Testnet Only**: This server is configured for {network} testnet only
+- **Testnet Only**: This server is configured for \{network\} testnet only
 - **No Private Key Storage**: Server never stores private keys
 - **Development Tools**: Wallet creation tools are for development/testing only
 - **Network Verification**: Always verify network before transactions
@@ -699,11 +699,11 @@ Detailed description of return data structure with examples
 - Ensure testnet RPC is accessible
 
 #### Tool Not Found
-**Problem**: "Unknown tool: {tool_name}"
+**Problem**: "Unknown tool: \{tool_name\}"
 **Solution**:
 - Verify tool name spelling
 - Check BMCPS v3.0 naming convention
-- Use `{prefix}_help` for tool discovery
+- Use `\{prefix\}_help` for tool discovery
 - Update MCP server configuration
 
 #### Balance Returns Zero
@@ -721,8 +721,8 @@ Detailed description of return data structure with examples
 - **`Insufficient funds`**: Add funds to wallet or use faucet
 
 ### Getting Help
-1. Use `{prefix}_help` for interactive assistance
-2. Use `{prefix}_search_tools` to find relevant tools
+1. Use `\{prefix\}_help` for interactive assistance
+2. Use `\{prefix\}_search_tools` to find relevant tools
 3. Check this README for examples
 4. Review error logs in server output
 ```
@@ -740,12 +740,12 @@ Detailed description of return data structure with examples
 
 ### Dependencies
 ```json
-{
+\{
   "@modelcontextprotocol/sdk": "^1.0.0",
   "zod": "^3.22.0",
   "axios": "^1.7.0",
-  "{blockchain-specific-library}": "^6.13.0"
-}
+  "\{blockchain-specific-library\}": "^6.13.0"
+\}
 ```
 
 ### File Structure
@@ -764,7 +764,7 @@ src/
 ```
 
 ### Performance Characteristics
-- **Response Time**: <5 seconds for standard operations
+- **Response Time**: &lt;5 seconds for standard operations
 - **Concurrent Requests**: Up to 10 simultaneous requests
 - **Memory Usage**: ~50MB base + ~10MB per active connection
 - **Network**: Optimized RPC usage with connection pooling
@@ -779,7 +779,7 @@ src/
 ### Development Setup
 ```bash
 # Clone repository
-git clone https://github.com/your-repo/{blockchain}-mcp-server.git
+git clone https://github.com/your-repo/\{blockchain\}-mcp-server.git
 
 # Install dependencies
 npm install
@@ -830,8 +830,8 @@ npm run build
 ### B. Network Comparison
 | Network | Chain ID | Purpose | Block Time | Consensus |
 |---------|----------|---------|------------|-----------|
-| {Primary} | {chain_id} | {purpose} | {block_time}s | {consensus} |
-| {Secondary} | {chain_id} | {purpose} | {block_time}s | {consensus} |
+| \{Primary\} | \{chain_id\} | \{purpose\} | \{block_time\}s | \{consensus\} |
+| \{Secondary\} | \{chain_id\} | \{purpose\} | \{block_time\}s | \{consensus\} |
 
 ### C. Error Code Reference
 - `1001`: Invalid address format
@@ -919,7 +919,7 @@ This server leverages the complete Blockchain MCP Standard v3.0 (BMCPS v3.0) too
 
 ### Factory System
 \`\`\`bash
-node mbss-v3-factory.js --blockchain {blockchain} --network {network}
+node mbss-v3-factory.js --blockchain \{blockchain\} --network \{network\}
 \`\`\`
 - Generates complete server structure
 - Auto-generates tool stubs

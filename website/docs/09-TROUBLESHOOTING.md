@@ -27,13 +27,13 @@ logger.error('Something failed');
 **Solution**: Check your tool registration:
 ```typescript
 // In src/tools/index.ts
-export const TOOL_HANDLERS = {
+export const TOOL_HANDLERS = \{
   ...coreHandlers,      // 25 BMCPS v3.0 tools
   ...walletHandlers,    // Original wallet tools
   ...tokenHandlers,     // Original token tools
   ...defiHandlers,      // Original DeFi tools
   // ... ALL other handlers must be spread here
-};
+\};
 ```
 
 ### 3. Aliasing Not Working
@@ -46,9 +46,9 @@ export const TOOL_HANDLERS = {
 const actualToolName = toolAliases[toolName] || toolName;
 const handler = TOOL_HANDLERS[actualToolName];
 
-if (!handler) {
-  throw new McpError(ErrorCode.MethodNotFound, `Unknown tool: ${toolName}`);
-}
+if (!handler) \{
+  throw new McpError(ErrorCode.MethodNotFound, `Unknown tool: $\{toolName\}`);
+\}
 ```
 
 ### 4. Console Output Breaking MCP
@@ -70,12 +70,12 @@ grep -r "console\." src/ --exclude-dir=node_modules
 **Solution**: Update your test mocks:
 ```typescript
 // tests/integration/tool-execution.test.ts
-jest.mock('../../src/client', () => ({
-  getProvider: jest.fn().mockReturnValue({
+jest.mock('../../src/client', () => (\{
+  getProvider: jest.fn().mockReturnValue(\{
     getBalance: jest.fn().mockResolvedValue(BigInt('1000000000000000000')),
     // Use BigInt for ethers v6
-  })
-}));
+  \})
+\}));
 ```
 
 ### 6. Build Succeeds but Runtime Fails
@@ -103,8 +103,8 @@ node dist/index.js 2>&1 | head -20
 **Solution**: Ensure tool-definitions.ts exports correctly:
 ```typescript
 // src/tool-definitions.ts
-import { coreTools } from './tools/core/index.js';
-import { walletTools } from './tools/wallets/index.js';
+import \{ coreTools \} from './tools/core/index.js';
+import \{ walletTools \} from './tools/wallets/index.js';
 // ... import all tool categories
 
 export const TOOL_DEFINITIONS = [

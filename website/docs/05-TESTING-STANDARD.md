@@ -15,22 +15,22 @@ This consolidated standard covers all testing requirements, validation procedure
 ### Core Dependencies
 
 ```json
-{
-  "devDependencies": {
+\{
+  "devDependencies": \{
     "jest": "^29.7.0",
     "ts-jest": "^29.1.5",
     "@types/jest": "^29.5.12",
     "ts-node": "^10.9.2",
     "@modelcontextprotocol/inspector": "^1.0.0"
-  }
-}
+  \}
+\}
 ```
 
 ### Jest Configuration
 
 ```javascript
 // jest.config.cjs
-module.exports = {
+module.exports = \{
   preset: 'ts-jest',
   testEnvironment: 'node',
   roots: ['<rootDir>/tests'],
@@ -43,27 +43,27 @@ module.exports = {
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
-  coverageThreshold: {
-    global: {
+  coverageThreshold: \{
+    global: \{
       branches: 80,
       functions: 80,
       lines: 80,
       statements: 80
-    }
-  },
-  transform: {
-    '^.+\\.ts$': ['ts-jest', {
-      tsconfig: {
+    \}
+  \},
+  transform: \{
+    '^.+\\.ts$': ['ts-jest', \{
+      tsconfig: \{
         esModuleInterop: true,
         allowSyntheticDefaultImports: true,
         moduleResolution: 'node'
-      }
-    }]
-  },
-  moduleNameMapper: {
-    '^(\\.{1,2}/.*)\\.js$': '$1'
-  }
-};
+      \}
+    \}]
+  \},
+  moduleNameMapper: \{
+    '^(\\.\{1,2\}/.*)\\.js$': '$1'
+  \}
+\};
 ```
 
 ---
@@ -102,31 +102,31 @@ tests/
 
 ```typescript
 // tests/smoke/server-startup.test.ts
-describe('Server Startup', () => {
-  it('should load without errors', () => {
-    expect(() => {
+describe('Server Startup', () => \{
+  it('should load without errors', () => \{
+    expect(() => \{
       require('../../src/index');
-    }).not.toThrow();
-  });
+    \}).not.toThrow();
+  \});
 
-  it('should have correct server metadata', async () => {
-    const { Server } = await import('../../src/index');
+  it('should have correct server metadata', async () => \{
+    const \{ Server \} = await import('../../src/index');
     expect(Server.name).toMatch(/^[a-z]+[-_]mcp[-_]server$/);
     expect(Server.version).toMatch(/^\d+\.\d+\.\d+$/);
-  });
-});
+  \});
+\});
 ```
 
 ### 2. Unit Tests (Component Testing)
 
 ```typescript
 // tests/unit/core/get-balance.test.ts
-import { handleGetBalance } from '../../../src/tools/core/{prefix}-get-balance';
-import { mockClient } from '../../fixtures/mock-client';
+import \{ handleGetBalance \} from '../../../src/tools/core/\{prefix\}-get-balance';
+import \{ mockClient \} from '../../fixtures/mock-client';
 
-describe('Get Balance Tool', () => {
-  it('should return balance for valid address', async () => {
-    const args = { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0' };
+describe('Get Balance Tool', () => \{
+  it('should return balance for valid address', async () => \{
+    const args = \{ address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0' \};
     const result = await handleGetBalance(args, mockClient);
     
     expect(result.content).toHaveLength(1);
@@ -136,126 +136,126 @@ describe('Get Balance Tool', () => {
     expect(data).toHaveProperty('address');
     expect(data).toHaveProperty('balance');
     expect(data).toHaveProperty('formatted');
-  });
+  \});
 
-  it('should throw error for invalid address', async () => {
-    const args = { address: 'invalid' };
+  it('should throw error for invalid address', async () => \{
+    const args = \{ address: 'invalid' \};
     
     await expect(
       handleGetBalance(args, mockClient)
     ).rejects.toThrow('Invalid address format');
-  });
+  \});
 
-  it('should handle network errors gracefully', async () => {
-    const failingClient = {
+  it('should handle network errors gracefully', async () => \{
+    const failingClient = \{
       ...mockClient,
-      provider: {
+      provider: \{
         getBalance: jest.fn().mockRejectedValue(new Error('Network error'))
-      }
-    };
+      \}
+    \};
     
-    const args = { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0' };
+    const args = \{ address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0' \};
     
     await expect(
       handleGetBalance(args, failingClient)
     ).rejects.toThrow('Failed to get balance');
-  });
-});
+  \});
+\});
 ```
 
 ### 3. Integration Tests (System Testing)
 
 ```typescript
 // tests/integration/tools.test.ts
-import { Server } from '@modelcontextprotocol/sdk/server';
-import { TOOL_DEFINITIONS, TOOL_HANDLERS } from '../../src/tools';
+import \{ Server \} from '@modelcontextprotocol/sdk/server';
+import \{ TOOL_DEFINITIONS, TOOL_HANDLERS \} from '../../src/tools';
 
-describe('Tool Integration', () => {
+describe('Tool Integration', () => \{
   let server: Server;
   
-  beforeAll(async () => {
+  beforeAll(async () => \{
     server = new Server(
-      { name: 'test-server', version: '1.0.0' },
-      { capabilities: { tools: {} } }
+      \{ name: 'test-server', version: '1.0.0' \},
+      \{ capabilities: \{ tools: \{\} \} \}
     );
-  });
+  \});
 
-  describe('Tool Registration', () => {
-    it('should have all 25 BMCPS v3.0 core tools', () => {
+  describe('Tool Registration', () => \{
+    it('should have all 25 BMCPS v3.0 core tools', () => \{
       const coreTools = [
-        '{prefix}_get_chain_info',
-        '{prefix}_get_balance',
-        '{prefix}_get_transaction',
-        '{prefix}_get_block',
-        '{prefix}_validate_address',
-        '{prefix}_get_transaction_history',
-        '{prefix}_create_wallet',
-        '{prefix}_help',
-        '{prefix}_search_tools',
-        '{prefix}_list_tools_by_category',
-        '{prefix}_send_transaction',
-        '{prefix}_get_network_info',
-        '{prefix}_set_network',
-        '{prefix}_get_gas_price',
-        '{prefix}_get_mempool_info',
-        '{prefix}_estimate_fees',
-        '{prefix}_import_wallet',
-        '{prefix}_get_wallet_info',
-        '{prefix}_get_account_info',
-        '{prefix}_generate_address',
-        '{prefix}_get_token_balance',
-        '{prefix}_get_token_info',
-        '{prefix}_transfer_token',
-        '{prefix}_approve_token',
-        '{prefix}_get_token_allowance'
+        '\{prefix\}_get_chain_info',
+        '\{prefix\}_get_balance',
+        '\{prefix\}_get_transaction',
+        '\{prefix\}_get_block',
+        '\{prefix\}_validate_address',
+        '\{prefix\}_get_transaction_history',
+        '\{prefix\}_create_wallet',
+        '\{prefix\}_help',
+        '\{prefix\}_search_tools',
+        '\{prefix\}_list_tools_by_category',
+        '\{prefix\}_send_transaction',
+        '\{prefix\}_get_network_info',
+        '\{prefix\}_set_network',
+        '\{prefix\}_get_gas_price',
+        '\{prefix\}_get_mempool_info',
+        '\{prefix\}_estimate_fees',
+        '\{prefix\}_import_wallet',
+        '\{prefix\}_get_wallet_info',
+        '\{prefix\}_get_account_info',
+        '\{prefix\}_generate_address',
+        '\{prefix\}_get_token_balance',
+        '\{prefix\}_get_token_info',
+        '\{prefix\}_transfer_token',
+        '\{prefix\}_approve_token',
+        '\{prefix\}_get_token_allowance'
       ];
       
-      coreTools.forEach(toolName => {
+      coreTools.forEach(toolName => \{
         const tool = TOOL_DEFINITIONS.find(t => t.name === toolName);
         expect(tool).toBeDefined();
         expect(TOOL_HANDLERS[toolName]).toBeDefined();
-      });
-    });
+      \});
+    \});
 
-    it('should follow naming conventions', () => {
-      TOOL_DEFINITIONS.forEach(tool => {
+    it('should follow naming conventions', () => \{
+      TOOL_DEFINITIONS.forEach(tool => \{
         expect(tool.name).toMatch(/^[a-z]+_[a-z]+(_[a-z]+)*$/);
-      });
-    });
+      \});
+    \});
 
-    it('should have valid input schemas', () => {
-      TOOL_DEFINITIONS.forEach(tool => {
+    it('should have valid input schemas', () => \{
+      TOOL_DEFINITIONS.forEach(tool => \{
         expect(tool.inputSchema).toBeDefined();
         expect(tool.inputSchema.type).toBe('object');
         expect(tool.inputSchema.properties).toBeDefined();
-      });
-    });
-  });
+      \});
+    \});
+  \});
 
-  describe('Tool Execution', () => {
-    it('should execute tools without errors', async () => {
+  describe('Tool Execution', () => \{
+    it('should execute tools without errors', async () => \{
       const testCases = [
-        { tool: '{prefix}_get_chain_info', args: {} },
-        { tool: '{prefix}_validate_address', args: { address: 'test-address' } },
-        { tool: '{prefix}_help', args: {} }
+        \{ tool: '\{prefix\}_get_chain_info', args: \{\} \},
+        \{ tool: '\{prefix\}_validate_address', args: \{ address: 'test-address' \} \},
+        \{ tool: '\{prefix\}_help', args: \{\} \}
       ];
       
-      for (const { tool, args } of testCases) {
+      for (const \{ tool, args \} of testCases) \{
         const handler = TOOL_HANDLERS[tool];
         expect(handler).toBeDefined();
         
         // Test that handler returns expected format
-        const mockClient = { /* mock client */ };
+        const mockClient = \{ /* mock client */ \};
         const result = await handler(args, mockClient);
         
         expect(result).toHaveProperty('content');
         expect(Array.isArray(result.content)).toBe(true);
         expect(result.content[0]).toHaveProperty('type');
         expect(result.content[0]).toHaveProperty('text');
-      }
-    });
-  });
-});
+      \}
+    \});
+  \});
+\});
 ```
 
 ### 4. BMCPS v3.0 Compliance Tests
@@ -265,8 +265,8 @@ describe('Tool Integration', () => {
 import * as fs from 'fs';
 import * as path from 'path';
 
-describe('Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance', () => {
-  describe('Directory Structure', () => {
+describe('Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance', () => \{
+  describe('Directory Structure', () => \{
     const requiredDirs = [
       'src/tools/core',
       'src/tools/wallet',
@@ -276,55 +276,55 @@ describe('Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance', () => {
       'src/config'
     ];
     
-    requiredDirs.forEach(dir => {
-      it(`should have ${dir} directory`, () => {
+    requiredDirs.forEach(dir => \{
+      it(`should have $\{dir\} directory`, () => \{
         const dirPath = path.join(process.cwd(), dir);
         expect(fs.existsSync(dirPath)).toBe(true);
-      });
-    });
-  });
+      \});
+    \});
+  \});
 
-  describe('Code Organization', () => {
-    it('should have modular tool files', () => {
+  describe('Code Organization', () => \{
+    it('should have modular tool files', () => \{
       const toolsDir = path.join(process.cwd(), 'src/tools/core');
       const files = fs.readdirSync(toolsDir);
       
       // Should have individual tool files, not monolithic
       expect(files.length).toBeGreaterThan(5);
       
-      files.forEach(file => {
+      files.forEach(file => \{
         expect(file).toMatch(/^[a-z-]+\.ts$/);
-      });
-    });
+      \});
+    \});
 
-    it('should have client abstraction', () => {
+    it('should have client abstraction', () => \{
       const clientPath = path.join(process.cwd(), 'src/client.ts');
       expect(fs.existsSync(clientPath)).toBe(true);
-    });
+    \});
 
-    it('index.ts should be under 500 lines', () => {
+    it('index.ts should be under 500 lines', () => \{
       const indexPath = path.join(process.cwd(), 'src/index.ts');
       const content = fs.readFileSync(indexPath, 'utf-8');
       const lines = content.split('\n').length;
       
       expect(lines).toBeLessThan(500);
-    });
-  });
+    \});
+  \});
 
-  describe('Tool Naming', () => {
-    it('should use handle prefix for all handlers', async () => {
-      const { TOOL_HANDLERS } = await import('../../src/tools');
+  describe('Tool Naming', () => \{
+    it('should use handle prefix for all handlers', async () => \{
+      const \{ TOOL_HANDLERS \} = await import('../../src/tools');
       
-      Object.values(TOOL_HANDLERS).forEach(handler => {
+      Object.values(TOOL_HANDLERS).forEach(handler => \{
         expect(handler.name).toMatch(/^handle[A-Z]/);
-      });
-    });
-  });
+      \});
+    \});
+  \});
 
-  describe('Error Handling', () => {
-    it('should use McpError for all errors', async () => {
+  describe('Error Handling', () => \{
+    it('should use McpError for all errors', async () => \{
       const toolFile = fs.readFileSync(
-        path.join(process.cwd(), 'src/tools/core/{prefix}-get-balance.ts'),
+        path.join(process.cwd(), 'src/tools/core/\{prefix\}-get-balance.ts'),
         'utf-8'
       );
       
@@ -332,9 +332,9 @@ describe('Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance', () => {
       expect(toolFile).toContain('ErrorCode');
       expect(toolFile).not.toContain('console.log');
       expect(toolFile).not.toContain('console.error');
-    });
-  });
-});
+    \});
+  \});
+\});
 ```
 
 ---
@@ -462,40 +462,40 @@ echo "✅ Server startup validated!"
 
 ```typescript
 // tests/performance/load.test.ts
-describe('Performance Tests', () => {
-  it('should handle 100 concurrent tool calls', async () => {
+describe('Performance Tests', () => \{
+  it('should handle 100 concurrent tool calls', async () => \{
     const promises = [];
     
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 100; i++) \{
       promises.push(
-        handleGetChainInfo({}, mockClient)
+        handleGetChainInfo(\{\}, mockClient)
       );
-    }
+    \}
     
     const start = Date.now();
     await Promise.all(promises);
     const duration = Date.now() - start;
     
     expect(duration).toBeLessThan(5000); // Should complete in 5 seconds
-  });
+  \});
 
-  it('should maintain memory usage under load', async () => {
+  it('should maintain memory usage under load', async () => \{
     const initialMemory = process.memoryUsage().heapUsed;
     
     // Execute 1000 tool calls
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) \{
       await handleGetBalance(
-        { address: 'test-address' },
+        \{ address: 'test-address' \},
         mockClient
       );
-    }
+    \}
     
     const finalMemory = process.memoryUsage().heapUsed;
     const memoryIncrease = (finalMemory - initialMemory) / 1024 / 1024; // MB
     
     expect(memoryIncrease).toBeLessThan(100); // Less than 100MB increase
-  });
-});
+  \});
+\});
 ```
 
 ---
@@ -526,7 +526,7 @@ npm run test:coverage
 open coverage/index.html
 
 # Check coverage thresholds
-npm run test:coverage -- --coverageThreshold='{"global":{"lines":80}}'
+npm run test:coverage -- --coverageThreshold='\{"global":\{"lines":80\}\}'
 ```
 
 ---
@@ -556,10 +556,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Setup Node.js ${{ matrix.node-version }}
+    - name: Setup Node.js $\{\{ matrix.node-version \}\}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: $\{\{ matrix.node-version \}\}
     
     - name: Install dependencies
       run: npm ci
@@ -590,8 +590,8 @@ jobs:
 
 ```typescript
 // tests/security/input-validation.test.ts
-describe('Security: Input Validation', () => {
-  describe('Address Validation', () => {
+describe('Security: Input Validation', () => \{
+  describe('Address Validation', () => \{
     const maliciousInputs = [
       '0x0000000000000000000000000000000000000000', // Zero address
       '<script>alert("xss")</script>', // XSS attempt
@@ -599,45 +599,45 @@ describe('Security: Input Validation', () => {
       '../../../etc/passwd', // Path traversal
       '0x' + 'f'.repeat(100), // Overflow attempt
       '\x00\x01\x02', // Null bytes
-      '${7*7}', // Template injection
-      '{{7*7}}', // Template injection variant
+      '$\{7*7\}', // Template injection
+      '\{\{7*7\}\}', // Template injection variant
     ];
     
-    maliciousInputs.forEach(input => {
-      it(`should reject malicious input: ${input.substring(0, 20)}...`, async () => {
+    maliciousInputs.forEach(input => \{
+      it(`should reject malicious input: $\{input.substring(0, 20)\}...`, async () => \{
         await expect(
-          handleValidateAddress({ address: input }, mockClient)
+          handleValidateAddress(\{ address: input \}, mockClient)
         ).rejects.toThrow();
-      });
-    });
-  });
+      \});
+    \});
+  \});
 
-  describe('Transaction Amount Validation', () => {
-    it('should reject negative amounts', async () => {
+  describe('Transaction Amount Validation', () => \{
+    it('should reject negative amounts', async () => \{
       await expect(
-        handleSendTransaction({ amount: -1 }, mockClient)
+        handleSendTransaction(\{ amount: -1 \}, mockClient)
       ).rejects.toThrow('Invalid amount');
-    });
+    \});
 
-    it('should reject amounts exceeding MAX_SAFE_INTEGER', async () => {
+    it('should reject amounts exceeding MAX_SAFE_INTEGER', async () => \{
       await expect(
-        handleSendTransaction({ amount: Number.MAX_SAFE_INTEGER + 1 }, mockClient)
+        handleSendTransaction(\{ amount: Number.MAX_SAFE_INTEGER + 1 \}, mockClient)
       ).rejects.toThrow('Amount exceeds safe range');
-    });
+    \});
 
-    it('should reject non-numeric amounts', async () => {
+    it('should reject non-numeric amounts', async () => \{
       await expect(
-        handleSendTransaction({ amount: 'abc' }, mockClient)
+        handleSendTransaction(\{ amount: 'abc' \}, mockClient)
       ).rejects.toThrow('Amount must be numeric');
-    });
-  });
+    \});
+  \});
 
-  describe('Rate Limiting', () => {
-    it('should enforce rate limits on rapid calls', async () => {
+  describe('Rate Limiting', () => \{
+    it('should enforce rate limits on rapid calls', async () => \{
       const promises = [];
-      for (let i = 0; i < 100; i++) {
-        promises.push(handleGetBalance({ address: 'test' }, mockClient));
-      }
+      for (let i = 0; i < 100; i++) \{
+        promises.push(handleGetBalance(\{ address: 'test' \}, mockClient));
+      \}
       
       const results = await Promise.allSettled(promises);
       const rateLimited = results.filter(r => 
@@ -646,48 +646,48 @@ describe('Security: Input Validation', () => {
       );
       
       expect(rateLimited.length).toBeGreaterThan(0);
-    });
-  });
-});
+    \});
+  \});
+\});
 ```
 
 ### Network Security Tests
 
 ```typescript
 // tests/security/network.test.ts
-describe('Security: Network Protection', () => {
-  it('should not expose sensitive RPC URLs', async () => {
-    const result = await handleGetChainInfo({}, mockClient);
+describe('Security: Network Protection', () => \{
+  it('should not expose sensitive RPC URLs', async () => \{
+    const result = await handleGetChainInfo(\{\}, mockClient);
     const text = result.content[0].text;
     
     expect(text).not.toContain('api-key');
     expect(text).not.toContain('secret');
     expect(text).not.toContain(process.env.RPC_API_KEY);
-  });
+  \});
 
-  it('should timeout on slow network responses', async () => {
-    const slowClient = {
-      provider: {
+  it('should timeout on slow network responses', async () => \{
+    const slowClient = \{
+      provider: \{
         getBalance: () => new Promise(resolve => setTimeout(resolve, 10000))
-      }
-    };
+      \}
+    \};
     
     await expect(
-      handleGetBalance({ address: 'test' }, slowClient)
+      handleGetBalance(\{ address: 'test' \}, slowClient)
     ).rejects.toThrow('Request timeout');
-  });
+  \});
 
-  it('should validate SSL certificates', async () => {
-    const insecureClient = new Client({ 
+  it('should validate SSL certificates', async () => \{
+    const insecureClient = new Client(\{ 
       url: 'https://self-signed.badssl.com/',
       rejectUnauthorized: false 
-    });
+    \});
     
     await expect(
       insecureClient.connect()
     ).rejects.toThrow('SSL certificate');
-  });
-});
+  \});
+\});
 ```
 
 ## Chaos Engineering Tests
@@ -696,31 +696,31 @@ describe('Security: Network Protection', () => {
 
 ```typescript
 // tests/chaos/fault-injection.test.ts
-describe('Chaos: Fault Tolerance', () => {
-  it('should handle random network failures', async () => {
-    const chaosClient = {
-      provider: {
-        getBalance: jest.fn().mockImplementation(() => {
-          if (Math.random() < 0.3) { // 30% failure rate
+describe('Chaos: Fault Tolerance', () => \{
+  it('should handle random network failures', async () => \{
+    const chaosClient = \{
+      provider: \{
+        getBalance: jest.fn().mockImplementation(() => \{
+          if (Math.random() < 0.3) \{ // 30% failure rate
             throw new Error('Network unreachable');
-          }
+          \}
           return BigInt(1000000000000000000);
-        })
-      }
-    };
+        \})
+      \}
+    \};
     
     const results = [];
-    for (let i = 0; i < 100; i++) {
-      try {
+    for (let i = 0; i < 100; i++) \{
+      try \{
         const result = await handleGetBalance(
-          { address: 'test' }, 
+          \{ address: 'test' \}, 
           chaosClient
         );
         results.push(result);
-      } catch (error) {
+      \} catch (error) \{
         results.push(error);
-      }
-    }
+      \}
+    \}
     
     // Should have both successes and failures
     const successes = results.filter(r => !r.message);
@@ -730,37 +730,37 @@ describe('Chaos: Fault Tolerance', () => {
     expect(failures.length).toBeGreaterThan(0);
     
     // All failures should be handled gracefully
-    failures.forEach(error => {
+    failures.forEach(error => \{
       expect(error.message).toContain('Failed to get balance');
-    });
-  });
+    \});
+  \});
 
-  it('should recover from provider disconnection', async () => {
+  it('should recover from provider disconnection', async () => \{
     let connected = true;
-    const unstableClient = {
-      provider: {
-        getBalance: jest.fn().mockImplementation(() => {
+    const unstableClient = \{
+      provider: \{
+        getBalance: jest.fn().mockImplementation(() => \{
           if (!connected) throw new Error('Provider disconnected');
           return BigInt(1000000000000000000);
-        })
-      },
-      reconnect: jest.fn().mockImplementation(() => {
+        \})
+      \},
+      reconnect: jest.fn().mockImplementation(() => \{
         connected = true;
-      })
-    };
+      \})
+    \};
     
     // Disconnect provider
     connected = false;
     
     // First call should fail
     await expect(
-      handleGetBalance({ address: 'test' }, unstableClient)
+      handleGetBalance(\{ address: 'test' \}, unstableClient)
     ).rejects.toThrow();
     
     // Should attempt reconnection
     expect(unstableClient.reconnect).toHaveBeenCalled();
-  });
-});
+  \});
+\});
 ```
 
 ## Regression Testing Suite
@@ -769,22 +769,22 @@ describe('Chaos: Fault Tolerance', () => {
 
 ```typescript
 // tests/regression/historical-bugs.test.ts
-describe('Regression: Historical Bugs', () => {
+describe('Regression: Historical Bugs', () => \{
   // Document each fixed bug to prevent regression
   
-  it('should handle BigInt serialization correctly (Bug #123)', async () => {
+  it('should handle BigInt serialization correctly (Bug #123)', async () => \{
     // Previously failed with: TypeError: Do not know how to serialize a BigInt
     const result = await handleGetBalance(
-      { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0' },
+      \{ address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0' \},
       mockClient
     );
     
     const parsed = JSON.parse(result.content[0].text);
     expect(typeof parsed.balance).toBe('string');
     expect(parsed.balance).toMatch(/^\d+$/);
-  });
+  \});
 
-  it('should not hang on XRPL client initialization (Bug #456)', async () => {
+  it('should not hang on XRPL client initialization (Bug #456)', async () => \{
     const timeoutPromise = new Promise((_, reject) => 
       setTimeout(() => reject(new Error('Initialization timeout')), 5000)
     );
@@ -794,21 +794,21 @@ describe('Regression: Historical Bugs', () => {
     await expect(
       Promise.race([initPromise, timeoutPromise])
     ).resolves.not.toThrow();
-  });
+  \});
 
-  it('should handle invalid test addresses gracefully (Bug #789)', async () => {
+  it('should handle invalid test addresses gracefully (Bug #789)', async () => \{
     // Previously used invalid address in tests
     const validTestAddress = 'rB7ASwFaJ2ryXUDUN8ViiVWba1ikXcqFxB';
     
     const result = await handleValidateAddress(
-      { address: validTestAddress },
+      \{ address: validTestAddress \},
       mockClient
     );
     
     const parsed = JSON.parse(result.content[0].text);
     expect(parsed.valid).toBe(true);
-  });
-});
+  \});
+\});
 ```
 
 ## Mutation Testing
@@ -817,8 +817,8 @@ describe('Regression: Historical Bugs', () => {
 
 ```typescript
 // tests/mutation/mutation.test.ts
-describe('Mutation Testing', () => {
-  it('should catch mutations in critical logic', () => {
+describe('Mutation Testing', () => \{
+  it('should catch mutations in critical logic', () => \{
     // Test that changing operators breaks tests
     const originalCode = `if (amount > 0)`;
     const mutations = [
@@ -827,14 +827,14 @@ describe('Mutation Testing', () => {
       `if (amount == 0)`, // Equality mutation
     ];
     
-    mutations.forEach(mutation => {
+    mutations.forEach(mutation => \{
       // Each mutation should cause test failure
-      expect(() => {
+      expect(() => \{
         // Run test suite with mutated code
-      }).toThrow();
-    });
-  });
-});
+      \}).toThrow();
+    \});
+  \});
+\});
 ```
 
 ## Contract Testing
@@ -843,35 +843,35 @@ describe('Mutation Testing', () => {
 
 ```typescript
 // tests/contract/api-contract.test.ts
-describe('API Contract Testing', () => {
+describe('API Contract Testing', () => \{
   const schemaValidator = new Ajv();
   
-  it('should maintain backward compatibility', async () => {
-    const v1Response = await handleGetBalanceV1({ address: 'test' }, mockClient);
-    const v2Response = await handleGetBalance({ address: 'test' }, mockClient);
+  it('should maintain backward compatibility', async () => \{
+    const v1Response = await handleGetBalanceV1(\{ address: 'test' \}, mockClient);
+    const v2Response = await handleGetBalance(\{ address: 'test' \}, mockClient);
     
     // V2 should include all V1 fields
     const v1Fields = Object.keys(JSON.parse(v1Response.content[0].text));
     const v2Fields = Object.keys(JSON.parse(v2Response.content[0].text));
     
-    v1Fields.forEach(field => {
+    v1Fields.forEach(field => \{
       expect(v2Fields).toContain(field);
-    });
-  });
+    \});
+  \});
 
-  it('should validate response schemas', async () => {
-    const schema = {
+  it('should validate response schemas', async () => \{
+    const schema = \{
       type: 'object',
-      properties: {
-        address: { type: 'string' },
-        balance: { type: 'string' },
-        formatted: { type: 'string' }
-      },
+      properties: \{
+        address: \{ type: 'string' \},
+        balance: \{ type: 'string' \},
+        formatted: \{ type: 'string' \}
+      \},
       required: ['address', 'balance', 'formatted']
-    };
+    \};
     
     const result = await handleGetBalance(
-      { address: 'test' },
+      \{ address: 'test' \},
       mockClient
     );
     
@@ -879,8 +879,8 @@ describe('API Contract Testing', () => {
     const valid = schemaValidator.validate(schema, data);
     
     expect(valid).toBe(true);
-  });
-});
+  \});
+\});
 ```
 
 ## Stress Testing
@@ -889,13 +889,13 @@ describe('API Contract Testing', () => {
 
 ```typescript
 // tests/stress/load.test.ts
-describe('Stress Testing', () => {
-  it('should handle 1000 concurrent connections', async () => {
+describe('Stress Testing', () => \{
+  it('should handle 1000 concurrent connections', async () => \{
     const connections = [];
     
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) \{
       connections.push(createClient());
-    }
+    \}
     
     const results = await Promise.allSettled(
       connections.map(client => client.connect())
@@ -903,16 +903,16 @@ describe('Stress Testing', () => {
     
     const successful = results.filter(r => r.status === 'fulfilled');
     expect(successful.length).toBeGreaterThan(950); // 95% success rate
-  });
+  \});
 
-  it('should not leak memory under sustained load', async () => {
+  it('should not leak memory under sustained load', async () => \{
     const initialMemory = process.memoryUsage().heapUsed;
     
-    for (let cycle = 0; cycle < 10; cycle++) {
+    for (let cycle = 0; cycle < 10; cycle++) \{
       // Execute 10,000 operations
-      for (let i = 0; i < 10000; i++) {
-        await handleGetChainInfo({}, mockClient);
-      }
+      for (let i = 0; i < 10000; i++) \{
+        await handleGetChainInfo(\{\}, mockClient);
+      \}
       
       // Force garbage collection
       if (global.gc) global.gc();
@@ -922,9 +922,9 @@ describe('Stress Testing', () => {
       
       // Memory should not grow more than 50MB per cycle
       expect(memoryGrowth / (cycle + 1)).toBeLessThan(50);
-    }
-  });
-});
+    \}
+  \});
+\});
 ```
 
 ## UAT (User Acceptance Testing)
@@ -965,18 +965,18 @@ describe('Stress Testing', () => {
 ### Issue: Import path errors in tests
 ```typescript
 // Wrong
-import { handler } from '../src/tools/core/tool';
+import \{ handler \} from '../src/tools/core/tool';
 
 // Correct
-import { handler } from '../src/tools/core/tool.js';
+import \{ handler \} from '../src/tools/core/tool.js';
 ```
 
 ### Issue: Jest cannot find modules
 ```javascript
 // Add to jest.config.js
-moduleNameMapper: {
-  '^(\\.{1,2}/.*)\\.js$': '$1'
-}
+moduleNameMapper: \{
+  '^(\\.\{1,2\}/.*)\\.js$': '$1'
+\}
 ```
 
 ### Issue: Async tests timing out
@@ -984,22 +984,22 @@ moduleNameMapper: {
 // Increase timeout for slow operations
 jest.setTimeout(10000); // 10 seconds
 
-it('should handle slow operation', async () => {
+it('should handle slow operation', async () => \{
   // test code
-}, 10000);
+\}, 10000);
 ```
 
 ### Issue: Mock client not working
 ```typescript
 // Create proper mock client
-const mockClient = {
-  provider: {
+const mockClient = \{
+  provider: \{
     getBalance: jest.fn().mockResolvedValue(BigInt(1000000000000000000)),
     getBlockNumber: jest.fn().mockResolvedValue(12345),
     // ... other mocked methods
-  },
+  \},
   isHealthy: jest.fn().mockResolvedValue(true)
-};
+\};
 ```
 
 ---
