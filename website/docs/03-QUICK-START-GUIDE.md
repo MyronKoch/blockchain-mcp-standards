@@ -18,12 +18,12 @@ This consolidated guide covers both building new MCP servers and converting exis
 
 ```bash
 # Create project
-mkdir {blockchain}-testnet-mcp-server
-cd {blockchain}-testnet-mcp-server
+mkdir \{blockchain\}-testnet-mcp-server
+cd \{blockchain\}-testnet-mcp-server
 
 # Initialize with Blockchain MCP Standard v3.0 (BMCPS v3.0) template
 npm init -y
-npm pkg set name="{blockchain}-testnet-mcp-server"
+npm pkg set name="\{blockchain\}-testnet-mcp-server"
 npm pkg set version="1.0.0"
 npm pkg set type="module"
 npm pkg set main="dist/index.js"
@@ -55,9 +55,9 @@ npm pkg set scripts.test="jest"
 
 ```bash
 # Create modular structure
-mkdir -p src/tools/{core,wallet,network,tokens,help,account,nft,defi,staking,governance,contracts,bridge,analytics,security,events,advanced}
-mkdir -p src/{types,utils,config}
-mkdir -p tests/{unit,integration,smoke}
+mkdir -p src/tools/\{core,wallet,network,tokens,help,account,nft,defi,staking,governance,contracts,bridge,analytics,security,events,advanced\}
+mkdir -p src/\{types,utils,config\}
+mkdir -p tests/\{unit,integration,smoke\}
 
 # Create core files
 touch src/index.ts
@@ -75,8 +75,8 @@ touch README.md
 
 ```typescript
 // tsconfig.json
-{
-  "compilerOptions": {
+\{
+  "compilerOptions": \{
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -89,39 +89,39 @@ touch README.md
     "resolveJsonModule": true,
     "declaration": true,
     "sourceMap": true
-  },
+  \},
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "tests"]
-}
+\}
 ```
 
 ### Step 4: Create Client Wrapper
 
 ```typescript
 // src/client.ts
-import { ethers } from 'ethers'; // Or appropriate client for your blockchain
+import \{ ethers \} from 'ethers'; // Or appropriate client for your blockchain
 import logger from './logger.js';
 
-export class {Chain}Client {
+export class \{Chain\}Client \{
   public provider: ethers.JsonRpcProvider;
   private apiUrl: string;
 
-  constructor() {
-    this.apiUrl = process.env.RPC_URL || 'https://testnet-rpc.{blockchain}.com';
+  constructor() \{
+    this.apiUrl = process.env.RPC_URL || 'https://testnet-rpc.\{blockchain\}.com';
     this.provider = new ethers.JsonRpcProvider(this.apiUrl);
-    logger.info('[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Client initialized', { url: this.apiUrl });
-  }
+    logger.info('[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Client initialized', \{ url: this.apiUrl \});
+  \}
 
-  async isHealthy(): Promise<boolean> {
-    try {
+  async isHealthy(): Promise<boolean> \{
+    try \{
       await this.provider.getBlockNumber();
       return true;
-    } catch (error) {
+    \} catch (error) \{
       logger.error('Health check failed', error);
       return false;
-    }
-  }
-}
+    \}
+  \}
+\}
 ```
 
 ### Step 5: Implement Core Tools (25 mandatory)
@@ -129,41 +129,41 @@ export class {Chain}Client {
 Create individual tool files following the pattern:
 
 ```typescript
-// src/tools/core/{prefix}-get-balance.ts
-import { ErrorCode, McpError } from '@modelcontextprotocol/sdk/types.js';
-import type { {Chain}Client } from '../../client.js';
+// src/tools/core/\{prefix\}-get-balance.ts
+import \{ ErrorCode, McpError \} from '@modelcontextprotocol/sdk/types.js';
+import type \{ \{Chain\}Client \} from '../../client.js';
 import logger from '../../logger.js';
 
 export async function handleGetBalance(
   args: any,
-  client: {Chain}Client
-): Promise<{ content: Array<{ type: string; text: string }> }> {
-  const { address } = args;
+  client: \{Chain\}Client
+): Promise<\{ content: Array<\{ type: string; text: string \}> \}> \{
+  const \{ address \} = args;
   
-  try {
+  try \{
     const balance = await client.provider.getBalance(address);
-    const result = {
+    const result = \{
       address,
       balance: balance.toString(),
       formatted: ethers.formatEther(balance)
-    };
+    \};
     
-    logger.info('Balance retrieved', { address });
+    logger.info('Balance retrieved', \{ address \});
     
-    return {
-      content: [{
+    return \{
+      content: [\{
         type: 'text',
         text: JSON.stringify(result, null, 2)
-      }]
-    };
-  } catch (error) {
+      \}]
+    \};
+  \} catch (error) \{
     logger.error('Get balance failed', error);
     throw new McpError(
       ErrorCode.InternalError,
-      `Failed to get balance: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Failed to get balance: $\{error instanceof Error ? error.message : 'Unknown error'\}`
     );
-  }
-}
+  \}
+\}
 ```
 
 ### Step 6: Setup Main Server
@@ -172,93 +172,93 @@ export async function handleGetBalance(
 // src/index.ts
 #!/usr/bin/env node
 
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
-import { {Chain}Client } from './client.js';
+import \{ Server \} from '@modelcontextprotocol/sdk/server/index.js';
+import \{ StdioServerTransport \} from '@modelcontextprotocol/sdk/server/stdio.js';
+import \{ CallToolRequestSchema, ListToolsRequestSchema \} from '@modelcontextprotocol/sdk/types.js';
+import \{ \{Chain\}Client \} from './client.js';
 import logger from './logger.js';
 
 // Import tool handlers
-import { handleGetBalance } from './tools/core/{prefix}-get-balance.js';
-import { handleGetChainInfo } from './tools/core/{prefix}-get-chain-info.js';
+import \{ handleGetBalance \} from './tools/core/\{prefix\}-get-balance.js';
+import \{ handleGetChainInfo \} from './tools/core/\{prefix\}-get-chain-info.js';
 // ... import all 25 core tools
 
-const client = new {Chain}Client();
+const client = new \{Chain\}Client();
 
 const server = new Server(
-  {
-    name: '{prefix}-mcp-server',
+  \{
+    name: '\{prefix\}-mcp-server',
     version: '1.0.0',
-  },
-  {
-    capabilities: { tools: {} },
-  }
+  \},
+  \{
+    capabilities: \{ tools: \{\} \},
+  \}
 );
 
 // Tool definitions (25 BMCPS v3.0 core tools)
 const tools = [
-  {
-    name: '{prefix}_get_chain_info',
+  \{
+    name: '\{prefix\}_get_chain_info',
     description: 'Get comprehensive blockchain information',
-    inputSchema: {
+    inputSchema: \{
       type: 'object',
-      properties: {},
+      properties: \{\},
       required: []
-    }
-  },
-  {
-    name: '{prefix}_get_balance',
+    \}
+  \},
+  \{
+    name: '\{prefix\}_get_balance',
     description: 'Get native token balance for an address',
-    inputSchema: {
+    inputSchema: \{
       type: 'object',
-      properties: {
-        address: { type: 'string', description: 'Wallet address' }
-      },
+      properties: \{
+        address: \{ type: 'string', description: 'Wallet address' \}
+      \},
       required: ['address']
-    }
-  },
+    \}
+  \},
   // ... add all 25 tool definitions
 ];
 
 // Register list tools handler
-server.setRequestHandler(ListToolsRequestSchema, async () => {
-  return { tools };
-});
+server.setRequestHandler(ListToolsRequestSchema, async () => \{
+  return \{ tools \};
+\});
 
 // Register tool execution handler
-server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  const { name, arguments: args } = request.params;
+server.setRequestHandler(CallToolRequestSchema, async (request) => \{
+  const \{ name, arguments: args \} = request.params;
   
-  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Executing tool: ${name}`);
+  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Executing tool: $\{name\}`);
   
-  try {
-    switch (name) {
-      case '{prefix}_get_chain_info':
+  try \{
+    switch (name) \{
+      case '\{prefix\}_get_chain_info':
         return await handleGetChainInfo(args, client);
-      case '{prefix}_get_balance':
+      case '\{prefix\}_get_balance':
         return await handleGetBalance(args, client);
       // ... add all 25 tool cases
       default:
-        throw new Error(`Unknown tool: ${name}`);
-    }
-  } catch (error) {
-    logger.error(`Tool execution failed: ${name}`, error);
+        throw new Error(`Unknown tool: $\{name\}`);
+    \}
+  \} catch (error) \{
+    logger.error(`Tool execution failed: $\{name\}`, error);
     throw error;
-  }
-});
+  \}
+\});
 
-async function main() {
+async function main() \{
   const transport = new StdioServerTransport();
   await server.connect(transport);
   
-  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] {Blockchain} MCP server started`);
-  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Tools available: ${tools.length}`);
-}
+  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] \{Blockchain\} MCP server started`);
+  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Tools available: $\{tools.length\}`);
+\}
 
-main().catch((error) => {
+main().catch((error) => \{
   logger.error('Server startup failed', error);
   process.exit(1);
-});
+\});
 ```
 
 ---
@@ -291,8 +291,8 @@ ls -la src/
 cp -r . ../backup-$(date +%Y%m%d)
 
 # Create new structure alongside existing
-mkdir -p src/tools/{core,wallet,network,tokens,help,account,nft,defi,staking,governance,contracts,bridge,analytics,security,events,advanced}
-mkdir -p src/{types,utils,config}
+mkdir -p src/tools/\{core,wallet,network,tokens,help,account,nft,defi,staking,governance,contracts,bridge,analytics,security,events,advanced\}
+mkdir -p src/\{types,utils,config\}
 ```
 
 ### Step 3: Extract Tools to Modules
@@ -313,7 +313,7 @@ def extract_tools(input_file, output_dir):
         content = f.read()
     
     # Pattern to find tool implementations
-    tool_pattern = r"case ['\"]([^'\"]+)['\"]:\s*{([^}]+)}"
+    tool_pattern = r"case ['\"]([^'\"]+)['\"]:\s*\{([^\}]+)\}"
     matches = re.findall(tool_pattern, content, re.DOTALL)
     
     for tool_name, implementation in matches:
@@ -322,7 +322,7 @@ def extract_tools(input_file, output_dir):
         
         # Convert tool name to file name
         file_name = tool_name.replace('_', '-') + '.ts'
-        file_path = f"{output_dir}/tools/{category}/{file_name}"
+        file_path = f"\{output_dir\}/tools/\{category\}/\{file_name\}"
         
         # Generate modular tool file
         tool_content = generate_tool_file(tool_name, implementation)
@@ -331,7 +331,7 @@ def extract_tools(input_file, output_dir):
         with open(file_path, 'w') as f:
             f.write(tool_content)
         
-        print(f"✅ Extracted {tool_name} → {file_path}")
+        print(f"✅ Extracted \{tool_name\} → \{file_path\}")
 
 def determine_category(tool_name):
     """Map tool to BMCPS v3.0 category"""
@@ -354,24 +354,24 @@ def generate_tool_file(tool_name, implementation):
     """Generate BMCPS v3.0 compliant tool file"""
     handler_name = 'handle' + ''.join(word.capitalize() for word in tool_name.split('_')[1:])
     
-    return f'''import {{ ErrorCode, McpError }} from '@modelcontextprotocol/sdk/types.js';
-import type {{ Client }} from '../../client.js';
+    return f'''import \{\{ ErrorCode, McpError \}\} from '@modelcontextprotocol/sdk/types.js';
+import type \{\{ Client \}\} from '../../client.js';
 import logger from '../../logger.js';
 
-export async function {handler_name}(
+export async function \{handler_name\}(
   args: any,
   client: Client
-): Promise<{{ content: Array<{{ type: string; text: string }}> }}> {{
-  try {{
-    {implementation.strip()}
-  }} catch (error) {{
-    logger.error('{tool_name} failed', error);
+): Promise<\{\{ content: Array<\{\{ type: string; text: string \}\}> \}\}> \{\{
+  try \{\{
+    \{implementation.strip()\}
+  \}\} catch (error) \{\{
+    logger.error('\{tool_name\} failed', error);
     throw new McpError(
       ErrorCode.InternalError,
-      `{tool_name} failed: ${{error instanceof Error ? error.message : 'Unknown error'}}`
+      `\{tool_name\} failed: $\{\{error instanceof Error ? error.message : 'Unknown error'\}\}`
     );
-  }}
-}}
+  \}\}
+\}\}
 '''
 
 if __name__ == "__main__":
@@ -383,16 +383,16 @@ if __name__ == "__main__":
 ```typescript
 // src/tools/index.ts
 // Import all tool handlers
-import { handleGetChainInfo } from './core/{prefix}-get-chain-info.js';
-import { handleGetBalance } from './core/{prefix}-get-balance.js';
+import \{ handleGetChainInfo \} from './core/\{prefix\}-get-chain-info.js';
+import \{ handleGetBalance \} from './core/\{prefix\}-get-balance.js';
 // ... import all tools
 
 // Export tool handler map
-export const TOOL_HANDLERS: Record<string, (args: any, client: any) => Promise<any>> = {
-  '{prefix}_get_chain_info': handleGetChainInfo,
-  '{prefix}_get_balance': handleGetBalance,
+export const TOOL_HANDLERS: Record<string, (args: any, client: any) => Promise<any>> = \{
+  '\{prefix\}_get_chain_info': handleGetChainInfo,
+  '\{prefix\}_get_balance': handleGetBalance,
   // ... map all tools
-};
+\};
 
 // Export tool definitions
 export const TOOL_DEFINITIONS = [
@@ -406,39 +406,39 @@ export const TOOL_DEFINITIONS = [
 // src/index.ts - Simplified after extraction
 #!/usr/bin/env node
 
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
-import { Client } from './client.js';
-import { TOOL_HANDLERS, TOOL_DEFINITIONS } from './tools/index.js';
+import \{ Server \} from '@modelcontextprotocol/sdk/server/index.js';
+import \{ StdioServerTransport \} from '@modelcontextprotocol/sdk/server/stdio.js';
+import \{ CallToolRequestSchema, ListToolsRequestSchema \} from '@modelcontextprotocol/sdk/types.js';
+import \{ Client \} from './client.js';
+import \{ TOOL_HANDLERS, TOOL_DEFINITIONS \} from './tools/index.js';
 import logger from './logger.js';
 
 const client = new Client();
 const server = new Server(
-  { name: '{prefix}-mcp-server', version: '1.0.0' },
-  { capabilities: { tools: {} } }
+  \{ name: '\{prefix\}-mcp-server', version: '1.0.0' \},
+  \{ capabilities: \{ tools: \{\} \} \}
 );
 
-server.setRequestHandler(ListToolsRequestSchema, async () => {
-  return { tools: TOOL_DEFINITIONS };
-});
+server.setRequestHandler(ListToolsRequestSchema, async () => \{
+  return \{ tools: TOOL_DEFINITIONS \};
+\});
 
-server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  const { name, arguments: args } = request.params;
+server.setRequestHandler(CallToolRequestSchema, async (request) => \{
+  const \{ name, arguments: args \} = request.params;
   const handler = TOOL_HANDLERS[name];
   
-  if (!handler) {
-    throw new Error(`Unknown tool: ${name}`);
-  }
+  if (!handler) \{
+    throw new Error(`Unknown tool: $\{name\}`);
+  \}
   
   return await handler(args, client);
-});
+\});
 
-async function main() {
+async function main() \{
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Server started with ${Object.keys(TOOL_HANDLERS).length} tools`);
-}
+  logger.info(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Server started with $\{Object.keys(TOOL_HANDLERS).length\} tools`);
+\}
 
 main().catch(console.error);
 ```
@@ -484,11 +484,11 @@ done
 # Check core tools
 echo "✓ Checking 25 mandatory tools..."
 tools=("get_chain_info" "get_balance" "get_transaction" "get_block" "validate_address")
-for tool in "${tools[@]}"; do
-  if grep -q "${PREFIX}_$tool" src/tools/index.ts; then
-    echo "  ✓ ${PREFIX}_$tool implemented"
+for tool in "$\{tools[@]\}"; do
+  if grep -q "$\{PREFIX\}_$tool" src/tools/index.ts; then
+    echo "  ✓ $\{PREFIX\}_$tool implemented"
   else
-    echo "  ✗ Missing ${PREFIX}_$tool"
+    echo "  ✗ Missing $\{PREFIX\}_$tool"
   fi
 done
 
@@ -536,8 +536,8 @@ grep "name:" src/index.ts | wc -l  # Should be 25+
 ### Issue: Import path errors after modularization
 ```bash
 # Solution: Use .js extensions in imports
-# Wrong: import { handler } from './tools/core/tool'
-# Right: import { handler } from './tools/core/tool.js'
+# Wrong: import \{ handler \} from './tools/core/tool'
+# Right: import \{ handler \} from './tools/core/tool.js'
 ```
 
 ---

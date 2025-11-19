@@ -78,15 +78,15 @@ const config: Config = {
           items: [
             {
               label: 'Core Standard',
-              to: '/docs/01-Blockchain-MCP-Standard-v3.0',
+              to: '/docs/Blockchain-MCP-Standard-v3.0',
             },
             {
               label: 'Quick Start Guide',
-              to: '/docs/03-QUICK-START-GUIDE',
+              to: '/docs/QUICK-START-GUIDE',
             },
             {
               label: 'Tool Naming Registry',
-              to: '/docs/02-UNIVERSAL-TOOL-NAMING-REGISTRY',
+              to: '/docs/UNIVERSAL-TOOL-NAMING-REGISTRY',
             },
           ],
         },
@@ -95,11 +95,11 @@ const config: Config = {
           items: [
             {
               label: 'Testing Standard',
-              to: '/docs/05-TESTING-STANDARD',
+              to: '/docs/TESTING-STANDARD',
             },
             {
               label: 'Troubleshooting',
-              to: '/docs/09-TROUBLESHOOTING',
+              to: '/docs/TROUBLESHOOTING',
             },
             {
               label: 'API Key Cycling',

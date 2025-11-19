@@ -35,7 +35,7 @@ The Blockchain MCP Standard (BMCPS) v3.0 unifies architecture and tool requireme
 ### Key Requirements Summary
 1. **Architecture**: Modular file structure with standardized categories
 2. **Tools**: 25 mandatory core tools with specific functionality
-3. **Naming**: `{prefix}_{action}_{resource}` convention
+3. **Naming**: `\{prefix\}_\{action\}_\{resource\}` convention
 4. **Testing**: All tools must be functional via MCP Inspector
 5. **Documentation**: Comprehensive README and inline documentation
 
@@ -45,9 +45,9 @@ The Blockchain MCP Standard (BMCPS) v3.0 unifies architecture and tool requireme
 
 ### Mandatory Directory Structure
 ```
-{blockchain}-{network}-mcp-server/
+\{blockchain\}-\{network\}-mcp-server/
 ├── src/
-│   ├── index.ts                 # Main entry point (<300 lines)
+│   ├── index.ts                 # Main entry point (&lt;300 lines)
 │   ├── tool-definitions.ts      # Tool registry and schemas
 │   ├── client.ts                # Blockchain client wrapper (optional)
 │   ├── constants.ts             # ABIs, addresses, configs (optional)
@@ -107,7 +107,7 @@ The Blockchain MCP Standard (BMCPS) v3.0 unifies architecture and tool requireme
 
 ### File Naming Convention
 ```
-src/tools/{category}/{prefix}-{action}_{resource}.ts
+src/tools/\{category\}/\{prefix\}-\{action\}_\{resource\}.ts
 
 Examples:
 src/tools/core/xrp-get_balance.ts
@@ -117,22 +117,22 @@ src/tools/nft/xrp-mint_nft.ts
 
 ### Tool Implementation Template
 ```typescript
-import { z } from 'zod';
-import { Client } from 'xrpl'; // or appropriate client
-import { McpError, ErrorCode } from '@modelcontextprotocol/sdk/types.js';
+import \{ z \} from 'zod';
+import \{ Client \} from 'xrpl'; // or appropriate client
+import \{ McpError, ErrorCode \} from '@modelcontextprotocol/sdk/types.js';
 
 // Input validation schema
-const schema = z.object({
+const schema = z.object(\{
   address: z.string().describe('Wallet address'),
   // ... other parameters
-});
+\});
 
 // Tool handler function
-export async function handle{Action}{Resource}(
+export async function handle\{Action\}\{Resource\}(
   args: any,
   client?: Client // optional client parameter
-): Promise<{ content: Array<{ type: string; text: string }> }> {
-  try {
+): Promise<\{ content: Array<\{ type: string; text: string \}> \}> \{
+  try \{
     // Validate inputs
     const parsed = schema.parse(args);
     
@@ -140,25 +140,25 @@ export async function handle{Action}{Resource}(
     const result = await performOperation(parsed);
     
     // Return formatted response
-    return {
-      content: [{
+    return \{
+      content: [\{
         type: 'text',
         text: JSON.stringify(result, null, 2)
-      }]
-    };
-  } catch (error) {
-    if (error instanceof z.ZodError) {
+      \}]
+    \};
+  \} catch (error) \{
+    if (error instanceof z.ZodError) \{
       throw new McpError(
         ErrorCode.InvalidParams,
-        `Invalid parameters: ${error.errors.map(e => e.message).join(', ')}`
+        `Invalid parameters: $\{error.errors.map(e => e.message).join(', ')\}`
       );
-    }
+    \}
     throw new McpError(
       ErrorCode.InternalError,
-      `Operation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Operation failed: $\{error instanceof Error ? error.message : 'Unknown error'\}`
     );
-  }
-}
+  \}
+\}
 ```
 
 ---
@@ -170,49 +170,49 @@ export async function handle{Action}{Resource}(
 Every blockchain MCP server MUST implement these exact 25 tools:
 
 #### Blockchain Operations (5 tools)
-1. **`{prefix}_get_chain_info`** - Comprehensive blockchain information
-2. **`{prefix}_get_balance`** - Native token balance for address
-3. **`{prefix}_get_transaction`** - Transaction details by hash
-4. **`{prefix}_get_block`** - Block information by number/hash
-5. **`{prefix}_validate_address`** - Address format validation
+1. **`\{prefix\}_get_chain_info`** - Comprehensive blockchain information
+2. **`\{prefix\}_get_balance`** - Native token balance for address
+3. **`\{prefix\}_get_transaction`** - Transaction details by hash
+4. **`\{prefix\}_get_block`** - Block information by number/hash
+5. **`\{prefix\}_validate_address`** - Address format validation
 
 #### Transaction Operations (2 tools)
-6. **`{prefix}_get_transaction_history`** - Recent transactions for address
-7. **`{prefix}_send_transaction`** - Send native tokens
+6. **`\{prefix\}_get_transaction_history`** - Recent transactions for address
+7. **`\{prefix\}_send_transaction`** - Send native tokens
 
 #### Wallet Management (3 tools)
-8. **`{prefix}_create_wallet`** - Generate new wallet
-9. **`{prefix}_import_wallet`** - Import from private key/mnemonic
-10. **`{prefix}_generate_address`** - Generate new address formats
+8. **`\{prefix\}_create_wallet`** - Generate new wallet
+9. **`\{prefix\}_import_wallet`** - Import from private key/mnemonic
+10. **`\{prefix\}_generate_address`** - Generate new address formats
 
 #### Network Management (3 tools)
-11. **`{prefix}_get_network_info`** - Network status and config
-12. **`{prefix}_set_network`** - Switch between networks
-13. **`{prefix}_get_gas_price`** - Current gas/fee pricing
+11. **`\{prefix\}_get_network_info`** - Network status and config
+12. **`\{prefix\}_set_network`** - Switch between networks
+13. **`\{prefix\}_get_gas_price`** - Current gas/fee pricing
 
 #### Fee Management (2 tools)
-14. **`{prefix}_estimate_fees`** - Fee estimation for transactions
-15. **`{prefix}_get_mempool_info`** - Mempool statistics
+14. **`\{prefix\}_estimate_fees`** - Fee estimation for transactions
+15. **`\{prefix\}_get_mempool_info`** - Mempool statistics
 
 #### Account Information (2 tools)
-16. **`{prefix}_get_wallet_info`** - Comprehensive wallet details
-17. **`{prefix}_get_account_info`** - Account metadata and status
+16. **`\{prefix\}_get_wallet_info`** - Comprehensive wallet details
+17. **`\{prefix\}_get_account_info`** - Account metadata and status
 
 #### Token Operations (5 tools)
-18. **`{prefix}_get_token_balance`** - Token balance queries
-19. **`{prefix}_get_token_info`** - Token metadata
-20. **`{prefix}_transfer_token`** - Send tokens
-21. **`{prefix}_approve_token`** - Approve token spending
-22. **`{prefix}_get_token_allowance`** - Check spending allowances
+18. **`\{prefix\}_get_token_balance`** - Token balance queries
+19. **`\{prefix\}_get_token_info`** - Token metadata
+20. **`\{prefix\}_transfer_token`** - Send tokens
+21. **`\{prefix\}_approve_token`** - Approve token spending
+22. **`\{prefix\}_get_token_allowance`** - Check spending allowances
 
 #### Help System (3 tools)
-23. **`{prefix}_help`** - Interactive help and guidance
-24. **`{prefix}_search_tools`** - Search tools by keyword
-25. **`{prefix}_list_tools_by_category`** - Browse organized catalog
+23. **`\{prefix\}_help`** - Interactive help and guidance
+24. **`\{prefix\}_search_tools`** - Search tools by keyword
+25. **`\{prefix\}_list_tools_by_category`** - Browse organized catalog
 
 ### Tool Naming Convention
 ```
-{prefix}_{action}_{resource}
+\{prefix\}_\{action\}_\{resource\}
 
 Where:
 - prefix: Blockchain identifier (eth, btc, sol, xrp, etc.)
@@ -232,46 +232,46 @@ Examples:
 Servers may implement additional tools based on blockchain capabilities:
 
 #### DeFi Operations
-- `{prefix}_swap_tokens`
-- `{prefix}_add_liquidity`
-- `{prefix}_remove_liquidity`
-- `{prefix}_get_pool_info`
+- `\{prefix\}_swap_tokens`
+- `\{prefix\}_add_liquidity`
+- `\{prefix\}_remove_liquidity`
+- `\{prefix\}_get_pool_info`
 
 #### NFT Operations
-- `{prefix}_mint_nft`
-- `{prefix}_transfer_nft`
-- `{prefix}_get_nft_metadata`
-- `{prefix}_create_nft_collection`
+- `\{prefix\}_mint_nft`
+- `\{prefix\}_transfer_nft`
+- `\{prefix\}_get_nft_metadata`
+- `\{prefix\}_create_nft_collection`
 
 #### Staking Operations
-- `{prefix}_stake_tokens`
-- `{prefix}_unstake_tokens`
-- `{prefix}_get_staking_rewards`
-- `{prefix}_get_validators`
+- `\{prefix\}_stake_tokens`
+- `\{prefix\}_unstake_tokens`
+- `\{prefix\}_get_staking_rewards`
+- `\{prefix\}_get_validators`
 
 #### Cross-Chain Bridge Operations
-- `{prefix}_bridge_tokens` - Bridge tokens to another chain
-- `{prefix}_get_bridge_info` - Bridge status and supported chains
-- `{prefix}_estimate_bridge_fees` - Bridge fee estimation
-- `{prefix}_get_bridge_history` - Bridge transaction history
+- `\{prefix\}_bridge_tokens` - Bridge tokens to another chain
+- `\{prefix\}_get_bridge_info` - Bridge status and supported chains
+- `\{prefix\}_estimate_bridge_fees` - Bridge fee estimation
+- `\{prefix\}_get_bridge_history` - Bridge transaction history
 
 #### Analytics & Monitoring
-- `{prefix}_get_analytics` - Network and account analytics
-- `{prefix}_get_performance_metrics` - Performance statistics
-- `{prefix}_monitor_transaction` - Transaction monitoring
-- `{prefix}_get_usage_stats` - Usage statistics and patterns
+- `\{prefix\}_get_analytics` - Network and account analytics
+- `\{prefix\}_get_performance_metrics` - Performance statistics
+- `\{prefix\}_monitor_transaction` - Transaction monitoring
+- `\{prefix\}_get_usage_stats` - Usage statistics and patterns
 
 #### Security & Audit
-- `{prefix}_audit_transaction` - Transaction security audit
-- `{prefix}_validate_security` - Security validation checks
-- `{prefix}_get_security_status` - Security status and alerts
-- `{prefix}_check_compliance` - Regulatory compliance checks
+- `\{prefix\}_audit_transaction` - Transaction security audit
+- `\{prefix\}_validate_security` - Security validation checks
+- `\{prefix\}_get_security_status` - Security status and alerts
+- `\{prefix\}_check_compliance` - Regulatory compliance checks
 
 #### Events & Logs
-- `{prefix}_get_events` - Blockchain event logs
-- `{prefix}_subscribe_events` - Event subscription
-- `{prefix}_get_logs` - Transaction and contract logs
-- `{prefix}_search_logs` - Log search and filtering
+- `\{prefix\}_get_events` - Blockchain event logs
+- `\{prefix\}_subscribe_events` - Event subscription
+- `\{prefix\}_get_logs` - Transaction and contract logs
+- `\{prefix\}_search_logs` - Log search and filtering
 
 ---
 
@@ -280,8 +280,8 @@ Servers may implement additional tools based on blockchain capabilities:
 ### Step 1: Initialize Project
 ```bash
 # Create project structure
-mkdir {blockchain}-{network}-mcp-server
-cd {blockchain}-{network}-mcp-server
+mkdir \{blockchain\}-\{network\}-mcp-server
+cd \{blockchain\}-\{network\}-mcp-server
 npm init -y
 
 # Install dependencies
@@ -289,15 +289,15 @@ npm install @modelcontextprotocol/sdk zod
 npm install -D typescript @types/node jest @types/jest ts-jest
 
 # Create directory structure
-mkdir -p src/tools/{core,wallet,network,tokens,help,account,nft,defi,staking,governance,contracts,bridge,analytics,security,events,advanced}
-mkdir -p tests/{unit,integration} scripts docs
+mkdir -p src/tools/\{core,wallet,network,tokens,help,account,nft,defi,staking,governance,contracts,bridge,analytics,security,events,advanced\}
+mkdir -p tests/\{unit,integration\} scripts docs
 ```
 
 ### Step 2: Configure TypeScript
 ```json
 // tsconfig.json
-{
-  "compilerOptions": {
+\{
+  "compilerOptions": \{
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -310,85 +310,85 @@ mkdir -p tests/{unit,integration} scripts docs
     "resolveJsonModule": true,
     "declaration": true,
     "declarationMap": true
-  },
+  \},
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "tests"]
-}
+\}
 ```
 
 ### Step 3: Create Main Index File
 ```typescript
 // src/index.ts
 #!/usr/bin/env node
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import {
+import \{ Server \} from '@modelcontextprotocol/sdk/server/index.js';
+import \{ StdioServerTransport \} from '@modelcontextprotocol/sdk/server/stdio.js';
+import \{
   CallToolRequestSchema,
   ListToolsRequestSchema,
   McpError,
   ErrorCode
-} from '@modelcontextprotocol/sdk/types.js';
+\} from '@modelcontextprotocol/sdk/types.js';
 
 // Import tool definitions
-import { TOOL_DEFINITIONS } from './tool-definitions.js';
+import \{ TOOL_DEFINITIONS \} from './tool-definitions.js';
 
 // Import tool handlers (organized by category)
 // Core tools
-import { handleGetChainInfo } from './tools/core/{prefix}-get_chain_info.js';
-import { handleGetBalance } from './tools/core/{prefix}-get_balance.js';
+import \{ handleGetChainInfo \} from './tools/core/\{prefix\}-get_chain_info.js';
+import \{ handleGetBalance \} from './tools/core/\{prefix\}-get_balance.js';
 // ... import all 25+ tools
 
 // Initialize server
 const server = new Server(
-  {
-    name: '{blockchain}-{network}-mcp-server',
+  \{
+    name: '\{blockchain\}-\{network\}-mcp-server',
     version: '3.0.0', // Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant
-  },
-  {
-    capabilities: { tools: {} },
-  }
+  \},
+  \{
+    capabilities: \{ tools: \{\} \},
+  \}
 );
 
 // Register tool definitions
-server.setRequestHandler(ListToolsRequestSchema, async () => {
-  return { tools: TOOL_DEFINITIONS };
-});
+server.setRequestHandler(ListToolsRequestSchema, async () => \{
+  return \{ tools: TOOL_DEFINITIONS \};
+\});
 
 // Route tool calls
-server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  const { name, arguments: args } = request.params;
+server.setRequestHandler(CallToolRequestSchema, async (request) => \{
+  const \{ name, arguments: args \} = request.params;
   
-  try {
-    switch (name) {
+  try \{
+    switch (name) \{
       // Core tools
-      case '{prefix}_get_chain_info':
+      case '\{prefix\}_get_chain_info':
         return await handleGetChainInfo(args);
-      case '{prefix}_get_balance':
+      case '\{prefix\}_get_balance':
         return await handleGetBalance(args);
       // ... handle all tools
       
       default:
         throw new McpError(
           ErrorCode.MethodNotFound,
-          `Unknown tool: ${name}`
+          `Unknown tool: $\{name\}`
         );
-    }
-  } catch (error) {
+    \}
+  \} catch (error) \{
     if (error instanceof McpError) throw error;
     throw new McpError(
       ErrorCode.InternalError,
-      `Tool execution failed: ${error}`
+      `Tool execution failed: $\{error\}`
     );
-  }
-});
+  \}
+\});
 
 // Start server
-async function main() {
+async function main() \{
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('[Blockchain MCP Standard v3.0 (BMCPS v3.0)] {Blockchain} MCP Server running');
-  console.error(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Total tools: ${TOOL_DEFINITIONS.length}`);
-}
+  console.error('[Blockchain MCP Standard v3.0 (BMCPS v3.0)] \{Blockchain\} MCP Server running');
+  console.error(`[Blockchain MCP Standard v3.0 (BMCPS v3.0)] Total tools: $\{TOOL_DEFINITIONS.length\}`);
+\}
 
 main().catch(console.error);
 ```
@@ -398,31 +398,31 @@ main().catch(console.error);
 Start with the 25 mandatory tools, one file per tool:
 
 ```typescript
-// src/tools/core/{prefix}-get_balance.ts
-import { z } from 'zod';
+// src/tools/core/\{prefix\}-get_balance.ts
+import \{ z \} from 'zod';
 
-const schema = z.object({
+const schema = z.object(\{
   address: z.string().describe('Wallet address to check balance')
-});
+\});
 
-export async function handleGetBalance(args: any) {
-  const { address } = schema.parse(args);
+export async function handleGetBalance(args: any) \{
+  const \{ address \} = schema.parse(args);
   
   // Implementation here
   const balance = await fetchBalance(address);
   
-  return {
-    content: [{
+  return \{
+    content: [\{
       type: 'text',
-      text: JSON.stringify({
+      text: JSON.stringify(\{
         address,
         balance: balance.formatted,
         balanceRaw: balance.raw,
         symbol: 'ETH' // or appropriate symbol
-      }, null, 2)
-    }]
-  };
-}
+      \}, null, 2)
+    \}]
+  \};
+\}
 ```
 
 ---
@@ -440,7 +440,7 @@ export async function handleGetBalance(args: any) {
 
 #### Tool Requirements ✓
 - [ ] All 25 mandatory core tools implemented
-- [ ] Tool naming follows `{prefix}_{action}_{resource}`
+- [ ] Tool naming follows `\{prefix\}_\{action\}_\{resource\}`
 - [ ] All tools have proper input schemas
 - [ ] Help system fully functional
 - [ ] Network switching capability
@@ -514,25 +514,25 @@ npm run mbss-check  # Custom script to verify standards
 #### From Monolithic (Before)
 ```typescript
 // Everything in one massive index.ts file
-switch (toolName) {
+switch (toolName) \{
   case 'get_balance': // 3000+ lines of cases
     // implementation inline
   case 'send_transaction':
     // implementation inline
   // ... 100+ more cases
-}
+\}
 ```
 
 #### To Modular Blockchain MCP Standard v3.0 (BMCPS v3.0) (After)
 ```typescript
 // Clean index.ts with imports
-import { handleGetBalance } from './tools/core/eth-get_balance.js';
+import \{ handleGetBalance \} from './tools/core/eth-get_balance.js';
 
-switch (toolName) {
+switch (toolName) \{
   case 'eth_get_balance':
     return await handleGetBalance(args);
   // ... clean routing only
-}
+\}
 ```
 
 ---
