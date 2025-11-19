@@ -22,9 +22,15 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-The site is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
+The site is automatically deployed to GitHub Pages when changes are pushed to the `master` branch.
 
 **Live URL**: https://myronkoch.github.io/blockchain-mcp-standards/
+
+### Manual Deployment Trigger
+
+You can manually trigger a deployment from the GitHub Actions tab:
+1. Go to Actions → "Deploy to GitHub Pages"
+2. Click "Run workflow" → Select branch: `master` → Click "Run workflow"
 
 ## Documentation Structure
 
