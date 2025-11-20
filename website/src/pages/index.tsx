@@ -17,7 +17,7 @@ function HomepageHeader() {
           Blockchain MCP Standard v3.0
         </Heading>
         <p className="hero__subtitle">
-          The unified standard for building blockchain MCP servers across 15+ blockchains
+          The universal standard for building MCP servers for any blockchain ecosystem
         </p>
         <div className={styles.buttons}>
           <Link
@@ -33,7 +33,7 @@ function HomepageHeader() {
           </Link>
         </div>
         <div style={{marginTop: '2rem', fontSize: '0.9rem', opacity: 0.8}}>
-          <strong>25 mandatory tools</strong> • <strong>15 blockchains</strong> • <strong>Factory automation</strong> • <strong>MIT Licensed</strong>
+          <strong>25 mandatory tools</strong> • <strong>Universal standard</strong> • <strong>Factory automation</strong> • <strong>MIT Licensed</strong>
         </div>
       </div>
     </header>
@@ -45,7 +45,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="Blockchain MCP Standard v3.0"
-      description="The unified standard for building blockchain MCP servers - 25 mandatory tools across 15+ blockchains with modular architecture and factory automation">
+      description="The universal standard for building blockchain MCP servers for any blockchain ecosystem - 25 mandatory tools with modular architecture and factory automation">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

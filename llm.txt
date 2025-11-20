@@ -8,7 +8,8 @@ The **Blockchain MCP Standard v3.0 (BMCPS v3.0)** is the unified architectural a
 - **Supersedes**: MBPS v2.1 (tool requirements) + MSAS v1.0 (architecture standard)
 - **Documents**: 10 core standards (reduced from 28 historical documents)
 - **Mandatory Tools**: 25 tools every compliant server must implement
-- **Supported Blockchains**: 15 official (Bitcoin, Ethereum, Solana, Polygon, Avalanche, Arbitrum, Base, BNB Chain, Cosmos, Osmosis, NEAR, Sui, TRON, XRP, World Chain)
+- **Scope**: Universal standard for ANY blockchain ecosystem
+- **Reference Implementations**: 15 officially documented (Bitcoin, Ethereum, Solana, Polygon, Avalanche, Arbitrum, Base, BNB Chain, Cosmos, Osmosis, NEAR, Sui, TRON, XRP, World Chain)
 - **Naming Convention**: `{prefix}_{action}_{resource}` (e.g., `eth_get_balance`, `btc_create_wallet`)
 
 ---
@@ -260,7 +261,9 @@ node implementation-templates.js --blockchain eth --tools all
 
 ---
 
-## 15 Official Blockchain Prefixes
+## Reference Blockchain Prefixes (15 Officially Documented)
+
+The standard supports ANY blockchain - these are reference implementations:
 
 | Blockchain | Prefix | Example Tool |
 |------------|--------|--------------|
