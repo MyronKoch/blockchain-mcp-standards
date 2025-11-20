@@ -12,14 +12,9 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://myronkoch.github.io',
-  // For GitHub pages deployment
-  baseUrl: '/blockchain-mcp-standards/',
-
-  // GitHub pages deployment config
-  organizationName: 'MyronKoch',
-  projectName: 'blockchain-mcp-standards',
-  deploymentBranch: 'gh-pages',
+  // Update this with your Cloudflare Pages domain after deployment
+  url: 'https://blockchain-mcp-standards.pages.dev',
+  baseUrl: '/',
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
@@ -36,7 +31,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/MyronKoch/blockchain-mcp-standards/tree/main/',
+          editUrl: 'https://github.com/MyronKoch/blockchain-mcp-standards/tree/master/',
           showLastUpdateTime: true,
           showLastUpdateAuthor: true,
         },

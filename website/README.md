@@ -22,15 +22,57 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-The site is automatically deployed to GitHub Pages when changes are pushed to the `master` branch.
+The site is deployed to **Cloudflare Pages** for fast global delivery with support for private repositories.
 
-**Live URL**: https://myronkoch.github.io/blockchain-mcp-standards/
+**Live URL**: TBD (will be provided after deployment)
 
-### Manual Deployment Trigger
+### Cloudflare Pages Setup (One-Time)
 
-You can manually trigger a deployment from the GitHub Actions tab:
-1. Go to Actions → "Deploy to GitHub Pages"
-2. Click "Run workflow" → Select branch: `master` → Click "Run workflow"
+1. **Log in to Cloudflare Dashboard**
+   - Go to https://dash.cloudflare.com/
+   - Navigate to "Workers & Pages" → "Pages"
+
+2. **Connect Your Repository**
+   - Click "Create a project" → "Connect to Git"
+   - Select your GitHub repository: `blockchain-mcp-standards`
+   - Authorize Cloudflare Pages to access your repo
+
+3. **Configure Build Settings**
+   ```
+   Framework preset: Docusaurus
+   Build command: cd website && npm ci && npm run build
+   Build output directory: website/build
+   Root directory: /
+   Node version: 20
+   ```
+
+4. **Environment Variables** (Optional)
+   - None required for basic deployment
+
+5. **Deploy**
+   - Click "Save and Deploy"
+   - Your site will be available at: `https://blockchain-mcp-standards.pages.dev`
+   - You can add a custom domain later in Project Settings
+
+### Automatic Deployments
+
+Cloudflare Pages automatically deploys:
+- **Production**: Every push to `master` branch
+- **Preview**: Every pull request (preview URLs for testing)
+
+### Manual Deployment via CLI (Optional)
+
+Install Wrangler CLI:
+```bash
+npm install -g wrangler
+```
+
+Deploy manually:
+```bash
+cd website
+npm run build
+npx wrangler pages deploy build --project-name blockchain-mcp-standards
+```
 
 ## Documentation Structure
 
