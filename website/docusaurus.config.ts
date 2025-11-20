@@ -124,9 +124,9 @@ const config: Config = {
       additionalLanguages: ['bash', 'typescript', 'javascript', 'json', 'markdown'],
     },
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
-      respectPrefersColorScheme: true,
+      respectPrefersColorScheme: false,
     },
     algolia: {
       // This is disabled for now - enable after deployment
