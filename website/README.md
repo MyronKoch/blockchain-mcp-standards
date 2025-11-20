@@ -43,7 +43,7 @@ The site is deployed to **Cloudflare Pages** for fast global delivery with suppo
    Build command: cd website && npm ci && npm run build
    Build output directory: website/build
    Root directory: /
-   Node version: 20
+   Node version: 22
    ```
 
 4. **Environment Variables** (Optional)
