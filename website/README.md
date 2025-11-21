@@ -85,8 +85,9 @@ The documentation files are located in the `docs/` directory and are organized a
 
 ## Customization
 
-- `docusaurus.config.ts` - Site configuration
+- `docusaurus.config.ts` - Site configuration (Defaults to Dark Mode)
 - `sidebars.ts` - Sidebar navigation structure
-- `src/pages/index.tsx` - Landing page
-- `src/components/HomepageFeatures/` - Homepage feature cards
-- `src/css/custom.css` - Custom styling
+- `src/pages/index.tsx` - Landing page (Splash screen)
+- `src/components/HomepageFeatures/` - Bento Grid feature cards
+- `src/components/SpaceFidget/` - 3D Interactive "Dyson Sphere" background
+- `src/css/custom.css` - "Neon Glass" design system & variables
