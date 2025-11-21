@@ -24,7 +24,7 @@ This command generates static content into the `build` directory and can be serv
 
 The site is deployed to **Cloudflare Pages** for fast global delivery with support for private repositories.
 
-**Live URL**: TBD (will be provided after deployment)
+**Live URL**: https://bmcps.dev
 
 ### Cloudflare Pages Setup (One-Time)
 
@@ -51,7 +51,7 @@ The site is deployed to **Cloudflare Pages** for fast global delivery with suppo
 
 5. **Deploy**
    - Click "Save and Deploy"
-   - Your site will be available at: `https://blockchain-mcp-standards.pages.dev`
+   - Your site will be available at: `https://bmcps.dev`
    - You can add a custom domain later in Project Settings
 
 ### Automatic Deployments
