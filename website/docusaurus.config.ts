@@ -12,8 +12,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  // Update this with your Cloudflare Pages domain after deployment
-  url: 'https://blockchain-mcp-standards.pages.dev',
+  url: 'https://bmcps.dev',
   baseUrl: '/',
   trailingSlash: false,
 
