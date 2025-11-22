@@ -1,0 +1,1132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "3.0.0",
+  "title": "BMCPS v3.0 Universal Tool Schema",
+  "description": "Format-agnostic definitions for all 25 mandatory blockchain tools. Can be transformed into MCP, OpenAI Functions, REST APIs, or any other protocol.",
+  "tools": [
+    {
+      "name": "get_chain_info",
+      "category": "core",
+      "description": "Get comprehensive blockchain network information",
+      "longDescription": "Retrieves detailed information about the blockchain including chain ID, network name, consensus mechanism, block time, and current status.",
+      "inputs": {},
+      "outputs": {
+        "chain_id": {
+          "type": "string",
+          "description": "Blockchain network identifier"
+        },
+        "network_name": {
+          "type": "string",
+          "description": "Human-readable network name"
+        },
+        "consensus": {
+          "type": "string",
+          "description": "Consensus mechanism (PoW, PoS, etc.)"
+        },
+        "block_time": {
+          "type": "number",
+          "description": "Average block time in seconds"
+        },
+        "latest_block": {
+          "type": "number",
+          "description": "Most recent block number"
+        }
+      },
+      "errors": [
+        {
+          "code": "NETWORK_ERROR",
+          "message": "Failed to connect to blockchain node"
+        }
+      ],
+      "example": {
+        "input": {},
+        "output": {
+          "chain_id": "1",
+          "network_name": "Ethereum Mainnet",
+          "consensus": "Proof of Stake",
+          "block_time": 12,
+          "latest_block": 18500000
+        }
+      }
+    },
+    {
+      "name": "get_balance",
+      "category": "core",
+      "description": "Get native token balance for an address",
+      "longDescription": "Retrieves the native token balance (ETH, BTC, SOL, etc.) for a given address on the current network.",
+      "inputs": {
+        "address": {
+          "type": "string",
+          "description": "Wallet address to query",
+          "required": true,
+          "validation": "blockchain_address"
+        }
+      },
+      "outputs": {
+        "balance": {
+          "type": "string",
+          "description": "Balance in smallest unit (wei, satoshi, lamports, etc.)"
+        },
+        "formatted_balance": {
+          "type": "string",
+          "description": "Human-readable balance with symbol"
+        },
+        "decimals": {
+          "type": "number",
+          "description": "Number of decimal places"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_ADDRESS",
+          "message": "Address format is invalid for this blockchain"
+        },
+        {
+          "code": "NETWORK_ERROR",
+          "message": "Failed to query blockchain node"
+        }
+      ],
+      "example": {
+        "input": {
+          "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+        },
+        "output": {
+          "balance": "1500000000000000000",
+          "formatted_balance": "1.5 ETH",
+          "decimals": 18
+        }
+      }
+    },
+    {
+      "name": "get_transaction",
+      "category": "core",
+      "description": "Get transaction details by hash",
+      "longDescription": "Retrieves complete information about a transaction including sender, receiver, amount, gas fees, and confirmation status.",
+      "inputs": {
+        "tx_hash": {
+          "type": "string",
+          "description": "Transaction hash/ID",
+          "required": true
+        }
+      },
+      "outputs": {
+        "hash": {
+          "type": "string",
+          "description": "Transaction hash"
+        },
+        "from": {
+          "type": "string",
+          "description": "Sender address"
+        },
+        "to": {
+          "type": "string",
+          "description": "Recipient address"
+        },
+        "value": {
+          "type": "string",
+          "description": "Amount transferred"
+        },
+        "block_number": {
+          "type": "number",
+          "description": "Block containing transaction"
+        },
+        "confirmations": {
+          "type": "number",
+          "description": "Number of confirmations"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "confirmed", "failed"],
+          "description": "Transaction status"
+        }
+      },
+      "errors": [
+        {
+          "code": "TX_NOT_FOUND",
+          "message": "Transaction hash not found"
+        },
+        {
+          "code": "INVALID_HASH",
+          "message": "Transaction hash format is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "tx_hash": "0x123abc..."
+        },
+        "output": {
+          "hash": "0x123abc...",
+          "from": "0xabc...",
+          "to": "0xdef...",
+          "value": "1000000000000000000",
+          "block_number": 18500000,
+          "confirmations": 12,
+          "status": "confirmed"
+        }
+      }
+    },
+    {
+      "name": "get_block",
+      "category": "core",
+      "description": "Get block information by number or hash",
+      "longDescription": "Retrieves detailed information about a block including transactions, timestamp, miner/validator, and gas usage.",
+      "inputs": {
+        "block_identifier": {
+          "type": "string",
+          "description": "Block number, hash, or 'latest'",
+          "required": true
+        }
+      },
+      "outputs": {
+        "number": {
+          "type": "number",
+          "description": "Block number"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Block hash"
+        },
+        "timestamp": {
+          "type": "number",
+          "description": "Unix timestamp"
+        },
+        "transactions": {
+          "type": "array",
+          "description": "Transaction hashes in block"
+        },
+        "miner": {
+          "type": "string",
+          "description": "Miner/validator address"
+        }
+      },
+      "errors": [
+        {
+          "code": "BLOCK_NOT_FOUND",
+          "message": "Block not found"
+        }
+      ],
+      "example": {
+        "input": {
+          "block_identifier": "latest"
+        },
+        "output": {
+          "number": 18500000,
+          "hash": "0xabc123...",
+          "timestamp": 1700000000,
+          "transactions": ["0x111...", "0x222..."],
+          "miner": "0xminer..."
+        }
+      }
+    },
+    {
+      "name": "validate_address",
+      "category": "core",
+      "description": "Validate address format for blockchain",
+      "longDescription": "Checks if an address string is valid for the current blockchain (checksum, length, format).",
+      "inputs": {
+        "address": {
+          "type": "string",
+          "description": "Address to validate",
+          "required": true
+        }
+      },
+      "outputs": {
+        "valid": {
+          "type": "boolean",
+          "description": "Whether address is valid"
+        },
+        "checksummed": {
+          "type": "string",
+          "description": "Checksummed version of address"
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {
+          "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+        },
+        "output": {
+          "valid": true,
+          "checksummed": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+        }
+      }
+    },
+    {
+      "name": "get_transaction_history",
+      "category": "core",
+      "description": "Get recent transactions for an address",
+      "longDescription": "Retrieves paginated transaction history for an address including sent and received transactions.",
+      "inputs": {
+        "address": {
+          "type": "string",
+          "description": "Wallet address",
+          "required": true
+        },
+        "limit": {
+          "type": "number",
+          "description": "Maximum transactions to return (default: 10)",
+          "default": 10
+        },
+        "offset": {
+          "type": "number",
+          "description": "Pagination offset (default: 0)",
+          "default": 0
+        }
+      },
+      "outputs": {
+        "transactions": {
+          "type": "array",
+          "description": "Array of transaction objects"
+        },
+        "total": {
+          "type": "number",
+          "description": "Total transaction count"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_ADDRESS",
+          "message": "Address format is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+          "limit": 5
+        },
+        "output": {
+          "transactions": [
+            {"hash": "0x111...", "from": "0xabc...", "to": "0xdef...", "value": "1000000"}
+          ],
+          "total": 42
+        }
+      }
+    },
+    {
+      "name": "send_transaction",
+      "category": "core",
+      "description": "Send native tokens to an address",
+      "longDescription": "Creates, signs, and broadcasts a transaction sending native tokens from one address to another.",
+      "inputs": {
+        "from": {
+          "type": "string",
+          "description": "Sender address",
+          "required": true
+        },
+        "to": {
+          "type": "string",
+          "description": "Recipient address",
+          "required": true
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount to send (in base units)",
+          "required": true
+        },
+        "private_key": {
+          "type": "string",
+          "description": "Private key for signing (use with caution)",
+          "required": true,
+          "sensitive": true
+        }
+      },
+      "outputs": {
+        "tx_hash": {
+          "type": "string",
+          "description": "Transaction hash"
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status"
+        }
+      },
+      "errors": [
+        {
+          "code": "INSUFFICIENT_FUNDS",
+          "message": "Sender has insufficient balance"
+        },
+        {
+          "code": "INVALID_PRIVATE_KEY",
+          "message": "Private key is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "from": "0xabc...",
+          "to": "0xdef...",
+          "amount": "1000000000000000000",
+          "private_key": "0x[REDACTED]"
+        },
+        "output": {
+          "tx_hash": "0x123abc...",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "name": "create_wallet",
+      "category": "wallet",
+      "description": "Generate a new wallet with private key and address",
+      "longDescription": "Creates a new cryptographically secure wallet with private key, public key, and address.",
+      "inputs": {},
+      "outputs": {
+        "address": {
+          "type": "string",
+          "description": "Wallet address"
+        },
+        "private_key": {
+          "type": "string",
+          "description": "Private key (KEEP SECURE)",
+          "sensitive": true
+        },
+        "mnemonic": {
+          "type": "string",
+          "description": "Recovery phrase (if applicable)",
+          "sensitive": true
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {},
+        "output": {
+          "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+          "private_key": "[REDACTED]",
+          "mnemonic": "[REDACTED]"
+        }
+      }
+    },
+    {
+      "name": "import_wallet",
+      "category": "wallet",
+      "description": "Import wallet from private key or mnemonic",
+      "longDescription": "Imports an existing wallet using a private key or recovery phrase.",
+      "inputs": {
+        "private_key": {
+          "type": "string",
+          "description": "Private key to import (optional)",
+          "sensitive": true
+        },
+        "mnemonic": {
+          "type": "string",
+          "description": "Recovery phrase to import (optional)",
+          "sensitive": true
+        }
+      },
+      "outputs": {
+        "address": {
+          "type": "string",
+          "description": "Imported wallet address"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "Import success status"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_PRIVATE_KEY",
+          "message": "Private key format is invalid"
+        },
+        {
+          "code": "INVALID_MNEMONIC",
+          "message": "Mnemonic phrase is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "mnemonic": "[REDACTED]"
+        },
+        "output": {
+          "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+          "success": true
+        }
+      }
+    },
+    {
+      "name": "generate_address",
+      "category": "wallet",
+      "description": "Generate new address from existing wallet",
+      "longDescription": "Generates additional addresses for HD wallets (hierarchical deterministic).",
+      "inputs": {
+        "index": {
+          "type": "number",
+          "description": "Derivation index (default: 0)",
+          "default": 0
+        }
+      },
+      "outputs": {
+        "address": {
+          "type": "string",
+          "description": "Generated address"
+        },
+        "derivation_path": {
+          "type": "string",
+          "description": "HD derivation path"
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {
+          "index": 1
+        },
+        "output": {
+          "address": "0xnew...",
+          "derivation_path": "m/44'/60'/0'/0/1"
+        }
+      }
+    },
+    {
+      "name": "get_network_info",
+      "category": "network",
+      "description": "Get current network configuration and status",
+      "longDescription": "Retrieves information about the currently connected network including RPC endpoint, chain ID, and connection status.",
+      "inputs": {},
+      "outputs": {
+        "network_name": {
+          "type": "string",
+          "description": "Network name"
+        },
+        "chain_id": {
+          "type": "string",
+          "description": "Chain identifier"
+        },
+        "rpc_url": {
+          "type": "string",
+          "description": "RPC endpoint URL"
+        },
+        "connected": {
+          "type": "boolean",
+          "description": "Connection status"
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {},
+        "output": {
+          "network_name": "Ethereum Mainnet",
+          "chain_id": "1",
+          "rpc_url": "https://eth-mainnet.g.alchemy.com/v2/...",
+          "connected": true
+        }
+      }
+    },
+    {
+      "name": "set_network",
+      "category": "network",
+      "description": "Switch to different network",
+      "longDescription": "Changes the active network connection (mainnet, testnet, custom RPC).",
+      "inputs": {
+        "network": {
+          "type": "string",
+          "description": "Network to switch to (mainnet, testnet, etc.)",
+          "required": true
+        },
+        "rpc_url": {
+          "type": "string",
+          "description": "Custom RPC URL (optional)"
+        }
+      },
+      "outputs": {
+        "success": {
+          "type": "boolean",
+          "description": "Whether network switch succeeded"
+        },
+        "network_name": {
+          "type": "string",
+          "description": "New network name"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_NETWORK",
+          "message": "Network identifier is invalid"
+        },
+        {
+          "code": "CONNECTION_FAILED",
+          "message": "Failed to connect to network"
+        }
+      ],
+      "example": {
+        "input": {
+          "network": "testnet"
+        },
+        "output": {
+          "success": true,
+          "network_name": "Ethereum Sepolia"
+        }
+      }
+    },
+    {
+      "name": "get_gas_price",
+      "category": "network",
+      "description": "Get current gas/fee pricing",
+      "longDescription": "Retrieves current network fees for transactions (gas price, priority fees, etc.).",
+      "inputs": {},
+      "outputs": {
+        "gas_price": {
+          "type": "string",
+          "description": "Current gas price in smallest unit"
+        },
+        "formatted_price": {
+          "type": "string",
+          "description": "Human-readable gas price"
+        },
+        "priority_fee": {
+          "type": "string",
+          "description": "Priority fee (EIP-1559, if applicable)"
+        }
+      },
+      "errors": [
+        {
+          "code": "NETWORK_ERROR",
+          "message": "Failed to fetch gas price"
+        }
+      ],
+      "example": {
+        "input": {},
+        "output": {
+          "gas_price": "25000000000",
+          "formatted_price": "25 gwei",
+          "priority_fee": "2000000000"
+        }
+      }
+    },
+    {
+      "name": "estimate_fees",
+      "category": "network",
+      "description": "Estimate transaction fees",
+      "longDescription": "Calculates estimated fees for a transaction based on current network conditions.",
+      "inputs": {
+        "from": {
+          "type": "string",
+          "description": "Sender address",
+          "required": true
+        },
+        "to": {
+          "type": "string",
+          "description": "Recipient address",
+          "required": true
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount to send"
+        },
+        "data": {
+          "type": "string",
+          "description": "Transaction data (for contract calls)"
+        }
+      },
+      "outputs": {
+        "estimated_gas": {
+          "type": "number",
+          "description": "Estimated gas units"
+        },
+        "total_fee": {
+          "type": "string",
+          "description": "Total fee in native token"
+        },
+        "formatted_fee": {
+          "type": "string",
+          "description": "Human-readable fee"
+        }
+      },
+      "errors": [
+        {
+          "code": "ESTIMATION_FAILED",
+          "message": "Fee estimation failed"
+        }
+      ],
+      "example": {
+        "input": {
+          "from": "0xabc...",
+          "to": "0xdef...",
+          "amount": "1000000000000000000"
+        },
+        "output": {
+          "estimated_gas": 21000,
+          "total_fee": "525000000000000",
+          "formatted_fee": "0.000525 ETH"
+        }
+      }
+    },
+    {
+      "name": "get_mempool_info",
+      "category": "network",
+      "description": "Get mempool statistics and pending transactions",
+      "longDescription": "Retrieves information about pending transactions in the mempool.",
+      "inputs": {},
+      "outputs": {
+        "pending_count": {
+          "type": "number",
+          "description": "Number of pending transactions"
+        },
+        "avg_gas_price": {
+          "type": "string",
+          "description": "Average gas price in mempool"
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {},
+        "output": {
+          "pending_count": 1523,
+          "avg_gas_price": "28000000000"
+        }
+      }
+    },
+    {
+      "name": "get_wallet_info",
+      "category": "account",
+      "description": "Get comprehensive wallet information",
+      "longDescription": "Retrieves complete information about a wallet including balance, transaction count, and token holdings.",
+      "inputs": {
+        "address": {
+          "type": "string",
+          "description": "Wallet address",
+          "required": true
+        }
+      },
+      "outputs": {
+        "address": {
+          "type": "string",
+          "description": "Wallet address"
+        },
+        "balance": {
+          "type": "string",
+          "description": "Native token balance"
+        },
+        "transaction_count": {
+          "type": "number",
+          "description": "Total transactions"
+        },
+        "token_count": {
+          "type": "number",
+          "description": "Number of different tokens held"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_ADDRESS",
+          "message": "Address is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "address": "0xabc..."
+        },
+        "output": {
+          "address": "0xabc...",
+          "balance": "1500000000000000000",
+          "transaction_count": 42,
+          "token_count": 5
+        }
+      }
+    },
+    {
+      "name": "get_account_info",
+      "category": "account",
+      "description": "Get account details and metadata",
+      "longDescription": "Retrieves blockchain-specific account information (nonce, storage, code, etc.).",
+      "inputs": {
+        "address": {
+          "type": "string",
+          "description": "Account address",
+          "required": true
+        }
+      },
+      "outputs": {
+        "address": {
+          "type": "string",
+          "description": "Account address"
+        },
+        "nonce": {
+          "type": "number",
+          "description": "Transaction nonce"
+        },
+        "is_contract": {
+          "type": "boolean",
+          "description": "Whether address is a contract"
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {
+          "address": "0xcontract..."
+        },
+        "output": {
+          "address": "0xcontract...",
+          "nonce": 0,
+          "is_contract": true
+        }
+      }
+    },
+    {
+      "name": "get_token_balance",
+      "category": "tokens",
+      "description": "Get token balance for address",
+      "longDescription": "Retrieves the balance of a specific token (ERC-20, SPL, etc.) for an address.",
+      "inputs": {
+        "address": {
+          "type": "string",
+          "description": "Wallet address",
+          "required": true
+        },
+        "token_address": {
+          "type": "string",
+          "description": "Token contract address",
+          "required": true
+        }
+      },
+      "outputs": {
+        "balance": {
+          "type": "string",
+          "description": "Token balance in smallest unit"
+        },
+        "formatted_balance": {
+          "type": "string",
+          "description": "Human-readable balance"
+        },
+        "decimals": {
+          "type": "number",
+          "description": "Token decimals"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Token symbol"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_TOKEN",
+          "message": "Token address is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "address": "0xwallet...",
+          "token_address": "0xUSDC..."
+        },
+        "output": {
+          "balance": "1000000",
+          "formatted_balance": "1.0 USDC",
+          "decimals": 6,
+          "symbol": "USDC"
+        }
+      }
+    },
+    {
+      "name": "get_token_info",
+      "category": "tokens",
+      "description": "Get token metadata and information",
+      "longDescription": "Retrieves metadata about a token including name, symbol, decimals, total supply.",
+      "inputs": {
+        "token_address": {
+          "type": "string",
+          "description": "Token contract address",
+          "required": true
+        }
+      },
+      "outputs": {
+        "name": {
+          "type": "string",
+          "description": "Token name"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Token symbol"
+        },
+        "decimals": {
+          "type": "number",
+          "description": "Token decimals"
+        },
+        "total_supply": {
+          "type": "string",
+          "description": "Total token supply"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_TOKEN",
+          "message": "Token contract not found"
+        }
+      ],
+      "example": {
+        "input": {
+          "token_address": "0xUSDC..."
+        },
+        "output": {
+          "name": "USD Coin",
+          "symbol": "USDC",
+          "decimals": 6,
+          "total_supply": "25000000000000"
+        }
+      }
+    },
+    {
+      "name": "transfer_token",
+      "category": "tokens",
+      "description": "Transfer tokens to another address",
+      "longDescription": "Sends tokens (ERC-20, SPL, etc.) from one address to another.",
+      "inputs": {
+        "from": {
+          "type": "string",
+          "description": "Sender address",
+          "required": true
+        },
+        "to": {
+          "type": "string",
+          "description": "Recipient address",
+          "required": true
+        },
+        "token_address": {
+          "type": "string",
+          "description": "Token contract address",
+          "required": true
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount to transfer",
+          "required": true
+        },
+        "private_key": {
+          "type": "string",
+          "description": "Private key for signing",
+          "required": true,
+          "sensitive": true
+        }
+      },
+      "outputs": {
+        "tx_hash": {
+          "type": "string",
+          "description": "Transaction hash"
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status"
+        }
+      },
+      "errors": [
+        {
+          "code": "INSUFFICIENT_BALANCE",
+          "message": "Insufficient token balance"
+        },
+        {
+          "code": "INVALID_TOKEN",
+          "message": "Token address is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "from": "0xabc...",
+          "to": "0xdef...",
+          "token_address": "0xUSDC...",
+          "amount": "1000000",
+          "private_key": "[REDACTED]"
+        },
+        "output": {
+          "tx_hash": "0x123...",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "name": "approve_token",
+      "category": "tokens",
+      "description": "Approve token spending allowance",
+      "longDescription": "Approves a spender (contract or address) to transfer tokens on behalf of the owner.",
+      "inputs": {
+        "token_address": {
+          "type": "string",
+          "description": "Token contract address",
+          "required": true
+        },
+        "spender": {
+          "type": "string",
+          "description": "Address to approve",
+          "required": true
+        },
+        "amount": {
+          "type": "string",
+          "description": "Amount to approve",
+          "required": true
+        },
+        "private_key": {
+          "type": "string",
+          "description": "Private key for signing",
+          "required": true,
+          "sensitive": true
+        }
+      },
+      "outputs": {
+        "tx_hash": {
+          "type": "string",
+          "description": "Transaction hash"
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_TOKEN",
+          "message": "Token address is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "token_address": "0xUSDC...",
+          "spender": "0xDEX...",
+          "amount": "1000000",
+          "private_key": "[REDACTED]"
+        },
+        "output": {
+          "tx_hash": "0x456...",
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "name": "get_token_allowance",
+      "category": "tokens",
+      "description": "Check token spending allowance",
+      "longDescription": "Retrieves the amount of tokens that a spender is allowed to transfer on behalf of the owner.",
+      "inputs": {
+        "token_address": {
+          "type": "string",
+          "description": "Token contract address",
+          "required": true
+        },
+        "owner": {
+          "type": "string",
+          "description": "Token owner address",
+          "required": true
+        },
+        "spender": {
+          "type": "string",
+          "description": "Spender address",
+          "required": true
+        }
+      },
+      "outputs": {
+        "allowance": {
+          "type": "string",
+          "description": "Approved allowance amount"
+        },
+        "formatted_allowance": {
+          "type": "string",
+          "description": "Human-readable allowance"
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_TOKEN",
+          "message": "Token address is invalid"
+        }
+      ],
+      "example": {
+        "input": {
+          "token_address": "0xUSDC...",
+          "owner": "0xabc...",
+          "spender": "0xDEX..."
+        },
+        "output": {
+          "allowance": "1000000",
+          "formatted_allowance": "1.0 USDC"
+        }
+      }
+    },
+    {
+      "name": "help",
+      "category": "help",
+      "description": "Get help information about available tools",
+      "longDescription": "Returns information about all available tools, their usage, and examples.",
+      "inputs": {
+        "tool_name": {
+          "type": "string",
+          "description": "Specific tool to get help for (optional)"
+        }
+      },
+      "outputs": {
+        "tools": {
+          "type": "array",
+          "description": "List of tool information"
+        },
+        "total_tools": {
+          "type": "number",
+          "description": "Total number of available tools"
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {},
+        "output": {
+          "tools": [
+            {"name": "get_balance", "description": "Get balance..."}
+          ],
+          "total_tools": 25
+        }
+      }
+    },
+    {
+      "name": "search_tools",
+      "category": "help",
+      "description": "Search for tools by keyword or category",
+      "longDescription": "Searches available tools by name, description, or category.",
+      "inputs": {
+        "query": {
+          "type": "string",
+          "description": "Search query",
+          "required": true
+        }
+      },
+      "outputs": {
+        "results": {
+          "type": "array",
+          "description": "Matching tools"
+        },
+        "count": {
+          "type": "number",
+          "description": "Number of results"
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {
+          "query": "balance"
+        },
+        "output": {
+          "results": [
+            {"name": "get_balance"},
+            {"name": "get_token_balance"}
+          ],
+          "count": 2
+        }
+      }
+    },
+    {
+      "name": "list_tools_by_category",
+      "category": "help",
+      "description": "List all tools grouped by category",
+      "longDescription": "Returns all available tools organized by category (core, wallet, network, tokens, etc.).",
+      "inputs": {},
+      "outputs": {
+        "categories": {
+          "type": "object",
+          "description": "Tools grouped by category"
+        }
+      },
+      "errors": [],
+      "example": {
+        "input": {},
+        "output": {
+          "categories": {
+            "core": ["get_balance", "get_transaction", "get_block"],
+            "wallet": ["create_wallet", "import_wallet"],
+            "tokens": ["get_token_balance", "transfer_token"]
+          }
+        }
+      }
+    }
+  ]
+}
