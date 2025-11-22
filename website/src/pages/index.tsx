@@ -15,11 +15,11 @@ function HomepageHeader() {
       <div className="container hero-content" style={{ position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
         <h1 className="hero-title">
           The Universal Standard<br />
-          for Blockchain MCP
+          for Blockchain AI Integration
         </h1>
         <p className="hero-subtitle">
-          Build scalable, modular, and factory-automated MCP servers for any blockchain ecosystem.
-          One standard to rule them all.
+          Generate MCP servers, OpenAI functions, REST APIs, and more — all from one universal schema.
+          Choose the right protocol for your context needs.
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '2rem', pointerEvents: 'auto' }}>
           <Link
