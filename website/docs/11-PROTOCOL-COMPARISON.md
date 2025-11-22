@@ -335,5 +335,5 @@ Test each protocol and choose what works best!
 
 **Next Steps:**
 - [Quick Start Guide](/docs/QUICK-START-GUIDE) - Get started with any protocol
-- [Universal Tool Schema](/docs/02-UNIVERSAL-TOOL-NAMING-REGISTRY) - See all 25 tools
-- [Testing Guide](/docs/05-TESTING-STANDARD) - Test your implementation
+- [Universal Tool Schema](/docs/UNIVERSAL-TOOL-NAMING-REGISTRY) - See all 25 tools
+- [Testing Guide](/docs/TESTING-STANDARD) - Test your implementation

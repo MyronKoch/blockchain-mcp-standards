@@ -106,13 +106,13 @@ Ready to build? Choose your path:
    - → [Quick Start Guide](/docs/QUICK-START-GUIDE)
 
 2. **Choose a Protocol** - Understand which format fits your needs
-   - → [Protocol Comparison](/docs/11-PROTOCOL-COMPARISON)
+   - → [Protocol Comparison](/docs/PROTOCOL-COMPARISON)
 
 3. **Read the Standard** - Deep dive into BMCPS v3.0 specification
    - → [BMCPS v3.0 Standard](/docs/Blockchain-MCP-Standard-v3.0)
 
 4. **See All Tools** - Browse the universal tool registry
-   - → [Tool Registry](/docs/02-UNIVERSAL-TOOL-NAMING-REGISTRY)
+   - → [Tool Registry](/docs/UNIVERSAL-TOOL-NAMING-REGISTRY)
 
 ## Architecture Overview
 
