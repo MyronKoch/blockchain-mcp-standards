@@ -11,22 +11,22 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Unified Standard',
-    icon: '⭐',
+    title: 'Multi-Protocol Support',
+    icon: '🔄',
     description: (
       <>
-        Combines architecture (MSAS v1.0) and tool requirements (MBPS v2.1)
-        into a single comprehensive standard. One source of truth for all blockchain MCP servers.
+        Generate MCP servers, OpenAI Functions, REST APIs, or JSON schemas — all from one universal
+        tool definition. Choose the right protocol for your use case.
       </>
     ),
   },
   {
-    title: 'Modular Architecture',
-    icon: '🏗️',
+    title: 'Context Management',
+    icon: '🧠',
     description: (
       <>
-        Category-based tool organization with mandatory <code>core/</code>, <code>wallet/</code>,
-        <code>network/</code>, and <code>tokens/</code> directories. Scale from 25 to 100+ tools.
+        MCP (~5k tokens), OpenAI Functions (~500 tokens), or REST API (zero tokens).
+        Optimize context overhead based on your conversation length needs.
       </>
     ),
   },
@@ -35,8 +35,8 @@ const FeatureList: FeatureItem[] = [
     icon: '🚀',
     description: (
       <>
-        Generate compliant servers in minutes with factory scripts. Includes validation
-        tools, testing frameworks, and implementation templates.
+        Generate compliant integrations in seconds with <code>bmcps-generator.js</code>.
+        Complete with validation, testing, and documentation.
       </>
     ),
   },
@@ -45,18 +45,18 @@ const FeatureList: FeatureItem[] = [
     icon: '🌐',
     description: (
       <>
-        Designed to work with any blockchain ecosystem (EVM, SVM, Move, etc.) while maintaining
-        a consistent interface for AI agents.
+        Designed for any blockchain (EVM, SVM, Move, etc.) with 17+ supported chains
+        and a consistent 25-tool interface.
       </>
     ),
   },
   {
-    title: 'Enterprise Ready',
-    icon: '🛡️',
+    title: 'Production Ready',
+    icon: '✅',
     description: (
       <>
-        Built-in error handling patterns, security best practices (API key cycling), and
-        comprehensive testing standards.
+        238 automated tests (100% passing). Built-in error handling, security patterns,
+        and comprehensive testing standards.
       </>
     ),
   },
@@ -65,8 +65,8 @@ const FeatureList: FeatureItem[] = [
     icon: '⚡',
     description: (
       <>
-        Clear documentation, quick start guides, and a standardized "Help" system
-        make it easy for both humans and AIs to use.
+        One command generates everything: <code>--format mcp</code>, <code>--format openai</code>,
+        <code>--format rest-api</code>, or <code>--format all</code>.
       </>
     ),
   },

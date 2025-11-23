@@ -1,12 +1,182 @@
-# Quick Start Guide: Build & Convert MCP Servers
+# Quick Start Guide: Multi-Protocol Blockchain AI Integration
 
-## 🚀 From Zero to Blockchain MCP Standard v3.0 (BMCPS v3.0) Compliance in 2 Hours
+## 🚀 From Zero to Production in 5 Minutes
 
-This consolidated guide covers both building new MCP servers and converting existing ones to follow the Modular Blockchain Server Standard (Blockchain MCP Standard v3.0 (BMCPS v3.0)).
+BMCPS v3.0 can generate blockchain AI integrations in **4 different formats** — all from one command. Choose the protocol that fits your use case.
 
 ---
 
-## Option A: Building New Server from Scratch
+## Prerequisites
+
+- Node.js 18+
+- Clone the BMCPS repository:
+  ```bash
+  git clone https://github.com/MyronKoch/blockchain-mcp-standards.git
+  cd blockchain-mcp-standards
+  ```
+
+---
+
+## Option A: Using the Multi-Format Generator (Recommended)
+
+### Step 1: Choose Your Format
+
+| Format | Context Overhead | Best For | Command Flag |
+|--------|-----------------|----------|--------------|
+| REST API | 0 tokens | Production apps, high-scale | `--format rest-api` |
+| OpenAI Functions | ~500 tokens | Long conversations | `--format openai` |
+| MCP Server | ~5k tokens | Claude Desktop, feature-rich | `--format mcp` |
+| JSON Schema | N/A | Custom protocols | `--format json-schema` |
+
+Not sure? Use `--format all` to generate everything!
+
+### Step 2: Generate Your Integration
+
+#### Example 1: Generate OpenAI Functions for Ethereum
+
+```bash
+node bmcps-generator.js --blockchain eth --format openai --network mainnet
+```
+
+**Output:**
+```
+eth-mainnet-openai/
+├── functions.json    # 25 OpenAI function definitions
+├── example.js        # Usage example
+└── README.md         # Documentation
+```
+
+**Usage:**
+```javascript
+const OpenAI = require('openai');
+const functions = require('./functions.json').functions;
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+const completion = await openai.chat.completions.create({
+  model: "gpt-4",
+  messages: [{ role: "user", content: "Get balance for 0x742d35Cc..." }],
+  functions: functions,
+  function_call: "auto"
+});
+```
+
+**Context Overhead:** ~500 tokens (10x less than MCP!)
+
+---
+
+#### Example 2: Generate MCP Server for Solana
+
+```bash
+node bmcps-generator.js --blockchain sol --format mcp --network mainnet
+```
+
+**Output:**
+```
+sol-mainnet-mcp-server/
+├── src/
+│   ├── index.ts                # MCP server
+│   ├── tool-definitions.ts     # Tool registry
+│   └── tools/                  # 25 implementations
+│       ├── core/
+│       ├── wallet/
+│       ├── network/
+│       └── tokens/
+├── tests/                      # Jest tests
+├── package.json
+└── README.md
+```
+
+**Next Steps:**
+```bash
+cd sol-mainnet-mcp-server
+npm install
+npm run build
+npm start
+```
+
+**Context Overhead:** ~5k tokens (full MCP features)
+
+---
+
+#### Example 3: Generate REST API for Bitcoin
+
+```bash
+node bmcps-generator.js --blockchain btc --format rest-api --network mainnet
+```
+
+**Output:**
+```
+btc-mainnet-rest-api/
+├── openapi.json      # OpenAPI 3.0 spec
+├── server.js         # Express server (25 endpoints)
+├── package.json      # Dependencies
+└── README.md         # Deployment guide
+```
+
+**Start the API:**
+```bash
+cd btc-mainnet-rest-api
+npm install
+npm start
+
+# Server running at http://localhost:3000
+# Health: http://localhost:3000/health
+# OpenAPI: http://localhost:3000/api/v1/openapi.json
+```
+
+**Example Request:**
+```bash
+curl -H "X-API-Key: your-key" \
+  "http://localhost:3000/api/v1/btc/get-balance?address=bc1q..."
+```
+
+**Context Overhead:** 0 tokens (AI just needs endpoint URLs!)
+
+---
+
+#### Example 4: Generate All Formats
+
+```bash
+node bmcps-generator.js --blockchain avax --format all --network mainnet
+```
+
+**Output:**
+```
+avax-mainnet-openai/         # OpenAI Functions
+avax-mainnet-mcp-server/     # MCP Server
+avax-mainnet-rest-api/       # REST API
+avax-mainnet-json-schema/    # JSON Schema
+```
+
+Test each format and choose what works best!
+
+---
+
+### Step 3: Implement Blockchain Logic
+
+All generators create TODO comments where you need to add blockchain-specific code:
+
+```typescript
+// TODO: Implement get_balance functionality for eth
+// Example:
+// const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
+// const balance = await provider.getBalance(parsed.address);
+```
+
+Add your RPC integration, and you're done!
+
+---
+
+### Supported Blockchains
+
+17 blockchains supported out of the box:
+
+`eth`, `btc`, `sol`, `xrp`, `avax`, `poly`, `bnb`, `arb`, `base`, `near`, `sui`, `cosmos`, `osmo`, `tron`, `world`, `ada`, `dot`
+
+---
+
+## Option B: Building Manually from Scratch
 
 ### Prerequisites
 - Node.js 18+ and npm 9+

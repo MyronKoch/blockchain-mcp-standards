@@ -31,6 +31,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
+          id: 'PROTOCOL-COMPARISON',
+          label: '🔄 Protocol Comparison',
+        },
+        {
+          type: 'doc',
           id: 'UNIVERSAL-TOOL-NAMING-REGISTRY',
           label: '📖 Tool Naming Registry',
         },
