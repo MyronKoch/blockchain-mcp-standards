@@ -2,246 +2,97 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## What This Repository Is
+## What This Is
 
-This is the **Blockchain MCP Standard v3.0 (BMCPS v3.0) (MCP Blockchain Server Standard) Standards Documentation Repository**. It contains the unified architectural and tooling standards for building blockchain MCP servers. This is NOT a server implementation—it's a standards reference and factory tooling system.
+**BMCPS v3.0 (Blockchain MCP Standard)** - a standards documentation and factory tooling repository. This is NOT a server implementation. It defines the unified spec for building blockchain MCP servers: 25 mandatory tools, modular architecture, naming conventions, and compliance levels.
 
-## Key Concepts
+BMCPS v3.0 supersedes both MBPS v2.1 (tool requirements) and MSAS v1.0 (architecture standard). Always reference "BMCPS v3.0" - never the old names.
 
-### Blockchain MCP Standard v3.0 (BMCPS v3.0) Unified Standard
-- **Combines** architecture (architecture standard (v1.0)) + tool requirements (tool requirements (v2.1)) into one standard
-- **Defines** 25 mandatory tools every blockchain MCP server must implement
-- **Enforces** modular architecture with category-based tool organization
-- **Specifies** naming convention: `{prefix}_{action}_{resource}` (e.g., `eth_get_balance`)
+## Tool Count Discrepancy
 
-### The 25 Mandatory Tools
-Every compliant server must implement these exact tools (with blockchain-specific prefix):
-1. Core (5): `get_chain_info`, `get_balance`, `get_transaction`, `get_block`, `validate_address`
-2. Transactions (2): `get_transaction_history`, `send_transaction`
-3. Wallet (3): `create_wallet`, `import_wallet`, `generate_address`
-4. Network (3): `get_network_info`, `set_network`, `get_gas_price`
-5. Fees (2): `estimate_fees`, `get_mempool_info`
-6. Account (2): `get_wallet_info`, `get_account_info`
-7. Tokens (5): `get_token_balance`, `get_token_info`, `transfer_token`, `approve_token`, `get_token_allowance`
-8. Help (3): `help`, `search_tools`, `list_tools_by_category`
+This repo's standard defines **25 mandatory tools** (includes `set_network`). The parent ecosystem (`01-BLOCKCHAIN-MCP-ECOSYSTEM/CLAUDE.md`) specifies **24 mandatory tools** (removed `set_network`, locked to single network per server). When generating servers for the parent ecosystem, follow the 24-tool spec. When working on this standards repo itself, the canonical spec is 25 tools as defined in `01-Blockchain-MCP-Standard-v3.0.md`.
 
-### Directory Structure Convention
-```
-{blockchain}-{network}-mcp-server/
-├── src/
-│   ├── index.ts              # <300 lines entry point
-│   ├── tool-definitions.ts   # Tool registry & schemas
-│   ├── client.ts             # Blockchain client wrapper
-│   └── tools/                # Tool implementations
-│       ├── core/             # Required: blockchain fundamentals
-│       ├── wallet/           # Required: wallet operations
-│       ├── network/          # Required: network management
-│       ├── tokens/           # Required: token operations
-│       ├── help/             # Required: help system
-│       ├── account/          # Optional: account features
-│       ├── nft/              # Optional: NFT operations
-│       ├── defi/             # Optional: DeFi protocols
-│       └── [others]/         # Optional categories as needed
-```
+## Repository Structure
 
-## Essential Commands
+Two main components:
 
-### Factory System (Node.js Scripts)
+### Standards Documents (numbered 01-10, read in order)
+- **01** - Complete unified standard (architecture + tools) - READ FIRST
+- **02** - Universal tool naming registry (all prefixes, action verbs, resources)
+- **03** - Quick start guide (Option A: new server, Option B: migration)
+- **04** - Network configurations (RPC endpoints, chain IDs, env vars)
+- **05** - Testing standard (Jest, security tests, chaos engineering, benchmarks)
+- **06** - Error handling patterns (McpError, Zod validation, recovery)
+- **07** - Help system implementation (3 required help tools)
+- **08** - README template for generated servers
+- **09** - Troubleshooting (TypeScript errors, imports, MCP connection)
+- **10** - Consolidation plan (historical context for v3.0 unification)
+
+### Factory Scripts (Node.js, plain JS - no build step)
 ```bash
-# Generate new Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant server
+# Generate a new BMCPS-compliant server skeleton with 25 tool stubs
 node bmcps-factory.js --blockchain eth --network testnet
 
-# Validate server compliance
+# Validate an existing server against BMCPS v3.0 (scores: architecture, tools, naming, testing, docs, security)
 node bmcps-validation.js /path/to/server
 
-# Testing framework setup
+# Set up Jest testing infrastructure for a server
 node bmcps-testing-framework.js /path/to/server
-```
 
-### Implementation Templates
-```bash
-# Generate tool implementation stubs
+# Generate tool implementation code with Zod schemas and error handling
 node implementation-templates.js --blockchain eth --tools all
 ```
 
-## Document Hierarchy (Read in Order)
+The factory and validation scripts share a common set of constants: `REQUIRED_TOOLS` (25 tool names), `REQUIRED_CATEGORIES` (core, wallet, network, tokens, help), and `COMPLIANCE_LEVELS` (Bronze/Silver/Gold thresholds). If the mandatory tool list changes, update all four scripts.
 
-### For New Server Development
-1. **01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md** - Read first: Complete spec
-2. **03-QUICK-START-GUIDE.md** - Follow Option A: New server from scratch
-3. **04-NETWORK-CONFIGURATIONS.md** - Configure RPC endpoints
-4. **06-ERROR-HANDLING-PATTERNS.md** - Implement error patterns
-5. **07-HELP-SYSTEM-IMPLEMENTATION.md** - Add help tools
-6. **05-TESTING-STANDARD.md** - Write tests
-7. **08-README-TEMPLATE.md** - Document server
-
-### For Server Migration
-1. **01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md** - Understand target architecture
-2. **03-QUICK-START-GUIDE.md** - Follow Option B: Migration path
-3. **06-ERROR-HANDLING-PATTERNS.md** - Refactor error handling
-4. **05-TESTING-STANDARD.md** - Add comprehensive tests
-
-### For Troubleshooting
-- Jump to **09-TROUBLESHOOTING.md** directly
-
-## Blockchain Prefix Registry
-
-| Blockchain | Prefix | Example Tool |
-|------------|--------|--------------|
-| Ethereum | `eth_` | `eth_get_balance` |
-| Bitcoin | `btc_` | `btc_create_wallet` |
-| Solana | `sol_` | `sol_send_transaction` |
-| Polygon | `poly_` | `poly_get_gas_price` |
-| Avalanche | `avax_` | `avax_estimate_fees` |
-| XRP | `xrp_` | `xrp_get_account_info` |
-| Cosmos | `cosmos_` | `cosmos_get_validators` |
-| Osmosis | `osmo_` | `osmo_get_pools` |
-| BNB Chain | `bnb_` | `bnb_swap_tokens` |
-| Arbitrum | `arb_` | `arb_get_network_info` |
-| Base | `base_` | `base_validate_address` |
-| NEAR | `near_` | `near_get_staking_info` |
-| Sui | `sui_` | `sui_get_objects` |
-| TRON | `tron_` | `tron_get_energy` |
-| World Chain | `world_` | `world_verify_world_id` |
-
-## Compliance Levels
-
-### 🥉 Bronze (Minimum Viable)
-- ✅ 25 core tools implemented
-- ✅ Basic modular structure
-- ✅ TypeScript compiles
-
-### 🥈 Silver (Production Ready)
-- ✅ All Bronze requirements
-- ✅ 40+ tools implemented
-- ✅ Full BMCPS v3.0 architecture compliance
-- ✅ Comprehensive test suite
-- ✅ Complete documentation
-
-### 🥇 Gold (Enterprise Grade)
-- ✅ All Silver requirements
-- ✅ 100+ tools organized
-- ✅ Performance optimized
-- ✅ Security audited
-- ✅ Production deployed
-
-## Architecture Principles
-
-### Modular Tool Organization
-- **One tool per file**: `src/tools/{category}/{prefix}-{tool-name}.ts`
-- **Category-based**: Group related tools (`core/`, `wallet/`, `tokens/`, etc.)
-- **Shared definitions**: Extract schemas to `tool-definitions.ts`
-- **Clean routing**: Keep `index.ts` under 300 lines
-
-### Tool Implementation Pattern
-```typescript
-import { z } from 'zod';
-import { McpError, ErrorCode } from '@modelcontextprotocol/sdk/types.js';
-
-// Define input schema
-const schema = z.object({
-  address: z.string().describe('Wallet address')
-});
-
-// Implement handler
-export async function handleGetBalance(args: any, client?: BlockchainClient) {
-  try {
-    const { address } = schema.parse(args);
-    const result = await client.getBalance(address);
-
-    return {
-      content: [{
-        type: 'text',
-        text: JSON.stringify(result, null, 2)
-      }]
-    };
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      throw new McpError(ErrorCode.InvalidParams, `Validation error: ${error.message}`);
-    }
-    throw new McpError(ErrorCode.InternalError, `Operation failed: ${error.message}`);
-  }
-}
-```
-
-### Error Handling Pattern
-- **Use McpError** from `@modelcontextprotocol/sdk/types.js`
-- **Validate with Zod** before operations
-- **Return structured errors** with proper error codes
-- **Never expose** private keys or sensitive data in errors
-
-## Reference Implementations
-
-### Example Servers (in parent directories)
-- **xrp-testnet-mcp-server/** - 40 tools, Blockchain MCP Standard v3.0 (BMCPS v3.0) compliant
-- **avalanche-fuji-mcp-server/** - 25+ tools, Silver tier
-- **BLOCKCHAIN-MCP-FACTORY-SERVER/** - Meta-server for generating new servers
-
-## Common Tasks
-
-### Validate a Server
+### Docusaurus Website
 ```bash
-# Check Blockchain MCP Standard v3.0 (BMCPS v3.0) compliance
-node bmcps-validation.js ../xrp-testnet-mcp-server
-
-# Expected output: Architecture, tools, naming, testing scores
+cd website
+npm start          # Dev server at localhost:3000
+npm run build      # Production build
+npm run typecheck  # TypeScript check
 ```
+Uses React 19, Three.js for 3D elements, and Docusaurus 3.9. Node >= 20 required.
 
-### Generate New Server
-```bash
-# Create compliant server structure
-node bmcps-factory.js --blockchain eth --network testnet
+### Other Files
+- **API-KEY-CYCLING.md** - Guide for rotating RPC provider keys (Alchemy, Infura, etc.)
+- **CONTRIBUTING.md** - Contribution guidelines
+- **CHANGELOG.md** - Version history with migration guides
+- **RELEASE-NOTES.md** - Detailed release notes
+- **llm.txt** - Condensed AI-friendly reference of the full standard
+- **archive/** - Superseded standards (mbps-v2.1, msas-v1.0, old-guides). Reference only.
 
-# Generates complete directory structure + 25 tool stubs
-```
+## Key Architecture Decisions
 
-### Check Tool Naming
-```bash
-# Verify tool names follow convention
-grep -r "name:" 01-Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md | grep "_"
-```
+**Naming convention**: `{prefix}_{action}_{resource}` - e.g., `eth_get_balance`, `btc_create_wallet`. The prefix registry covers 15 blockchains (see doc 02). New blockchains pick a unique short prefix.
 
-## Important Notes
+**Compliance is tiered**: Bronze (25 tools, compiles), Silver (40+ tools, full architecture, tests, docs), Gold (100+ tools, performance optimized, security audited).
 
-### What This Repo Is NOT
-- ❌ Not a blockchain server implementation
-- ❌ Not executable MCP server code
-- ❌ Not meant to handle blockchain transactions directly
+**Validation scoring**: `bmcps-validation.js` scores across 6 dimensions (architecture/10, tools/40, naming/15, testing/10, documentation/10, security/15 = 100 total). The `BMCPSValidator` class in that file is the canonical compliance checker.
 
-### What This Repo IS
-- ✅ Standards documentation repository
-- ✅ Factory tooling for server generation
-- ✅ Validation scripts for compliance checking
-- ✅ Reference guide for all blockchain MCP servers
+**Servers generated by the factory follow this layout**:
+- `src/index.ts` must stay under 300 lines
+- `src/tool-definitions.ts` holds all Zod schemas
+- `src/tools/{category}/{prefix}-{tool_name}.ts` - one tool per file
+- 5 required tool categories: `core/`, `wallet/`, `network/`, `tokens/`, `help/`
 
-## Version History
+## Editing Standards Documents
 
-- **v3.0** (Jan 2025) - Unified BMCPS standard (this version)
-- **v2.1** (Dec 2024) - MBPS tool requirements
-- **v1.0** (Sep 2024) - MSAS architecture standard
-
-## Related Resources
-
-- **02-UNIVERSAL-TOOL-NAMING-REGISTRY.md** - Complete tool naming reference
-- **10-CONSOLIDATION-PLAN.md** - Historical context for v3.0 unification
-- **RELEASE-NOTES.md** - Changelog for Blockchain MCP Standard v3.0 (BMCPS v3.0)
-- **llm.txt** - Quick reference for LLM context
-
-## Working with This Repository
-
-### When Adding New Standards
 1. Edit the appropriate numbered document (01-10)
-2. Update cross-references in other docs
-3. Test changes against reference implementations
-4. Update RELEASE-NOTES.md
+2. Update cross-references in other docs that link to the changed content
+3. If mandatory tools change, update all 4 factory scripts and `llm.txt`
+4. Update `RELEASE-NOTES.md` and `CHANGELOG.md`
 
-### When Updating Factory Scripts
-1. Modify `bmcps-factory.js` or related scripts
-2. Test generation against all blockchain types
-3. Validate output with `bmcps-validation.js`
-4. Update Quick Start Guide if CLI changes
+## Editing Factory Scripts
 
-### Archive Policy
-- Old standards → `archive/` directory
-- Keep for historical reference only
-- Do not use for new development
+1. Modify the target script
+2. Test generation: `node bmcps-factory.js --blockchain test --network testnet`
+3. Validate output: `node bmcps-validation.js` against the generated server
+4. If CLI args changed, update `03-QUICK-START-GUIDE.md`
+
+## Reference Implementations (sibling directories)
+
+These live in the parent `extracted-mcp-servers/` directory:
+- **xrp-testnet-mcp-server** - 40 tools, fully compliant
+- **avalanche-fuji-mcp-server** - 25+ tools, Silver tier
+- **BLOCKCHAIN-MCP-FACTORY-SERVER** - Meta-server that generates new servers via MCP tools
