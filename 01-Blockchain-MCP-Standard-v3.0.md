@@ -618,6 +618,6 @@ switch (toolName) {
 
 *This unified standard supersedes all previous standards.*
 
-**One Standard. Complete Compliance. Production Ready.**
+**One Standard. One Tool Contract. Consistent Names.**
 
 **Maintained at**: `/servers/testnet/NEW STANDARDS/Blockchain-MCP-Standard-v3.0-UNIFIED-STANDARD.md`
