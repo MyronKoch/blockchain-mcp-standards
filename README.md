@@ -1,5 +1,7 @@
 # Blockchain MCP Server Standards
 
+> **Status: frozen (October 2026).** BMCPS v3.0 was written in 2025 and is kept here as a reference; it is no longer actively developed. Known limits and what I'd change today: [bmcps.dev/docs/STATUS](https://bmcps.dev/docs/STATUS).
+
 ## 📚 Consolidated Documentation (v3.0)
 
 We've consolidated 28 documents down to 10 core standards for clarity and maintainability.
