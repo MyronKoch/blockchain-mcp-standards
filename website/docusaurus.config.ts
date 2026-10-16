@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'BMCPS v3.0',
-  tagline: 'The unified standard for blockchain MCP servers',
+  tagline: 'A 2025 standard for blockchain MCP tool interfaces, frozen as a reference',
   favicon: 'img/favicon.ico',
 
   future: {
@@ -30,7 +30,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/MyronKoch/blockchain-mcp-standards/tree/master/',
+          editUrl: 'https://github.com/MyronKoch/blockchain-mcp-standards/tree/master/website/',
           showLastUpdateTime: true,
           showLastUpdateAuthor: true,
         },
@@ -43,6 +43,12 @@ const config: Config = {
   ],
 
   themeConfig: {
+    announcementBar: {
+      id: 'frozen-2026-10',
+      content:
+        'BMCPS v3.0 is frozen as a 2025 reference and no longer actively developed. <a href="/docs/STATUS">Status, known limits, and what I\'d change today</a>',
+      isCloseable: false,
+    },
     image: 'img/bmcps-social-card.jpg',
     navbar: {
       title: 'BMCPS v3.0',
@@ -110,7 +116,7 @@ const config: Config = {
             },
             {
               label: 'License (MIT)',
-              href: 'https://github.com/MyronKoch/blockchain-mcp-standards/blob/main/LICENSE',
+              href: 'https://github.com/MyronKoch/blockchain-mcp-standards/blob/master/LICENSE',
             },
           ],
         },
