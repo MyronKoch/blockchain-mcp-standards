@@ -21,6 +21,11 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'doc',
+          id: 'STATUS',
+          label: '🧊 Status: frozen (read first)',
+        },
+        {
+          type: 'doc',
           id: 'Blockchain-MCP-Standard-v3.0',
           label: '⭐ Main Standard (v3.0)',
         },
