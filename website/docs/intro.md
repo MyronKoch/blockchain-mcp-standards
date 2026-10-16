@@ -4,7 +4,11 @@ sidebar_position: 1
 
 # Introduction to BMCPS v3.0
 
-Welcome to **BMCPS v3.0** (Blockchain Multi-Protocol Standard) — the universal standard for blockchain AI integration that solves the **context rot** problem.
+:::info Frozen reference
+BMCPS v3.0 was written in 2025 and frozen in October 2026. Read [Status, known limits, and what I'd change today](/docs/STATUS) first.
+:::
+
+Welcome to **BMCPS v3.0** (Blockchain Multi-Protocol Standard): a standard for blockchain AI integration, written to address the **context rot** problem.
 
 ## What is BMCPS?
 
@@ -49,11 +53,11 @@ node bmcps-generator.js --blockchain eth --format rest-api
 node bmcps-generator.js --blockchain eth --format all
 ```
 
-Each command generates a complete, production-ready integration with:
-- ✅ All 25 mandatory BMCPS tools
-- ✅ Complete documentation
-- ✅ Testing frameworks
-- ✅ Type safety (TypeScript where applicable)
+Each command generates a project skeleton with:
+- All 25 mandatory BMCPS tools, as stub handlers
+- Documentation
+- A test scaffold
+- TypeScript types where applicable (the MCP output needs a fix to compile; see [Status](/docs/STATUS))
 
 ## Why BMCPS?
 
@@ -66,17 +70,17 @@ Choose your context overhead:
 - **~500 tokens** (OpenAI) for long conversations
 - **~5k tokens** (MCP) for feature-rich interactions
 
-### 3. Universal Compatibility
-Works with **17+ blockchains**: Ethereum, Bitcoin, Solana, Avalanche, Polygon, and more. Consistent 25-tool interface across all chains.
+### 3. Chain-Agnostic Design
+One 25-tool interface meant to fit Ethereum, Bitcoin, Solana, Avalanche, Polygon, and more. The generator knows 17 chain identifiers; those are targets, not working integrations.
 
-### 4. Factory Automation
-Generate complete integrations in seconds. No manual setup, no boilerplate code — just working implementations.
+### 4. Code Generation
+Generate a starting skeleton for any of the four formats from one schema. Handlers are stubs you implement.
 
-### 5. Production Ready
-- 238 automated tests (100% passing)
-- Built-in error handling patterns
-- Security best practices
-- Comprehensive testing standards
+### 5. Tested, With Known Gaps
+- 238 automated generator tests (all passing), which check the shape of generated files rather than that they build
+- Error handling patterns
+- Security guidance
+- Testing standards
 
 ## What's Included?
 
@@ -93,7 +97,7 @@ Every BMCPS integration includes:
 
 ### Generator Features
 - **Multi-format output** - MCP, OpenAI, REST API, JSON Schema
-- **17+ blockchains** - EVM, SVM, Move-based, and more
+- **17 chain identifiers** - EVM, SVM, Move-based, and more (generator targets)
 - **Complete documentation** - README, examples, usage guides
 - **Type safety** - Full TypeScript support for MCP
 - **Testing included** - Jest test suites generated automatically
@@ -161,9 +165,9 @@ Tools are organized by category:
 ## Version Information
 
 - **Current Version**: v3.0.0
-- **Release Date**: January 2025
-- **Status**: Production Ready
-- **Test Coverage**: 100% (238/238 tests passing)
+- **Written**: 2025
+- **Status**: Frozen as a reference (October 2026). See [Status](/docs/STATUS)
+- **Tests**: 238/238 generator tests passing (structural checks)
 
 ---
 
