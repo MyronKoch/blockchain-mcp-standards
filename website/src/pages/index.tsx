@@ -14,12 +14,12 @@ function HomepageHeader() {
       <div className="hero-glow" style={{ zIndex: 0 }} />
       <div className="container hero-content" style={{ position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
         <h1 className="hero-title">
-          The Universal Standard<br />
-          for Blockchain AI Integration
+          A Standard for<br />
+          Blockchain MCP Tool Interfaces
         </h1>
         <p className="hero-subtitle">
-          Generate MCP servers, OpenAI functions, REST APIs, and more — all from one universal schema.
-          Choose the right protocol for your context needs.
+          25 tools, one naming convention, one schema, with generators for MCP, OpenAI functions,
+          REST, and JSON Schema. Written in 2025; frozen as a reference in October 2026.
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '2rem', pointerEvents: 'auto' }}>
           <Link
@@ -43,7 +43,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="BMCPS v3.0"
-      description="The universal standard for building blockchain MCP servers">
+      description="A 2025 standard for blockchain MCP tool interfaces, frozen as a reference">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

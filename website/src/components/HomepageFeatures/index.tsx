@@ -31,32 +31,32 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Factory Automation',
+    title: 'Code Generation',
     icon: '🚀',
     description: (
       <>
-        Generate compliant integrations in seconds with <code>bmcps-generator.js</code>.
-        Complete with validation, testing, and documentation.
+        <code>bmcps-generator.js</code> turns the schema into project skeletons with stub
+        handlers. As shipped, its MCP output needs fixes to compile; see Status.
       </>
     ),
   },
   {
-    title: 'Universal Compatibility',
+    title: 'Chain-Agnostic Design',
     icon: '🌐',
     description: (
       <>
-        Designed for any blockchain (EVM, SVM, Move, etc.) with 17+ supported chains
-        and a consistent 25-tool interface.
+        One 25-tool interface meant to fit EVM, UTXO, Cosmos, and Move chains. The generator
+        knows 17 chain identifiers; those are targets, not working integrations.
       </>
     ),
   },
   {
-    title: 'Production Ready',
+    title: 'Tested, With Known Gaps',
     icon: '✅',
     description: (
       <>
-        238 automated tests (100% passing). Built-in error handling, security patterns,
-        and comprehensive testing standards.
+        238 automated generator tests pass. They check the shape of generated files, not that
+        they build; closing that gap is first on my list.
       </>
     ),
   },
